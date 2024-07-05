@@ -129,7 +129,7 @@
                                                         </div>
                                                         <div class="col-md-4 mt-2">
                                                             <label for="roi">IRR/ROI:</label>
-                                                            <input class="form-control" type="text" name="roi" id="roi" value="{{ $carLoan->roi ?? '' }}">
+                                                            <input class="form-control" type="number" name="roi" id="roi" value="{{ $carLoan->roi ?? '' }}">
                                                         </div>
                                                         <!-- <div class="col-md-4 mt-2">
                                                             <label for="disbursed_amount">Disbursed Amount:</label>
@@ -484,7 +484,7 @@
                 $('#tenure_loan').prop('readonly', true);
                 $('#co_applicant').prop('readonly', true);
                 $('#disbursedFields').show();
-                $('#roi').prop('readonly', true);
+                // $('#roi').prop('readonly', true);
                 $('#disbursed_date').prop('required', true);
                 $('#emi_amount').prop('required', true);
                 $('#emi_advance').prop('required', true);
