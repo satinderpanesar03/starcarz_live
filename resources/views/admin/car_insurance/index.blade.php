@@ -117,7 +117,7 @@
                                                 <td>{{++$value}}</td>
                                                 <td>{{$item->party ? ucfirst($item->party->party_name) : ''}}</td>
                                                 <td>{{ucfirst($item->policy_number)}}</td>
-                                                <td>{{ucfirst($item->vehicle_number_input)}}</td>
+                                                <td>{{strtoupper($item->vehicle_number)}}</td>
                                                 <td><span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.car.insurance.view', $item->id)}}" class="btn btn-primary btn-sm" title="View">
                                                             <i class="fa fa-eye"></i>
