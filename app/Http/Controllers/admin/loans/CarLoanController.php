@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class CarLoanController extends Controller
 {
@@ -64,8 +65,9 @@ class CarLoanController extends Controller
         $executives = MstExecutive::pluck('name', 'id');
         $loanType = CarLoan::getLoanType();
         $carType = CarLoan::getCarType();
+        $roleNames = explode(',',Auth::guard('admin')->user()->roles);
 
-        return view('admin.loans.car-loan.index', compact('carLoans', 'models', 'dealers', 'status', 'banks', 'executives', 'loanType', 'carType'));
+        return view('admin.loans.car-loan.index', compact('carLoans', 'models', 'dealers', 'status', 'banks', 'executives', 'loanType', 'carType','roleNames'));
     }
 
     public function create()
@@ -100,7 +102,7 @@ class CarLoanController extends Controller
             // 'mst_dealer_id' => 'required',
             // 'mst_model_id' => 'required',
             // 'insurance_from_date' => 'required',
-            // 'insurance_to_date' => 'required',   
+            // 'insurance_to_date' => 'required',
         ]);
         $input = $request->all();
 

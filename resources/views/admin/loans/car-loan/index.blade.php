@@ -129,6 +129,7 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">ID</th>
+                                                <th>Party Name</th>
                                                 <th>Bank Name</th>
                                                 <!-- <th>Dealer</th> -->
                                                 <th>Loan Amount</th>
@@ -142,7 +143,7 @@
                                             @forelse($carLoans as $key => $carLoan)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <!-- <td>{{ ($carLoan->party)?$carLoan->party->party_name:'' }}</td> -->
+                                                <td>{{ ($carLoan->party)?$carLoan->party->party_name:'' }}</td>
                                                 <!-- <td>{{ ($carLoan->dealer)?$carLoan->dealer->name:'' }}</td> -->
                                                 <td>{{ ($carLoan->bank)?$carLoan->bank->name:'' }}</td>
                                                 <td>{{ ($carLoan->loan_amount)?$carLoan->loan_amount:'' }}</td>
@@ -175,9 +176,13 @@
                                                         <a href="{{ route('admin.loan.car-loan.view', $carLoan->id) }}" class="btn btn-primary btn-sm" title="View">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
+
+                                                        @if($carLoan->status != 4 || in_array(1, $roleNames))
                                                         <a href="{{ route('admin.loan.car-loan.show', $carLoan->id) }}" class="btn btn-success btn-sm" title="Edit">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
+                                                        @endif
+
                                                         <a href="{{ route('admin.loan.chart.index', $carLoan->id) }}" class="btn btn-success btn-sm" title="Chart">
                                                             <i class="fa fa-file"></i>
                                                         </a>
