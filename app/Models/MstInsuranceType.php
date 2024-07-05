@@ -14,8 +14,8 @@ class MstInsuranceType extends Model
     public static function getInsurance()
     {
         return [
-            // '1' => 'Health Insurance',
-            // '2' => 'Term Insurance',
+            '1' => 'Health Insurance',
+            '2' => 'Car Loan',
             '3' => 'General Insurance',
             '4' => 'Home Loan',
             '5' => 'Loan Against Property',
