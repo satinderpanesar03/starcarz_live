@@ -118,7 +118,7 @@
 
                                                     <div class="col-md-3 mb-3">
                                                         <label for="sub_model">Enter Sub Model:</label>
-                                                        <input type="text" id="sub_model" name="sub_model" class="form-control" value="">
+                                                        <input type="text" id="sub_model" name="sub_model" class="form-control" value="@if(isset($insurance)) {{$insurance->sub_model}} @endif">
                                                     </div>
 
 
@@ -238,8 +238,8 @@
                                                     </div>
 
                                                     <div class="col-md-3 mt-3">
-                                                        <label for="sub_model">NCB:</label>
-                                                        <input type="text" id="ncb" name="ncb" class="form-control" value="">
+                                                        <label for="ncb">NCB:</label>
+                                                        <input type="text" id="ncb" name="ncb" class="form-control" value="@if(isset($insurance)) {{$insurance->ncb}} @endif">
                                                     </div>
 
                                                     <div class="col-md-6 mt-3">
