@@ -29,3 +29,11 @@ function ensureModule($permission){
 function showEntries(){
     return [10, 25, 75, 100];
 }
+
+function calculateGst($amount, $percentage){
+
+    $gstAmount = ($amount * $percentage) / 100;
+    $totalAmount = $amount + $gstAmount;
+
+    return $totalAmount;
+}

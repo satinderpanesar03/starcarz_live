@@ -43,7 +43,14 @@ class HealthInsurance extends Controller
     public function create()
     {
         $executives = MstExecutive::pluck('name', 'id');
-        $parties = MstParty::select('id', 'party_name')->get();
+        $parties = MstParty::with('partyContact')->get()->map(function ($party) {
+            $contactNumbers = $party->partyContact->pluck('number')->implode(', ');
+            return [
+                'id' => $party->id,
+                'name' => $party->party_name,
+                'contacts' => $contactNumbers
+            ];
+        });
         $insurance_company = MstInsurance::pluck('name', 'id');
         $subTypes = MstInsuranceType::where('insurance_id',1)->pluck('name', 'id');
 

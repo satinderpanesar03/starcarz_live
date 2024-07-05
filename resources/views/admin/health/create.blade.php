@@ -39,10 +39,12 @@
                                                     <input type="hidden" value="1" name="mst_executive_id">
                                                     <div class="col-md-4 mt-2">
                                                         <label for="mst_executive_id">Party</label>
-                                                        <select name="party_id" id="party_id" class="form-control">
-                                                            <option value="" selected disabled>Choose...</option>
-                                                            @foreach ($parties as $party)
-                                                            <option value="{{$party->id}}" {{ isset($insurance) && $insurance->party_id == $party->id ? ' selected' : '' }}>{{$party->party_name}}</option>
+                                                        <select name="party_id" id="mst_party_id" class="form-control">
+                                                            <option value="">Search By Name/Number</option>
+                                                            @foreach($parties as $party)
+                                                            <option value="{{ $party['id'] }}" {{ isset($insurance->party_id) && $insurance->party_id == $party['id'] ? 'selected' : '' }}>
+                                                                {{ $party['name'] }} ({{ $party['contacts'] }})
+                                                            </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -309,8 +311,13 @@
             const premium = parseFloat($('#premium').val()) || 0;
             const gst = parseFloat($('#gst').val()) || 0;
 
-            const total = premium + gst;
-            $('#gross_premium').val(total);
+            // const total = premium + gst;
+
+
+            const gstAmount = (premium * gst) / 100;
+            const totalAmount = premium + gstAmount;
+
+            $('#gross_premium').val(totalAmount);
         }
 
         $('#premium, #gst').on('input', function() {
