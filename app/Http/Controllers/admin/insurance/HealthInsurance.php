@@ -7,6 +7,7 @@ use App\Models\EndorsementInsuranceDetail;
 use App\Models\HealthInsurance as ModelsHealthInsurance;
 use App\Models\InsuranceRenewalDetail;
 use App\Models\MstExecutive;
+use App\Models\MstInsuranceType;
 use App\Models\MstModel;
 use App\Models\MstParty;
 use Carbon\Carbon;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Models\MstInsurance;
 
 class HealthInsurance extends Controller
 {
@@ -42,8 +44,10 @@ class HealthInsurance extends Controller
     {
         $executives = MstExecutive::pluck('name', 'id');
         $parties = MstParty::select('id', 'party_name')->get();
+        $insurance_company = MstInsurance::pluck('name', 'id');
+        $subTypes = MstInsuranceType::where('insurance_id',1)->pluck('name', 'id');
 
-        return view('admin.health.create', compact('executives', 'parties'));
+        return view('admin.health.create', compact('executives', 'parties','insurance_company','subTypes'));
     }
 
     public function store(Request $request)
@@ -57,8 +61,10 @@ class HealthInsurance extends Controller
                 'required',
                 Rule::unique('health_insurances')->ignore($request->id),
             ],
+            'executive_id' => 'required'
         ], [
-            'party_id' => 'Please select party'
+            'party_id' => 'Please select party',
+            'executive_id' => 'Please select executive',
         ]);
         $input = $request->all();
 
@@ -139,7 +145,11 @@ class HealthInsurance extends Controller
         $endorsement = EndorsementInsuranceDetail::where('insurance_type', 1)
             ->where('policy_number', $insurance->policy_number)
             ->first();
-        return view('admin.health.edit', compact('parties', 'insurance', 'renewal', 'endorsement'));
+        $executives = MstExecutive::pluck('name', 'id');
+        $insurance_company = MstInsurance::pluck('name', 'id');
+        $subTypes = MstInsuranceType::where('insurance_id',1)->pluck('name', 'id');
+
+        return view('admin.health.edit', compact('parties', 'insurance', 'renewal', 'endorsement','executives','insurance_company','subTypes'));
     }
 
     public function view($id)
@@ -149,7 +159,11 @@ class HealthInsurance extends Controller
         $endorsement = EndorsementInsuranceDetail::where('insurance_type', 1)
             ->where('policy_number', $insurance->policy_number)
             ->first();
-        return view('admin.health.view', compact('parties', 'insurance', 'endorsement'));
+            $executives = MstExecutive::pluck('name', 'id');
+            $insurance_company = MstInsurance::pluck('name', 'id');
+            $subTypes = MstInsuranceType::where('insurance_id',1)->pluck('name', 'id');
+
+        return view('admin.health.view', compact('parties', 'insurance', 'endorsement','executives','insurance_company','subTypes'));
     }
 
     public function renewalIndex()

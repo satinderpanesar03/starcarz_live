@@ -68,6 +68,15 @@
                                                         <label for="city">City:</label>
                                                         <input type="text" id="city" name="city" class="form-control" readonly>
                                                     </div>
+                                                    <div class="col-md-4 mt-2">
+                                                        <label for="contact_number">Executive:</label>
+                                                        <select name="executive_id" id="executive_id" class="form-control">
+                                                            <option value="" selected disabled>Choose...</option>
+                                                            @foreach ($executives as $value => $party)
+                                                            <option value="{{$value}}" {{ isset($insurance->id) && $insurance->executive_id == $value ? ' selected' : '' }}>{{$party}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">
                                                 <h5>Insurance Details</h5>
@@ -140,6 +149,25 @@
                                                             <span><a href="{{route('admin.remove.uploaded.image',['health_insurances',$insurance->id,'policy_image'])}}" class="btn btn-sm danger">Remove</a></span>
                                                         </div>
                                                         @endif
+                                                    </div>
+                                                    <div class="col-md-3 mt-3">
+                                                        <label for="mst_brand_type_id">Insurance Company:</label>
+                                                        <select name="insurance_company_id" id="insurance_company_id" class="form-control">
+                                                            <option selected disabled="">Choose...</option>
+                                                            @foreach ($insurance_company as $value => $company)
+                                                            <option value="{{$value}}" @if(isset($insurance) && $insurance->insurance_company_id == $value) selected @endif>{{$company}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-3 mt-3">
+                                                        <label for="mst_brand_type_id">Insurance Type:</label>
+                                                        <select name="sub_type_id" id="insurance_company" class="form-control">
+                                                            <option selected disabled="">Choose...</option>
+                                                            @foreach ($subTypes as $value => $company)
+                                                            <option value="{{$value}}" @if(isset($insurance) && $insurance->sub_type_id == $value) selected @endif>{{$company}}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <!-- <div class="col-md-3 mt-3">
                                                         <label for="mst_brand_type_id">Hospital Name:</label>

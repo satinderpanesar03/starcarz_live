@@ -39,7 +39,7 @@
                                                     <input type="hidden" value="1" name="mst_executive_id">
                                                     <div class="col-md-4 mt-2">
                                                         <label for="mst_executive_id">Party</label>
-                                                        <select name="party_id" id="mst_party_id" class="form-control">
+                                                        <select name="party_id" id="party_id" class="form-control">
                                                             <option value="" selected disabled>Choose...</option>
                                                             @foreach ($parties as $party)
                                                             <option value="{{$party->id}}" {{ isset($insurance) && $insurance->party_id == $party->id ? ' selected' : '' }}>{{$party->party_name}}</option>
@@ -65,6 +65,15 @@
                                                     <div class="col-md-4 mt-2">
                                                         <label for="city">City:</label>
                                                         <input type="text" id="city" name="city" class="form-control" readonly>
+                                                    </div>
+                                                    <div class="col-md-4 mt-2">
+                                                        <label for="contact_number">Executive:</label>
+                                                        <select name="executive_id" id="executive_id" class="form-control">
+                                                            <option value="" selected disabled>Choose...</option>
+                                                            @foreach ($executives as $value => $party)
+                                                            <option value="{{$value}}" {{ isset($insurance->id) && $insurance->mst_executive_id == $value ? ' selected' : '' }}>{{$party}}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">
@@ -124,6 +133,28 @@
                                                         <label for="policy_image" class="form-label">Insurance Policy</label>
                                                         <input type="file" class="form-control" name="policy_image" required>
                                                     </div>
+
+                                                    <div class="col-md-3 mt-3">
+                                                        <label for="mst_brand_type_id">Insurance Company:</label>
+                                                        <select name="insurance_company_id" id="insurance_company_id" class="form-control">
+                                                            <option selected disabled="">Choose...</option>
+                                                            @foreach ($insurance_company as $value => $company)
+                                                            <option value="{{$value}}" @if(isset($insurance) && $insurance->insurance_company == $value) selected @endif>{{$company}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-md-3 mt-3">
+                                                        <label for="mst_brand_type_id">Insurance Type:</label>
+                                                        <select name="sub_type_id" id="insurance_company" class="form-control">
+                                                            <option selected disabled="">Choose...</option>
+                                                            @foreach ($subTypes as $value => $company)
+                                                            <option value="{{$value}}" @if(isset($insurance) && $insurance->subTypes == $value) selected @endif>{{$company}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+
                                                     <!-- <div class="col-md-3 mt-3">
                                                         <label for="mst_brand_type_id">Hospital Name:</label>
                                                         <input class="form-control" type="text" name="hospital_name" id="hospital_name" value="{{$insurance->hospital_name ?? ''}}" required>
