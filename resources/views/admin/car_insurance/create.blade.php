@@ -634,7 +634,9 @@
     $(document).ready(function() {
         $('#insurance_from_date').change(function() {
             var fromDate = new Date($(this).val());
-            var toDate = new Date(fromDate.setFullYear(fromDate.getFullYear() + 1));
+            var toDate = new Date(fromDate);
+            toDate.setFullYear(fromDate.getFullYear() + 1);
+            toDate.setDate(toDate.getDate() - 1);
             var formattedToDate = toDate.toISOString().slice(0, 10);
             $('#insurance_to_date').val(formattedToDate);
         });
