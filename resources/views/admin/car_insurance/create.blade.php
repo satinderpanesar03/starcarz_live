@@ -208,11 +208,15 @@
                                                     </div>
                                                     <div class="col-md-3 mt-3">
                                                         <label for="sum_insured">Sum Insured:</label>
-                                                        <input class="form-control" type="text" name="sum_insured" id="sum_insured" value="{{$insurance->sum_insured ?? ''}}" required>
+                                                        <input class="form-control" type="number" name="sum_insured" id="sum_insured" value="{{$insurance->sum_insured ?? ''}}" required>
                                                     </div>
                                                     <div class="col-md-3 mt-3">
-                                                        <label for="mst_brand_type_id">Premium:</label>
-                                                        <input class="form-control" type="text" name="premium" id="premium" value="{{$insurance->premium ?? ''}}" required>
+                                                        <label for="mst_brand_type_id">OD Premium:</label>
+                                                        <input class="form-control" type="number" name="premium" id="premium" value="{{$insurance->premium ?? ''}}" required>
+                                                    </div>
+                                                    <div class="col-md-3 mt-3">
+                                                        <label for="mst_brand_type_id">Third Party Premium:</label>
+                                                        <input class="form-control" type="number" name="third_party_premium" id="third_party_premium" value="{{$insurance->third_party_premium ?? ''}}" required>
                                                     </div>
                                                     <div class="col-md-3 mt-3">
                                                         <label for="mst_brand_type_id">Gst:</label>
@@ -621,9 +625,18 @@
         function calculateTotal() {
             const premium = parseFloat($('#premium').val()) || 0;
             const gst = parseFloat($('#gst').val()) || 0;
+            const thirdPartyPremium = parseFloat($('#third_party_premium').val()) || 0;
+            const amtAll = premium + thirdPartyPremium;
 
-            const total = premium + gst;
-            $('#total').val(total);
+            let totalAmount;
+            if (!isNaN(gst) || gst != '' || gst !== 0) {
+                const gstAmount = (amtAll * gst) / 100;
+                totalAmount = amtAll + gstAmount;
+            } else {
+                totalAmount = amtAll;
+            }
+
+            $('#total').val(totalAmount);
         }
 
         $('#premium, #gst').on('input', function() {

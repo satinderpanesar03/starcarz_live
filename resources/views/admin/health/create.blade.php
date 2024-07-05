@@ -121,7 +121,7 @@
                                                     </div>
                                                     <div class="col-md-3 mt-3">
                                                         <label for="mst_brand_type_id">Premium:</label>
-                                                        <input class="form-control" type="text" name="premium" id="premium" value="{{$insurance->premium ?? ''}}" required>
+                                                        <input class="form-control" type="number" name="premium" id="premium" value="{{$insurance->premium ?? ''}}" required>
                                                     </div>
                                                     <div class="col-md-3 mt-3">
                                                         <label for="mst_brand_type_id">Gst:</label>
