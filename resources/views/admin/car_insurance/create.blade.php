@@ -115,10 +115,17 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
+
+                                                    <div class="col-md-3 mb-3">
+                                                        <label for="sub_model">Enter Sub Model:</label>
+                                                        <input type="text" id="sub_model" name="sub_model" class="form-control" value="">
+                                                    </div>
+
+
                                                 </div>
 
                                                 <div class="row">
-                                                    
+
                                                     <div class="col-md-3">
                                                         <label for="colorType">Vehicle Model:</label>
                                                         <select name="color" id="od_type_insurance" class="form-control" required>
@@ -229,6 +236,12 @@
                                                         </div>
                                                         @endif
                                                     </div>
+
+                                                    <div class="col-md-3 mt-3">
+                                                        <label for="sub_model">NCB:</label>
+                                                        <input type="text" id="ncb" name="ncb" class="form-control" value="">
+                                                    </div>
+
                                                     <div class="col-md-6 mt-3">
                                                         <label for="coverage_detail">Coverge Detail:</label>
                                                         <textarea id="coverage_detail" name="coverage_detail" class="form-control" rows="4">@if(isset($insurance->id)) {{ $insurance->coverage_detail }}@else{{ old('coverage_detail') }}@endif</textarea>

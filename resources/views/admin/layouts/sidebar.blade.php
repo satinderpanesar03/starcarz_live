@@ -80,7 +80,7 @@
                         @endif
                         @if(EnsureModule('executive'))
                         <ul class="menu-content">
-                            <li class="nav-item {{ request()->routeIs('admin.master.executive.index') ? 'active' : '' }}""><a href=" {{route('admin.master.executive.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Sale Executive</span></a>
+                            <li class="nav-item {{ request()->routeIs('admin.master.executive.index') ? 'active' : '' }}""><a href=" {{route('admin.master.executive.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">OSE</span></a>
                             </li>
                         </ul>
                         @endif
