@@ -45,7 +45,7 @@ class CarInsurance extends Model
     }
 
     public static function vehicleType(){
-        return [1=>'Bike',2=>'Car'];
+        return [1=>'Two wheeler',2=>'Private car', 3=>'Commercial'];
     }
 
     public static function getVehicleType($key)
