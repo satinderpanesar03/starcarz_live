@@ -129,17 +129,17 @@ class PartyController extends Controller
             ],
             'whatsapp_number' => [
                 'required',
-                'distinct',
-                Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
-                    return $query->where('type', 1)->whereNot('mst_party_id', $request->id);
-                }),
+                // 'distinct',
+                // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
+                //     return $query->where('type', 1)->whereNot('mst_party_id', $request->id);
+                // }),
             ],
             'office_number' => [
                 // 'required',
-                'distinct',
-                Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
-                    return $query->where('type', 2)->whereNot('mst_party_id', $request->id);
-                }),
+                // 'distinct',
+                // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
+                //     return $query->where('type', 2)->whereNot('mst_party_id', $request->id);
+                // }),
             ],
             // 'residence_city' => [
             //     'required',

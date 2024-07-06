@@ -915,7 +915,7 @@ class PurchaseController extends Controller
         $purchases = Purchase::with('carModel:id,mst_brand_type_id,model','color:id,color','brand:id,type','purchaseOrder:id,purchase_id,price_p1')
         ->whereIn('status', [6,7])
         ->orderBy('id','desc')->get();
-        // dd($purchases);  
+        // dd($purchases);
 
         return view('admin.sale-purchase.ready-for-sale.index', compact('purchases'));
     }
