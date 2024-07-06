@@ -18,7 +18,7 @@
                                             <h5 class="pt-2 pb-2">@if(isset($insurance->id)) Edit @else Add @endif New Role</h5>
                                         </div>
                                         <div class="col-12 col-sm-5 d-flex justify-content-end align-items-center">
-                                            <a href="{{route('admin.master.insurance.index')}}" class="btn btn-sm btn-primary px-3 py-1">
+                                            <a href="{{route('admin.setting.role.index')}}" class="btn btn-sm btn-primary px-3 py-1">
                                                 <i class="fa fa-arrow-left"></i> Back </a>
                                         </div>
                                     </div>
