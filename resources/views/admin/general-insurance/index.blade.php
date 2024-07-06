@@ -75,7 +75,7 @@
                                         <tbody>
                                             @foreach ($insurances as $value => $item)
                                             <tr>
-                                                <td>{{++$value}}</td>
+                                                <td>{{$value + $insurances->firstItem()}}</td>
                                                 <td>{{$item->party ? ucfirst($item->party->party_name) : ''}}</td>
                                                 <td>{{ucfirst($item->policy_number)}}</td>
                                                 <td>{{$item->insurance ? ucfirst($item->insurance->name) : ''}}</td>
@@ -140,10 +140,10 @@
         async function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
+
             // Capture the HTML content of the table
             const table = document.querySelector('.table').outerHTML;
-            
+
             // Add the table content to the PDF document
             doc.html(table, {
                 callback: function (doc) {

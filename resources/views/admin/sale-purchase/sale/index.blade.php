@@ -100,7 +100,7 @@
                                         <tbody>
                                             @forelse($sales as $value => $sale)
                                             <tr>
-                                                <td>{{++$value}}</td>
+                                                <td>{{$value + $sales->firstItem()}}</td>
                                                 <td>{{ ($sale->firm_name) ? $sale->firm_name : '' }}</td>
                                                 <td>{{ ($sale->modelName) ? $sale->modelName->model : ''}}</td>
                                                 <td>{{date('d M,Y', strtotime($sale->created_at))}}</td>
