@@ -304,7 +304,7 @@
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="insurance_company">Insurance Company:</label>
-                                                        <select name="insurance_company" id="insurance_company" class="form-control">
+                                                        <select name="insurance_company" id="insurance_company" class="form-control" disabled>
                                                             <option value="">Choose...</option>
                                                             @foreach($insurance as $value => $label)
                                                             <option value="{{ $value }}" {{ isset($carLoan->insurance_company) && $carLoan->insurance_company == $value ? 'selected' : '' }}>{{ $label }}</option>
@@ -313,15 +313,15 @@
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="insurance_done_date">Insurance Done Date:</label>
-                                                        <input type="date" id="insurance_done_date" name="insurance_done_date" class="form-control" value="{{ isset($carLoan) ? \Carbon\Carbon::parse($carLoan->insurance_done_date)->format('Y-m-d') : old('insurance_done_date') }}">
+                                                        <input type="date" id="insurance_done_date" name="insurance_done_date" class="form-control" value="{{ isset($carLoan) ? \Carbon\Carbon::parse($carLoan->insurance_done_date)->format('Y-m-d') : old('insurance_done_date') }}" readonly>
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="insurance_from_date">Insurance From Date:</label>
-                                                        <input type="date" id="insurance_from_date" name="insurance_from_date" class="form-control" value="{{ isset($carLoan) ? \Carbon\Carbon::parse($carLoan->insurance_from_date)->format('Y-m-d') : old('insurance_from_date') }}">
+                                                        <input type="date" id="insurance_from_date" name="insurance_from_date" class="form-control" value="{{ isset($carLoan) ? \Carbon\Carbon::parse($carLoan->insurance_from_date)->format('Y-m-d') : old('insurance_from_date') }}" readonly>
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="insurance_to_date">Insurance To Date:</label>
-                                                        <input type="date" id="insurance_to_date" name="insurance_to_date" class="form-control" value="{{ isset($carLoan) ? \Carbon\Carbon::parse($carLoan->insurance_to_date)->format('Y-m-d') : old('insurance_to_date') }}">
+                                                        <input type="date" id="insurance_to_date" name="insurance_to_date" class="form-control" value="{{ isset($carLoan) ? \Carbon\Carbon::parse($carLoan->insurance_to_date)->format('Y-m-d') : old('insurance_to_date') }}" readonly>
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary mt-3">Save</button>
