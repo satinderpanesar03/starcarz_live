@@ -121,7 +121,7 @@ class PartyController extends Controller
             // 'office_city' => 'required',
             'residence_address' => 'required',
             // 'pan_number' => 'required',
-            'email' => 'required',
+            'email' => 'nullable|email',
             'residence_city' => 'required',
             'party_name' => [
                 'required',
