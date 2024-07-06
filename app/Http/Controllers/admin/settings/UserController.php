@@ -74,12 +74,17 @@ class UserController extends Controller
             }
             $user->save();
 
-            foreach(explode(',',$user->roles) as $role){
-                if($role == 4 || $role == 5 || $role == 7){
-                    MstExecutive::create([
-                        'name' => $user->name,
-                        'admin_login_id' => $user->id,
-                    ]);
+            foreach (explode(',', $user->roles) as $role) {
+                if (in_array($role, [4, 5, 7])) {
+                    MstExecutive::updateOrCreate(
+                        [
+                            'admin_login_id' => $user->id,
+                        ],
+                        [
+                            'name' => $user->name,
+                            'admin_login_id' => $user->id,
+                        ]
+                    );
                 }
             }
 

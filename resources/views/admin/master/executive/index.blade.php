@@ -66,7 +66,7 @@
                                         </thead>
                                         <tbody>
                                             @forelse($executives as $value => $executive)
-                                            <tr>
+                                            <tr @if ($executive->admin_login_id == 1) style="background-color: #bec6c9" @endif>
                                                 <td>{{++$value}}</td>
                                                 <td>{{ucfirst($executive->name)}}</td>
                                                 <td class="text-truncate">
