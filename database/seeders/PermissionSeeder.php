@@ -17,7 +17,7 @@ class PermissionSeeder extends Seeder
         $permissions = Permission::permissions;
 
         Permission::truncate();
-        RoleAndPermission::truncate();
+
 
         foreach ($permissions as $module => $modulePermissions) {
             foreach ($modulePermissions as $permission) {
@@ -28,14 +28,14 @@ class PermissionSeeder extends Seeder
             }
         }
 
-        $permissions = Permission::select('id')->get();
+        // $permissions = Permission::select('id')->get();
+        // RoleAndPermission::truncate();
+        // foreach($permissions as $permission){
+        //     RoleAndPermission::create([
+        //         'role_id' => 1,
+        //         'permission_id' => $permission->id
+        //     ]);
+        // }
 
-        foreach($permissions as $permission){
-            RoleAndPermission::create([
-                'role_id' => 1,
-                'permission_id' => $permission->id
-            ]);
-        }
-        
     }
 }
