@@ -477,8 +477,13 @@
             const premium = parseFloat($('#premium').val()) || 0;
             const gst = parseFloat($('#gst').val()) || 0;
 
-            const total = premium + gst;
-            $('#total').val(total);
+            // const total = premium + gst;
+            // $('#total').val(total);
+
+            const gstAmount = (premium * gst) / 100;
+            const totalAmount = premium + gstAmount;
+
+            $('#total').val(totalAmount);
         }
 
         $('#premium, #gst').on('input', function() {
