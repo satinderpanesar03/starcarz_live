@@ -22,7 +22,7 @@ class UserController extends Controller
         } else {
             $users = AdminLogin::paginate($request->limit ? $request->limit : 10);
         }
-        
+
         return view('admin.settings.user.index')->with(['users' => $users]);
     }
 
@@ -119,4 +119,17 @@ class UserController extends Controller
         $user = AdminLogin::findOrFail($id);
         return view('admin.settings.user.show', compact('user'));
     }
+
+    public function grantAccess(Request $request, $id){
+        $user = AdminLogin::findOrFail($id);
+
+        $access = ($request->all_access == 'on') ? 1 : null;
+        $user->update(['all_access' => $access]);
+
+        $access ? \toastr()->success(ucfirst('User access granted')) : \toastr()->success(ucfirst('User access revoked'));
+        return back();
+
+    }
+
+
 }

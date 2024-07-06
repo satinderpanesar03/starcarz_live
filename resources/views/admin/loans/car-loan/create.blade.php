@@ -253,7 +253,7 @@
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="executive">Executive:</label>
-                                                        <select name="executive" id="executive" class="form-control">
+                                                        <select name="executive" id="executive" class="form-control" required>
                                                             <option value="" selected disabled>Choose...</option>
                                                             @foreach ($executives as $value => $party)
                                                             <option value="{{$value}}" {{ isset($carLoan->id) && $carLoan->executive == $value ? ' selected' : '' }}>{{$party}}</option>

@@ -63,6 +63,7 @@
                                                 <th>Contact</th>
                                                 <th>Role</th>
                                                 <th>Actions</th>
+                                                <th>All Access</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -86,10 +87,15 @@
                                                         <a href="{{route('admin.setting.user.show', $user->id)}}" class="btn btn-success btn-sm" title="Edit">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <a href="#">
-                                                            <input type="checkbox" checked data-toggle="toggle" data-size="xs">
-                                                        </a>
                                                     </span>
+                                                </td>
+                                                <td>
+                                                    <form action="{{ route('admin.setting.user.all_access', $user->id) }}" method="POST" id="all-access-form-{{ $user->id }}">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <input type="checkbox" name="all_access" @if($user->all_access) checked @endif data-toggle="toggle" data-size="xs" onchange="document.getElementById('all-access-form-{{ $user->id }}').submit();">
+                                                    </form>
+
                                                 </td>
                                             </tr>
                                             @empty

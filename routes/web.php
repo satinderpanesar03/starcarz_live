@@ -406,6 +406,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
                 Route::get('show-user/{id}', 'show')->name('user.show')->middleware('Ensure:edit_users');
                 Route::get('delete-user/{id}', 'delete')->name('user.delete')->middleware('Ensure:delete_users');
                 Route::get('view-user/{id}', 'view')->name('user.view')->middleware('Ensure:view_users');
+                Route::patch('grant-access/{id}', 'grantAccess')->name('user.all_access');
             });
 
             Route::controller(CompanyController::class)->group(function () {

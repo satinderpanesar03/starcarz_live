@@ -23,7 +23,8 @@ class AdminLogin extends Authenticatable
         'gender',
         'password',
         'reset_link',
-        'roles'
+        'roles',
+        'all_access'
     ];
     protected $hidden = [
         'password',
@@ -58,7 +59,7 @@ class AdminLogin extends Authenticatable
 
     public function getMultiRoleNameAttribute(){
         $roleName = [];
-        $roles = DB::table('roles')->select('id', 'title')->get(); 
+        $roles = DB::table('roles')->select('id', 'title')->get();
 
         foreach($roles as $role){
             if(in_array($role->id, explode(',', $this->roles))){
