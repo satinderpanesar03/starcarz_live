@@ -76,7 +76,7 @@
                                         <tbody>
                                             @forelse($insurances as $value => $insurance)
                                             <tr>
-                                                <td>{{++$value}}</td>
+                                                <td>{{$value + $insurances->firstItem()}}</td>
                                                 <td>{{ucfirst($insurance->name)}}</td>
                                                 <td>{{ucfirst($insurance->address)}}</td>
                                                 <td>{{ucfirst($insurance->city)}}</td>

@@ -90,7 +90,7 @@
                                         <tbody>
                                             @forelse($parties as $value => $party)
                                             <tr>
-                                                <td>{{++$value}}</td>
+                                                <td>{{$value + $parties->firstItem()}}</td>
                                                 <td>{{ucfirst($party->party_name)}}</td>
                                                 <td>{{$party->email}}</td>
                                                 <td>

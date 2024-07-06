@@ -77,7 +77,7 @@
                                                 @forelse($executives as $value => $executive)
                                                     <tr
                                                         @if ($executive->admin_login_id != 0) style="background-color: #bec6c9" @endif>
-                                                        <td>{{ ++$value }}</td>
+                                                        <td>{{$value + $executives->firstItem()}}</td>
                                                         <td>{{ ucfirst($executive->name) }}</td>
                                                         <td class="text-truncate">
                                                             <div style="display: flex; align-items: center; gap: 5px;">
