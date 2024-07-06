@@ -51,6 +51,9 @@
                                                             </option>
                                                             @endforeach
                                                         </select>
+                                                        <div data-toggle="modal" data-target="#addParty" class="input-group-append">
+                                                            <button class="btn btn-outline-primary btn-field-height" type="button">+</button>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="email">Email:</label>
@@ -269,7 +272,76 @@
         </div>
     </div>
 </div>
+<div class="modal fade text-left" id="addParty" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <label class="modal-title text-text-bold-600" id="myModalLabel33"><b>Add Party</b></label>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="ft-x font-medium-2 text-bold-700"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="#" id="updateForm" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- <label for="party_name">Party Name</label>  -->
+                            <input type="text" placeholder="Party Name" name="party_name" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- <label for="firm_name">Firm Name</label> -->
+                            <input type="text" placeholder="Firm Name" name="firm_name" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-2">
+                            <input type="number" placeholder="Whatsapp Number" name="whatsapp_number" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <!-- <label for="office_address">Office Address</label> -->
+                            <input type="text" placeholder="Office Address" name="office_address" class="form-control" required>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-md-6 mt-2">
+                            <!-- <label for="email">Email</label> -->
+                            <input type="text" placeholder="Email" name="email" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <!-- <label for="residence_city">Residence City</label> -->
+                            <input type="text" placeholder="Residence City" name="residence_city" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-2">
+                            <!-- <label for="office_number">Office Number</label> -->
+                            <input type="number" placeholder="Office Number" name="office_number" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <!-- <label for="office_city">Office City</label> -->
+                            <input type="text" placeholder="Office City" name="office_city" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mt-2">
+                            <!-- <label for="residence_address">Residence Address</label> -->
+                            <input type="text" placeholder="Residence Address" name="residence_address" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <!-- <label for="pan_number">Pan Number</label> -->
+                            <input type="text" placeholder="Pan Number" name="pan_number" class="form-control" required>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <input type="reset" class="btn bg-light-secondary" data-dismiss="modal" value="Close">
+                <button type="button" class="btn btn-primary modal_submit">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -462,6 +534,51 @@
 
         });
         $('#policy_number_id').trigger('change');
+    });
+    $(document).ready(function() {
+        $('.modal_submit').click(function(e) {
+            e.preventDefault();
+            var formData = $('#updateForm').serialize();
+            console.log(formData);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: '/save-party-data',
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    alert('Party data saved successfully');
+                    location.reload();
+                    $('#addParty input').val('');
+                    $('#addParty').modal('hide');
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    var errorMessage = 'Error: ';
+
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        console.log(response); // Debugging: Log the parsed response
+                        if (response.errors) {
+                            for (var key in response.errors) {
+                                errorMessage += response.errors[key][0] + '<br>';
+                            }
+                        }
+                    } catch (e) {
+                        console.error(e); // Debugging: Log any parsing errors
+                        errorMessage += 'Unknown error occurred.';
+                    }
+
+                    console.log(errorMessage); // Debugging: Log the final error message
+                    toastr.error(errorMessage);
+                }
+            });
+        });
     });
 </script>
 @endpush
