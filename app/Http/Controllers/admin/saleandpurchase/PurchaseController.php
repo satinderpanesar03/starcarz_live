@@ -461,19 +461,19 @@ class PurchaseController extends Controller
             ],
             'whatsapp_number' => [
                 'nullable',
-                'distinct',
-                Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
-                    return $query->where('type', 1)->where('mst_party_id', '!=', $request->id);
-                }),
+                // 'distinct',
+                // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
+                //     return $query->where('type', 1)->where('mst_party_id', '!=', $request->id);
+                // }),
             ],
             'email' => ['email', 'nullable'],
             'residence_city' => 'required',
             'office_number' => [
                 'nullable',
-                'distinct',
-                Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
-                    return $query->where('type', 2)->where('mst_party_id', '!=', $request->id);
-                }),
+                // 'distinct',
+                // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
+                //     return $query->where('type', 2)->where('mst_party_id', '!=', $request->id);
+                // }),
             ],
             'residence_address' => 'required',
         ];
