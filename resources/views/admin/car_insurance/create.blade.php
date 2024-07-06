@@ -164,7 +164,7 @@
 
                                                     <div class="col-md-3">
                                                         <label for="registration_year">Date of Registration:</label>
-                                                        <input type="text" id="registration_year" name="registration_year" class="form-control" value="@if(isset($insurance)) {{$insurance->registration_year}} @endif">
+                                                        <input type="date" id="registration_year" name="registration_year" class="form-control" value="@if(isset($insurance)) {{$insurance->registration_year}} @endif">
                                                     </div>
 
                                                 </div>
