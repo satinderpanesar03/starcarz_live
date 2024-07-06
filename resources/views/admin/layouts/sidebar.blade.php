@@ -90,6 +90,12 @@
                             </li>
                         </ul>
                         @endif
+                        {{-- @if(EnsureModule('insurance_company')) --}}
+                        <ul class="menu-content">
+                            <li class="nav-item {{ request()->routeIs('admin.master.insurance.index') ? 'active' : '' }}""><a href=" {{route('admin.master.insurance.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Insurance Company</span></a>
+                            </li>
+                        </ul>
+                        {{-- @endif --}}
                         @if(EnsureModule('supplier'))
                         <ul class="menu-content">
                             <li class="nav-item {{ request()->routeIs('admin.master.supplier.index') ? 'active' : '' }}""><a href=" {{route('admin.master.supplier.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Supplier</span></a>

@@ -76,7 +76,7 @@ class Permission extends Model
         //     'edit_broker',
         //     'view_broker'
         // ],
-        // 
+        //
         'bank' => [
             'view_bank',
             'add_bank',
@@ -244,6 +244,13 @@ class Permission extends Model
             'edit_sub_type',
             'show_sub_type',
             'status_sub_type'
+        ],
+        'insurance_company' => [
+            'view_insurance',
+            'add_insurance',
+            'edit_insurance',
+            'show_insurance',
+            'status_insurance'
         ],
 
     ];

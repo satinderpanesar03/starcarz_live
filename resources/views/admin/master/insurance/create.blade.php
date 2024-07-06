@@ -15,7 +15,7 @@
                                 <div class="card-header" style="background-color: #d6d6d6; color: #000000;  z-index: 1;">
                                     <div class="row">
                                         <div class="col-12 col-sm-7">
-                                            <h5 class="pt-2 pb-2">@if(isset($insurance->id)) Edit @else Add @endif Insurance</h5>
+                                            <h5 class="pt-2 pb-2">@if(isset($insurance->id)) Edit @else Add @endif Insurance Company</h5>
                                         </div>
                                         <div class="col-12 col-sm-5 d-flex justify-content-end align-items-center">
                                             <a href="{{route('admin.master.insurance.index')}}" class="btn btn-sm btn-primary px-3 py-1">
