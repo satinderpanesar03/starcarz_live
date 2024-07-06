@@ -75,7 +75,7 @@
                                                         <select name="mst_executive_id" id="mst_executive_id" class="form-control">
                                                             <option value="">Search Executive</option>
                                                             @foreach($executives as $id => $label)
-                                                            <option value="{{ $id }}" {{ isset($sale) && $sale->mst_executive_id == $id ? 'selected' : '' }}>{{ ucfirst($label) }}</option>
+                                                            <option value="{{ $id }}" {{ isset($sale) && $sale->mst_executive_id == $id ? 'selected' : '' }}>{{ ucfirst($label)}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -83,12 +83,15 @@
                                                         <label for="status">Status:</label>
                                                         <select name="status" id="status_id" class="form-control{{ $type ? ' readonly' : '' }}" {{ $type ? 'disabled' : '' }}>
                                                             @if(isset($sale->status))
-                                                            <option value="{{ $sale->status }}">{{ $sale->getStatusName($sale->status) }}</option>
+                                                                <option value="{{ $sale->status }}" selected>{{ $sale->getStatusName($sale->status) }}</option>
                                                             @endif
                                                             @foreach($status as $value => $label)
-                                                            <option value="{{ $value }}" {{ isset($sale->status) && $value == $sale->status? 'selected' : '' }}>{{ $label }}</option>
+                                                                @if(!isset($sale->status) || $value != $sale->status)
+                                                                    <option value="{{ $value }}">{{ $label }}</option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
+
                                                     </div>
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">

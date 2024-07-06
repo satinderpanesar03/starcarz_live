@@ -22,13 +22,13 @@ class SaleDetail extends Model
             '6' => 'Customer Demand'
         ];
 
-        if ($selectedStatusId !== null) {
-            // Filter out statuses that come before the selected status ID
-            $status = array_slice($status, $selectedStatusId, null, true);
+        // if ($selectedStatusId !== null) {
+        //     // Filter out statuses that come before the selected status ID
+        //     $status = array_slice($status, $selectedStatusId, null, true);
 
             // Reset keys to maintain original index values
             $status = array_combine(array_keys($status), array_values($status));
-        }
+        // }
 
         return $status;
     }
