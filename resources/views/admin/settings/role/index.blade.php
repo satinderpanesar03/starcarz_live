@@ -19,8 +19,8 @@
                                         <div class="col-12 col-sm-5 d-flex justify-content-end align-items-center">
                                             <button class="btn btn-sm btn-danger px-3 py-1 mr-2" id="listing-filter-toggle">
                                                 <i class="fa fa-filter"></i> Filter </button>
-                                            <!-- <a href="{{route('admin.setting.role.create')}}" class="btn btn-sm btn-primary px-3 py-1">
-                                                <i class="fa fa-plus"></i> Add Role </a> -->
+                                             <a href="{{route('admin.setting.role.new.create')}}" class="btn btn-sm btn-primary px-3 py-1">
+                                                <i class="fa fa-plus"></i> Add Role </a>
 
                                         </div>
                                     </div>
@@ -77,7 +77,10 @@
                                                 <td>{{$role->title}}</td>
                                                 <td class="text-truncate">
                                                     <span style="white-space:nowrap;" class="">
-                                                        <a href="{{route('admin.setting.role.show', $role->id)}}" class="btn btn-success btn-sm" title="Edit">
+                                                        <a href="{{route('admin.setting.role.show', $role->id)}}" class="btn btn-danger" title="Edit">
+                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                        </a> &nbsp;
+                                                        <a href="{{route('admin.setting.role.edit', $role->id)}}" class="btn btn-success" title="Edit">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
                                                     </span>

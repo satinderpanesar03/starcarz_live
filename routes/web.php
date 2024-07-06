@@ -390,6 +390,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
                 Route::post('store-role', 'store')->name('role.store')->middleware('Ensure:add_roles');
                 Route::get('show-role/{id}', 'show')->name('role.show')->middleware('Ensure:edit_roles');
                 Route::get('delete-role/{id}', 'delete')->name('role.delete')->middleware('Ensure:delete_roles');
+                Route::get('new-role', 'createRole')->name('role.new.create')->middleware('Ensure:add_roles');
+                Route::post('new-role-store', 'storeRole')->name('role.new.store')->middleware('Ensure:add_roles');
+                Route::get('edit-role/{id}', 'editRole')->name('role.edit')->middleware('Ensure:add_roles');
             });
 
             Route::controller(PermissionController::class)->group(function () {

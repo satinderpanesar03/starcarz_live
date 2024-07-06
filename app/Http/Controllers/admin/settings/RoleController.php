@@ -97,4 +97,50 @@ class RoleController extends Controller
         \toastr()->success(ucfirst('Role successfully deleted'));
         return back();
     }
+
+    public function createRole(){
+        return view('admin.settings.role.create_role');
+    }
+
+
+    public function storeRole(Request $request){
+        $validator = Validator::make($request->all(), [
+            'title' => [
+                'required',
+                'string',
+                Rule::unique('roles')->ignore($request->id),
+            ],
+        ]);
+        if($validator->fails()){
+            \toastr()->error($validator->errors()->first());
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        try {
+            DB::beginTransaction();
+
+            if($request->id){
+                $type = Role::find($request->id);
+                $type->update(['title' => $request->title]);
+            } else {
+                Role::create($request->except('_token'));
+            }
+
+            DB::commit();
+
+            \toastr()->success(ucfirst('role successfully saved'));
+            return redirect()->route('admin.setting.role.index');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \toastr()->error('Error occurred while saving role');
+            return redirect()->back();
+        }
+
+    }
+
+    public function editRole($id){
+        $role = Role::find($id);
+
+        return view('admin.settings.role.create_role', compact('role'));
+    }
+
 }
