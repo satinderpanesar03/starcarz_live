@@ -476,6 +476,10 @@ class PurchaseController extends Controller
                 // }),
             ],
             'residence_address' => 'required',
+            'office_city' => 'nullable',
+            'pan_number' => 'nullable',
+            'firm_name' => 'nullable',
+            'office_address' => 'nullable'
         ];
 
         $validatedData = $request->validate($rules);
@@ -490,8 +494,16 @@ class PurchaseController extends Controller
                 ['number' => $validatedData['office_number'], 'type' => 2]
             ]);
 
+            $party->partyCity()->create([
+                'city' => $validatedData['office_city'],
+            ]);
+            $party->partyFirm()->create([
+                'firm' => $validatedData['firm_name'],
+            ]);
+
             return response()->json(['message' => 'Party data saved successfully'], 200);
         } catch (\Exception $e) {
+            dd($e);
             if ($e instanceof \Illuminate\Validation\ValidationException) {
                 $errors = $e->validator->errors()->all();
 
