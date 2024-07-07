@@ -87,7 +87,7 @@ class GeneralInsuranceController extends Controller
                 Rule::unique('general_insurances')->ignore($request->id),
             ],
             'sum_insured' => 'integer',
-            'total' => 'integer'
+            // 'total' => 'nullalbe'
         ], [
             'mst_party_id' => 'Please select party'
         ]);

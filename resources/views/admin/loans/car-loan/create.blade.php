@@ -129,7 +129,7 @@
                                                         </div>
                                                         <div class="col-md-4 mt-2">
                                                             <label for="roi">IRR/ROI:</label>
-                                                            <input class="form-control" type="number" name="roi" id="roi" value="{{ $carLoan->roi ?? '' }}">
+                                                            <input class="form-control" type="number" name="roi" id="roi" step=".01" value="{{ $carLoan->roi ?? '' }}">
                                                         </div>
                                                         <!-- <div class="col-md-4 mt-2">
                                                             <label for="disbursed_amount">Disbursed Amount:</label>
