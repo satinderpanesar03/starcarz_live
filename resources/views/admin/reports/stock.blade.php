@@ -34,6 +34,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Car</th>
+                                                <th>Model</th>
                                                 <th>Fuel</th>
                                                 <th>Reg. No.</th>
                                                 <th>Color</th>
@@ -60,6 +61,7 @@
                                             <tr>
                                                 <td>{{++$value}}</td>
                                                 <td>{{$item->brand ? ucfirst($item->brand->type) : '---'}}</td>
+                                                <td>{{$item->carModel ? ucfirst($item->carModel->model) : '---'}}</td>
                                                 <td>
                                                     @foreach (\App\Models\Purchase::getFuelType() as $key => $value)
                                                     @if($key == $item->fuel_type)

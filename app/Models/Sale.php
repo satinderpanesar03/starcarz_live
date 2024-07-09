@@ -24,12 +24,14 @@ class Sale extends Model
     {
         return [
             '1' => 'Walk In',
-            '2' => 'Internet',
-            '3' => 'SMS',
+            '2' => 'Car Wale',
+            '3' => 'OLX',
             '4' => 'Dealer/Freelancer',
             '5' => 'Existing Customer',
             '6' => 'Telecaller',
-            '7' => 'Close'
+            '7' => 'Close',
+            '8' => 'Market Place',
+            '9' => 'Google'
         ];
     }
 

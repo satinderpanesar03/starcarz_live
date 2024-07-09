@@ -91,7 +91,7 @@ class ReportController extends Controller
                     ->orderBy('id', 'desc')
                     ->paginate($request->limit ?: 10);
             }
-            
+
             // $role = Role::where('title', ucfirst('executive'))->first();
             // if ($role) {
             //     $executives = AdminLogin::where('role_id', $role->id)->pluck('name', 'id');

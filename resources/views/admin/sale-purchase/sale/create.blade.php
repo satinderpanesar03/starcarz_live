@@ -133,8 +133,13 @@
                                                         <input class="form-control" type="text" name="model" id="model" value="@if(isset($sale->id)){{$sale->model}}@else{{old('model')}}@endif">
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <label for="model">Date Of Purchase:</label>
-                                                        <input class="form-control" type="date" name="date_of_purchase" id="model" value="@if(isset($sale->date_of_purchase)){{$sale->date_of_purchase}}@else{{old('date_of_purchase')}}@endif">
+                                                        <label for="enquiry_type">Enquiry Type:</label>
+                                                        <select name="enquiry_type" id="enquiry_type" class="form-control">
+                                                            <option value="" disabled selected>Choose...</option>
+                                                            @foreach($enquiryType as $value => $label)
+                                                            <option value="{{ $value }}" {{ isset($sale->enquiry_type) && $value == $sale->enquiry_type? 'selected' : '' }}>{{ $label }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
 
@@ -207,15 +212,7 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-3 mt-3">
-                                                        <label for="enquiry_type">Enquiry Type:</label>
-                                                        <select name="enquiry_type" id="enquiry_type" class="form-control">
-                                                            <option value="" disabled selected>Choose...</option>
-                                                            @foreach($enquiryType as $value => $label)
-                                                            <option value="{{ $value }}" {{ isset($sale->enquiry_type) && $value == $sale->enquiry_type? 'selected' : '' }}>{{ $label }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
+
 
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">

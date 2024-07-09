@@ -50,7 +50,7 @@
                                                         <input type="date" id="evaluation_date" name="evaluation_date" class="form-control" value="{{ isset($purchase) ? \Carbon\Carbon::parse($purchase->evaluation_date)->format('Y-m-d') : old('evaluation_date') }}">
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <label for="firm_name">Firm Name:</label>
+                                                        <label for="firm_name">Seller Name:</label>
                                                         <input type="text" id="firm_name" name="firm_name" class="form-control" value="@if(isset($purchase->id)){{$purchase->firm_name}}@else{{old('firm_name')}}@endif">
                                                     </div>
                                                     <div class="col-md-4 mt-2">
