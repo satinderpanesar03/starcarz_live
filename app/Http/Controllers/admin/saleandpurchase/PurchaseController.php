@@ -486,10 +486,30 @@ class PurchaseController extends Controller
 
         $validatedData = $request->validate($rules);
 
-        $checkUniqueFather = DB::table('mst_parties')->where(['party_name' => $request->party_name, 'father_name' => $request->father_name])->exists();
-            if($checkUniqueFather === true){
-                return response()->json(['error' => 'The  party name with same  father name already exists.'], 500);
-            }
+        $party_name = $request->party_name;
+        $whatsapp_number = $request->whatsapp_number;
+        $contact_number = $request->contact_number;
+
+        $merged_array = [$whatsapp_number, $contact_number];
+
+        $errorMessage = '';
+
+        $checkUnique = MstParty::where('party_name', $party_name)
+            ->whereHas('partyContact', function ($query) use ($merged_array) {
+                $query->where('number', $merged_array);
+            })
+            ->exists();
+
+        if ($checkUnique) {
+            $errorMessage = 'A party with same number already exists.';
+        }
+
+        if (!empty($errorMessage)) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $errorMessage
+            ], 422);
+        }
 
         try {
 

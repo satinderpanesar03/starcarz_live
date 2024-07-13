@@ -116,49 +116,43 @@ class PartyController extends Controller
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            // 'office_address' => 'required',
-            'name' => 'required',
-            // 'office_city' => 'required',
-            'residence_address' => 'required',
-            // 'pan_number' => 'required',
-            'email' => 'nullable|email',
-            'residence_city' => 'required',
-            'party_name' => [
-                'required',
-                // Rule::unique('mst_parties')->ignore($request->id),
-                // new UniquePartyAndFatherNames
-            ],
-            'father_name' => ['required'],
-            'whatsapp_number' => [
-                'required',
-                // 'distinct',
-                // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
-                //     return $query->where('type', 1)->whereNot('mst_party_id', $request->id);
-                // }),
-            ],
-            'office_number' => [
-                // 'required',
-                // 'distinct',
-                // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
-                //     return $query->where('type', 2)->whereNot('mst_party_id', $request->id);
-                // }),
-            ],
-            // 'residence_city' => [
-            //     'required',
-            //     Rule::unique('mst_parties')->ignore($request->input('residence_city')),
-            // ],
-        ]);
-        if ($validator->fails()) {
-            \toastr()->error($validator->errors()->first());
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $checkUniqueFather = DB::table('mst_parties')->where(['party_name' => $request->party_name, 'father_name' => $request->father_name])->exists();
-        if($checkUniqueFather === true){
-            \toastr()->error('The  party name with same  father name already exists.');
-            return redirect()->back();
-        }
+        // $validator = Validator::make($request->all(), [
+        //     // 'office_address' => 'required',
+        //     'name' => 'required',
+        //     // 'office_city' => 'required',
+        //     'residence_address' => 'required',
+        //     // 'pan_number' => 'required',
+        //     'email' => 'nullable|email',
+        //     'residence_city' => 'required',
+        //     'party_name' => [
+        //         'required',
+        //         // Rule::unique('mst_parties')->ignore($request->id),
+        //         // new UniquePartyAndFatherNames
+        //     ],
+        //     'father_name' => ['required'],
+        //     'whatsapp_number' => [
+        //         'required',
+        //         // 'distinct',
+        //         // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
+        //         //     return $query->where('type', 1)->whereNot('mst_party_id', $request->id);
+        //         // }),
+        //     ],
+        //     'office_number' => [
+        //         // 'required',
+        //         // 'distinct',
+        //         // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
+        //         //     return $query->where('type', 2)->whereNot('mst_party_id', $request->id);
+        //         // }),
+        //     ],
+        //     // 'residence_city' => [
+        //     //     'required',
+        //     //     Rule::unique('mst_parties')->ignore($request->input('residence_city')),
+        //     // ],
+        // ]);
+        // if ($validator->fails()) {
+        //     \toastr()->error($validator->errors()->first());
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
 
         // return $this->partyValidation($request->input('name'), $request->input('email'), $request->input('whatsapp_number'), $request->input('office_number'), $request->input('office_city'));
 
@@ -203,6 +197,29 @@ class PartyController extends Controller
                     ]);
                 }
             } else {
+                $party_name = $request->party_name;
+                $whatsapp_numbers = $request->whatsapp_number ?? [];
+                $contact_numbers = $request->contact_number ?? [];
+
+                $errorMessage = '';
+
+                foreach (array_merge($whatsapp_numbers, $contact_numbers) as $number) {
+                    $checkUnique = MstParty::where('party_name', $party_name)
+                        ->whereHas('partyContact', function ($query) use ($number) {
+                            $query->where('number', $number);
+                        })
+                        ->exists();
+
+                    if ($checkUnique) {
+                        $errorMessage .= 'A party with contact number(' . $number . ') already exists.<br>';
+                    }
+                }
+
+                if (!empty($errorMessage)) {
+                    \toastr()->error($errorMessage);
+                    return redirect()->back();
+                }
+
                 $party = MstParty::create([
                     'party_name' => $request->party_name,
                     'father_name' => $request->father_name,

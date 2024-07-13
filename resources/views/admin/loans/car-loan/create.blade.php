@@ -725,6 +725,7 @@
 
                         try {
                             var response = JSON.parse(xhr.responseText);
+                            console.log(response);
                             if (response.errors) {
                                 for (var key in response.errors) {
                                     errorMessage += response.errors[key][0] + '<br>';
