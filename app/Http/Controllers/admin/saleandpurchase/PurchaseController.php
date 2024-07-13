@@ -460,7 +460,7 @@ class PurchaseController extends Controller
                 // Rule::unique('mst_parties')->ignore($request->id),
                 'required'
             ],
-            'father_name' => 'required',
+            'father_name' => 'nullable',
             'whatsapp_number' => [
                 'nullable',
                 // 'distinct',

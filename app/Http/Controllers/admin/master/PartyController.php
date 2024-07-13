@@ -116,43 +116,43 @@ class PartyController extends Controller
 
     public function store(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     // 'office_address' => 'required',
-        //     'name' => 'required',
-        //     // 'office_city' => 'required',
-        //     'residence_address' => 'required',
-        //     // 'pan_number' => 'required',
-        //     'email' => 'nullable|email',
-        //     'residence_city' => 'required',
-        //     'party_name' => [
-        //         'required',
-        //         // Rule::unique('mst_parties')->ignore($request->id),
-        //         // new UniquePartyAndFatherNames
-        //     ],
-        //     'father_name' => ['required'],
-        //     'whatsapp_number' => [
-        //         'required',
-        //         // 'distinct',
-        //         // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
-        //         //     return $query->where('type', 1)->whereNot('mst_party_id', $request->id);
-        //         // }),
-        //     ],
-        //     'office_number' => [
-        //         // 'required',
-        //         // 'distinct',
-        //         // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
-        //         //     return $query->where('type', 2)->whereNot('mst_party_id', $request->id);
-        //         // }),
-        //     ],
-        //     // 'residence_city' => [
-        //     //     'required',
-        //     //     Rule::unique('mst_parties')->ignore($request->input('residence_city')),
-        //     // ],
-        // ]);
-        // if ($validator->fails()) {
-        //     \toastr()->error($validator->errors()->first());
-        //     return redirect()->back()->withErrors($validator)->withInput();
-        // }
+        $validator = Validator::make($request->all(), [
+            // 'office_address' => 'required',
+            'name' => 'required',
+            // 'office_city' => 'required',
+            'residence_address' => 'required',
+            // 'pan_number' => 'required',
+            'email' => 'nullable|email',
+            'residence_city' => 'required',
+            'party_name' => [
+                'required',
+                // Rule::unique('mst_parties')->ignore($request->id),
+                // new UniquePartyAndFatherNames
+            ],
+            'father_name' => ['nullable'],
+            'whatsapp_number' => [
+                'required',
+                // 'distinct',
+                // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
+                //     return $query->where('type', 1)->whereNot('mst_party_id', $request->id);
+                // }),
+            ],
+            'office_number' => [
+                // 'required',
+                // 'distinct',
+                // Rule::unique('party_contacts', 'number')->where(function ($query) use ($request) {
+                //     return $query->where('type', 2)->whereNot('mst_party_id', $request->id);
+                // }),
+            ],
+            // 'residence_city' => [
+            //     'required',
+            //     Rule::unique('mst_parties')->ignore($request->input('residence_city')),
+            // ],
+        ]);
+        if ($validator->fails()) {
+            \toastr()->error($validator->errors()->first());
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         // return $this->partyValidation($request->input('name'), $request->input('email'), $request->input('whatsapp_number'), $request->input('office_number'), $request->input('office_city'));
 
