@@ -75,7 +75,8 @@ class CarInsurance extends Controller
             return [
                 'id' => $party->id,
                 'name' => $party->party_name,
-                'contacts' => $contactNumbers
+                'contacts' => $contactNumbers,
+                'father_name' => $party->father_name
             ];
         });
         $vehicles = Purchase::select('id', 'reg_number')->whereIn('status', [6, 7])->get();

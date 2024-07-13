@@ -45,8 +45,19 @@
                                                         <label for="mst_party_id">Party</label>
                                                         <select name="mst_party_id" id="mst_party_id" class="form-control">
                                                             <option value="" selected disabled>Choose...</option>
-                                                            @foreach ($parties as $party)
-                                                            <option value="{{$party->id}}" {{ isset($insurance->id) && $insurance->mst_party_id == $party->id ? ' selected' : '' }}>{{$party->party_name}}</option>
+                                                            @foreach($parties as $party)
+                                                            <option value="{{ $party['id'] }}" {{ isset($carLoan->mst_party_id) && $carLoan->mst_party_id == $party['id'] ? 'selected' : '' }}>
+                                                                {{ $party['name'] }}
+
+                                                                @if ($party['father_name'])
+                                                                    S/O <span style="color: green;">{{ ucfirst($party['father_name']) }}</span>
+                                                                @endif
+
+                                                                @if ($party['contacts'])
+                                                                ({{ $party['contacts'] }})
+                                                                @endif
+
+                                                            </option>
                                                             @endforeach
                                                         </select>
                                                     </div>

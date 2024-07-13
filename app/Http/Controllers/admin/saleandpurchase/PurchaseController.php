@@ -457,8 +457,10 @@ class PurchaseController extends Controller
     {
         $rules = [
             'party_name' => [
-                Rule::unique('mst_parties')->ignore($request->id),
+                // Rule::unique('mst_parties')->ignore($request->id),
+                'required'
             ],
+            'father_name' => 'required',
             'whatsapp_number' => [
                 'nullable',
                 // 'distinct',
@@ -483,6 +485,12 @@ class PurchaseController extends Controller
         ];
 
         $validatedData = $request->validate($rules);
+
+        $checkUniqueFather = DB::table('mst_parties')->where(['party_name' => $request->party_name, 'father_name' => $request->father_name])->exists();
+            if($checkUniqueFather === true){
+                return response()->json(['error' => 'The  party name with same  father name already exists.'], 500);
+            }
+
         try {
 
             $party = new MstParty();
@@ -503,7 +511,6 @@ class PurchaseController extends Controller
 
             return response()->json(['message' => 'Party data saved successfully'], 200);
         } catch (\Exception $e) {
-            dd($e);
             if ($e instanceof \Illuminate\Validation\ValidationException) {
                 $errors = $e->validator->errors()->all();
 

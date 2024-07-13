@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Rules\UniquePartyAndFatherNames;
 
 class PartyController extends Controller
 {
@@ -125,8 +126,10 @@ class PartyController extends Controller
             'residence_city' => 'required',
             'party_name' => [
                 'required',
-                Rule::unique('mst_parties')->ignore($request->id),
+                // Rule::unique('mst_parties')->ignore($request->id),
+                // new UniquePartyAndFatherNames
             ],
+            'father_name' => ['required'],
             'whatsapp_number' => [
                 'required',
                 // 'distinct',
@@ -151,6 +154,12 @@ class PartyController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        $checkUniqueFather = DB::table('mst_parties')->where(['party_name' => $request->party_name, 'father_name' => $request->father_name])->exists();
+        if($checkUniqueFather === true){
+            \toastr()->error('The  party name with same  father name already exists.');
+            return redirect()->back();
+        }
+
         // return $this->partyValidation($request->input('name'), $request->input('email'), $request->input('whatsapp_number'), $request->input('office_number'), $request->input('office_city'));
 
         try {
@@ -160,6 +169,7 @@ class PartyController extends Controller
                 $party = MstParty::find($request->id);
                 $party->update([
                     'party_name' => $request->party_name,
+                    'father_name' => $request->father_name,
                     'office_address' => $request->office_address,
                     'residence_city' => $request->residence_city,
                     'designation' => $request->designation,
@@ -195,6 +205,7 @@ class PartyController extends Controller
             } else {
                 $party = MstParty::create([
                     'party_name' => $request->party_name,
+                    'father_name' => $request->father_name,
                     'office_address' => $request->office_address,
                     'residence_city' => $request->residence_city,
                     'designation' => $request->designation,

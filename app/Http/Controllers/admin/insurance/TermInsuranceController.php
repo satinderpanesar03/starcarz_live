@@ -42,7 +42,16 @@ class TermInsuranceController extends Controller
     {
         $executives = MstExecutive::pluck('name', 'id');
         $suppliers = MstSupplier::pluck('supplier', 'id');
-        $parties = MstParty::select('id', 'party_name')->get();
+        // $parties = MstParty::select('id', 'party_name')->get();
+        $parties = MstParty::with('partyContact')->get()->map(function ($party) {
+            $contactNumbers = $party->partyContact->pluck('number')->implode(', ');
+            return [
+                'id' => $party->id,
+                'name' => $party->party_name,
+                'contacts' => $contactNumbers,
+                'father_name' => $party->father_name
+            ];
+        });
         $insurance_company = MstInsurance::pluck('name', 'id');
         $case = 'add';
 

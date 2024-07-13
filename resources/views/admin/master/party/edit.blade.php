@@ -108,8 +108,40 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="form-group mb-2">
+                                                    <label class="mr-2">WHATSAPP NUMBER</label>
+                                                    <div class="form-group mb-2 d-flex">
+                                                        <div class="controls flex-grow-1">
+                                                            <div class="row">
+                                                                <div class="col-sm-10">
+                                                                    @if ($party->partyContact->isEmpty())
+                                                                    <!-- If no firm names exist, show a single input field -->
+                                                                    <input type="text" name="whatsapp_number[]" class="form-control mt-2" required data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="The numeric field may only contain numeric characters." placeholder="Enter Whatsapp Number">
+                                                                    @else
+                                                                    @foreach($party->partyContact as $contact)
+                                                                    @if ($contact->type == 1)
+                                                                    <input type="text" name="whatsapp_number[]" class="form-control m-2" required data-validation-containsnumber-regex="^[a-zA-Z]+$" data-validation-containsnumber-message="The alpha field may only contain alphabetic characters." placeholder="Enter Whatsapp Number" value="{{$contact->number}}" required>
+                                                                    @endif
+                                                                    @endforeach
+                                                                    @endif
+                                                                </div>
+                                                                <div class="col-sm-2 mt-2">
+                                                                    <button id="addWhatsappNumber" class="btn btn-outline-primary" type="button">+</button>
+                                                                </div>
+                                                            </div>
+                                                            <div id="appendWhatsapp"></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
+                                                <div class="form-group mb-2">
+                                                    <label>Father Name</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="father_name" class="form-control" data-validation-regex-regex="^[-a-zA-Z_\d]+$" data-validation-regex-message="Must Enter Character, Number, Dash or Uderscore" placeholder="Enter Father Name" value="{{$party->father_name ?? old('father_name')}}" required>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group mb-2">
                                                     <label>Residence Address</label>
                                                     <div class="controls">
@@ -163,32 +195,7 @@
                                                 </div>
 
 
-                                                <div class="form-group mb-2">
-                                                    <label class="mr-2">WHATSAPP NUMBER</label>
-                                                    <div class="form-group mb-2 d-flex">
-                                                        <div class="controls flex-grow-1">
-                                                            <div class="row">
-                                                                <div class="col-sm-10">
-                                                                    @if ($party->partyContact->isEmpty())
-                                                                    <!-- If no firm names exist, show a single input field -->
-                                                                    <input type="text" name="whatsapp_number[]" class="form-control mt-2" required data-validation-containsnumber-regex="(\d)+" data-validation-containsnumber-message="The numeric field may only contain numeric characters." placeholder="Enter Whatsapp Number">
-                                                                    @else
-                                                                    @foreach($party->partyContact as $contact)
-                                                                    @if ($contact->type == 1)
-                                                                    <input type="text" name="whatsapp_number[]" class="form-control m-2" required data-validation-containsnumber-regex="^[a-zA-Z]+$" data-validation-containsnumber-message="The alpha field may only contain alphabetic characters." placeholder="Enter Whatsapp Number" value="{{$contact->number}}" required>
-                                                                    @endif
-                                                                    @endforeach
-                                                                    @endif
-                                                                </div>
-                                                                <div class="col-sm-2 mt-2">
-                                                                    <button id="addWhatsappNumber" class="btn btn-outline-primary" type="button">+</button>
-                                                                </div>
-                                                            </div>
-                                                            <div id="appendWhatsapp"></div>
-                                                        </div>
-                                                    </div>
 
-                                                </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Submit</button>
 

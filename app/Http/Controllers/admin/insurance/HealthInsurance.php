@@ -48,7 +48,8 @@ class HealthInsurance extends Controller
             return [
                 'id' => $party->id,
                 'name' => $party->party_name,
-                'contacts' => $contactNumbers
+                'contacts' => $contactNumbers,
+                'father_name' => $party->father_name
             ];
         });
         $insurance_company = MstInsurance::pluck('name', 'id');
