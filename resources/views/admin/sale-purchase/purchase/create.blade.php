@@ -335,6 +335,7 @@
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">
                                                 @if(isset($purchase->reg_date) || isset($purchase->insurance_due_date) || isset($purchase->icompany_id) || isset($purchase->policy_number))
+                                                <div id="insuranceFields">
                                                 <h5>Insurance</h5>
                                                 <div class="row">
                                                     <div class="col-md-4 mt-2">
@@ -362,7 +363,7 @@
                                                     </div>
                                                 </div>
                                                 @endif
-                                                <div id="insuranceFields">
+                                                {{-- <div id="insuranceFields" style="display: ">
                                                     <h5>Insurance</h5>
                                                     <div class="row">
                                                         <div class="col-md-4 mt-2">
@@ -389,7 +390,7 @@
                                                             <input type="text" id="policy_number" name="policy_number" class="form-control" value="@if(isset($purchase->id)){{$purchase->policy_number}}@else{{old('policy_number')}}@endif">
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 @endif
 
                                                 @if(isset($purchase->expected_price))
@@ -606,11 +607,11 @@
                 $('#amount_input').hide();
                 $('#amount_input_1').hide(); // Hide Quoted Date field for other statuses
             }
-            if (selectedOption === '2') {
-                $('#insuranceFields').show();
-            } else {
-                $('#insuranceFields').hide();
-            }
+            // if (selectedOption === '2') {
+            //     $('#insuranceFields').show();
+            // } else {
+            //     $('#insuranceFields').hide();
+            // }
 
             // Check if the Quoted Date field should be shown
             // if (selectedOption === '4') {
@@ -622,7 +623,22 @@
             // }
 
         });
+
+
     });
+
+    $(document).ready(function() {
+    $('#willing_insurance').change(function() {
+        var insurance = $('#willing_insurance').val();
+        console.log(insurance);
+        if (insurance === '2') {
+            $('#insuranceFields').hide();
+        }else{
+            $('#insuranceFields').show();
+        }
+    });
+});
+
 
     $(document).ready(function() {
         $('#save_button').click(function() {
