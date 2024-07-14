@@ -40,6 +40,7 @@
                                                 <th>Manufacturing Year</th>
                                                 <th>Color</th>
                                                 <th>KM</th>
+                                                <th>Status</th>
                                                 <th>Owners</th>
                                                 <th>Ins</th>
                                                 @if(Auth::guard('admin')->user()->role_id == 1)
@@ -75,6 +76,34 @@
                                                 <td>{{$item->color ? ucfirst($item->color->color) : '---'}}</td>
 
                                                 <td>{{$item->kilometer}}</td>
+                                                <td>
+                                                    @php
+                                                        $statusClass = '';
+                                                        switch($item->status) {
+                                                        case 1:
+                                                        $statusClass = 'badge-light'; // Pending - Blue
+                                                        break;
+                                                        case 2:
+                                                        $statusClass = 'badge-warning'; // In Progress - Yellow
+                                                        break;
+                                                        case 3:
+                                                        $statusClass = 'badge-success'; // Completed - Green
+                                                        break;
+                                                        case 4:
+                                                        $statusClass = 'badge-info'; // On Hold - Light Blue
+                                                        break;
+                                                        case 5:
+                                                        $statusClass = 'badge-danger'; // Failed - Red
+                                                        break;
+                                                        case 6:
+                                                        $statusClass = 'badge-primary'; // Failed - Red
+                                                        break;
+                                                        default:
+                                                        $statusClass = 'badge-secondary'; // Default - Gray
+                                                        }
+                                                        @endphp
+                                                    <span class="badge {{ $statusClass }}">{{ $item->getStatusName($item->status) }}</span>
+                                                </td>
                                                 <td>{{$item->owners}}</td>
                                                 <td>{{date('d M, Y',strtotime($item->insurance_due_date))}}</td>
                                                 @if(Auth::guard('admin')->user()->role_id == 1)
