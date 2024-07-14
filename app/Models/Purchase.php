@@ -66,7 +66,7 @@ class Purchase extends Model
             '8' => '35 to 40 Lakhs',
             '9' => '40 to 45 Lakhs',
             '10' => '45 to 50 Lakhs',
-        ];        
+        ];
     }
 
     public static function getWillingType()
@@ -105,13 +105,18 @@ class Purchase extends Model
             '7' => 'Park and sale'
         ];
 
-        if ($selectedStatusId !== null) {
+        if ($selectedStatusId !== null && $selectedStatusId !== 7) {
             // Filter out statuses that come before the selected status ID
             $statuses = array_slice($statuses, $selectedStatusId, null, true);
 
             // Reset keys to maintain original index values
             $statuses = array_combine(array_keys($statuses), array_values($statuses));
         }
+
+        if ($selectedStatusId === 7) {
+            $statuses = array_combine(array_keys([5,6]), array_values(['Closed','Purchased']));
+        }
+
 
         return $statuses;
     }
@@ -213,7 +218,7 @@ class Purchase extends Model
     }
 
     public function getPendingImageStatusAttribute(){
-        $purchases = PurchasedImage::where('purchase_id', $this->id)->first(); 
+        $purchases = PurchasedImage::where('purchase_id', $this->id)->first();
 
         if($purchases){
             foreach ($purchases->toArray() as $column => $value) {

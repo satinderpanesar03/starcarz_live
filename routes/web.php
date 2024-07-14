@@ -473,7 +473,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
                 Route::middleware(['Ensure:view_purchase'])->group(function () {
                     Route::get('purchase/index', 'index')->name('purchase.index');
                     Route::get('purchase/orders', 'ordersList')->name('purchase.orders');
-                    Route::get('purchase/follow-up', 'followUp')->name('purchase.follow-up');
+                    // Route::get('purchase/follow-up', 'followUp')->name('purchase.follow-up');
                     Route::get('purchase/ready-to-sale', 'readySaleIndex')->name('purchase.ready-sale-index');
                     Route::get('purchase/ready-to-sale/add-images/{id}', 'readySaleImages')->name('purchase.ready-sale-add-image');
                     Route::post('purchase/ready-to-sale/add-images', 'readySaleImagesStore')->name('purchase.ready-sale-add-image-store');

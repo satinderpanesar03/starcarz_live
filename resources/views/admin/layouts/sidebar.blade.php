@@ -142,8 +142,8 @@
                         <ul class="menu-content">
                             <li class="nav-item {{ request()->routeIs('admin.purchase.purchase.index') ? 'active' : '' }}""><a href=" {{route('admin.purchase.purchase.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Enquiry</span></a>
                             </li>
-                            <li class="nav-item {{ request()->routeIs('admin.purchase.purchase.follow-up') ? 'active' : '' }}""><a href=" {{route('admin.purchase.purchase.follow-up')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Follow Up</span></a>
-                            </li>
+                            {{-- <li class="nav-item {{ request()->routeIs('admin.purchase.purchase.follow-up') ? 'active' : '' }}""><a href=" {{route('admin.purchase.purchase.follow-up')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Follow Up</span></a>
+                            </li> --}}
                             <li class="nav-item {{ request()->routeIs('admin.purchase.purchase.orders') ? 'active' : '' }}""><a href=" {{route('admin.purchase.purchase.orders')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item" data-i18n="permissions">Orders</span></a>
                             </li>
                         </ul>

@@ -122,8 +122,11 @@
                                                 <tr>
                                                     <th width="5%">ID</th>
                                                     <th>Party Name</th>
+                                                    <th>Party Number</th>
                                                     <th>Executive Name</th>
                                                     <th>Car Model</th>
+                                                    <th>Vehicle Number</th>
+                                                    <th>Manufacturing Year</th>
                                                     <th>Date</th>
                                                     <th>Status</th>
                                                     <th>Actions</th>
@@ -134,8 +137,11 @@
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ ($purchase->firm_name) ? $purchase->firm_name : '' }}</td>
+                                                    <td>{{ $purchase->contact_number ?? '' }}</td>
                                                     <td>{{ ($purchase->executive) ? $purchase->executive->name : '' }}</td>
                                                     <td>{{ ($purchase->carModel) ? $purchase->carModel->model : '' }}</td>
+                                                    <td>{{ strtoupper($purchase->reg_number) ?? ''}}</td>
+                                                    <td>{{ $purchase->manufacturing_year ?? ''}}</td>
                                                     <td>{{ ($purchase->evaluation_date) ? date('d M, Y', strtotime($purchase->evaluation_date)) : '' }}</td>
 
                                                     <!-- <td>{{ ($purchase->getStatusName($purchase->status))}}</td> -->

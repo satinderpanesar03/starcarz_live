@@ -37,6 +37,7 @@
                                                 <th>Model</th>
                                                 <th>Fuel</th>
                                                 <th>Reg. No.</th>
+                                                <th>Manufacturing Year</th>
                                                 <th>Color</th>
                                                 <th>KM</th>
                                                 <th>Owners</th>
@@ -70,6 +71,7 @@
                                                     @endforeach
                                                 </td>
                                                 <td>{{strtoupper($item->reg_number)}}</td>
+                                                <td>{{strtoupper($item->manufacturing_year)}}</td>
                                                 <td>{{$item->color ? ucfirst($item->color->color) : '---'}}</td>
 
                                                 <td>{{$item->kilometer}}</td>
