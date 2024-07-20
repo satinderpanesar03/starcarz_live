@@ -142,8 +142,9 @@
                                         <tbody>
                                             @forelse($carLoans as $key => $carLoan)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ ($carLoan->party)?$carLoan->party->party_name:'' }}</td>
+                                                <td>{{ $carLoans->firstItem() + $key }}</td>
+                                                {{-- <td>{{ ($carLoan->party)?$carLoan->party->party_name:'' }}</td> --}}
+                                                <td><a style="color: inherit;" @if(isset($carLoan->party->id)) href="{{route('admin.master.party.view', $carLoan->party->id)}}" @endif>{{$carLoan->party ? ucfirst($carLoan->party->party_name) : ''}}</a></td>
                                                 <!-- <td>{{ ($carLoan->dealer)?$carLoan->dealer->name:'' }}</td> -->
                                                 <td>{{ ($carLoan->bank)?$carLoan->bank->name:'' }}</td>
                                                 <td>{{ ($carLoan->loan_amount)?$carLoan->loan_amount:'' }}</td>

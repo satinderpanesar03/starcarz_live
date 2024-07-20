@@ -106,8 +106,11 @@
                                             <tr>
                                                 <th width="5%">ID</th>
                                                 <th>Party</th>
+                                                <th>Whatapp Number</th>
                                                 <th>Policy Number</th>
+                                                <th>Model</th>
                                                 <th>Car Number</th>
+                                                <th>Total Premium</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -115,9 +118,12 @@
                                             @foreach ($insurances as $value => $item)
                                             <tr>
                                                 <td>{{$insurances->firstItem() + $value}}</td>
-                                                <td>{{$item->party ? ucfirst($item->party->party_name) : ''}}</td>
+                                                <td><a style="color: inherit;" href="{{route('admin.master.party.view', $item->party->id)}}">{{$item->party ? ucfirst($item->party->party_name) : ''}}</a></td>
+                                                <td>{{$item->party->partyWhatsapp ? ($item->party->partyWhatsapp->number ? $item->party->partyWhatsapp->number : '--') : '--'}}</td>
                                                 <td>{{ucfirst($item->policy_number)}}</td>
+                                                <td>{{$item->modelName ? $item->modelName->model : ''}}</td>
                                                 <td>{{strtoupper($item->vehicle_number)}}</td>
+                                                <td>{{$item->total}}</td>
                                                 <td><span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.car.insurance.view', $item->id)}}" class="btn btn-primary btn-sm" title="View">
                                                             <i class="fa fa-eye"></i>

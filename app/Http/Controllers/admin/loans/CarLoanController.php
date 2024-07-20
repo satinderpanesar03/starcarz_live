@@ -57,7 +57,7 @@ class CarLoanController extends Controller
         });
         $carLoans = $query->orderBy('id', 'desc')
             ->paginate($request->limit ? $request->limit : 10);
-
+// dd($carLoans);
         $models = MstModel::pluck('model', 'id');
         $dealers = MstDealer::pluck('name', 'id');
         $status = CarLoan::getStatus();

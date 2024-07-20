@@ -51,7 +51,7 @@
                                                                         {{ isset($carLoan->mst_party_id) && $carLoan->mst_party_id == $party['id'] ? 'selected' : '' }}>
                                                                         {{ $party['name'] }}
 
-                                                                        @if ($party['father_name'])
+                                                                        @if (isset($party['father_name']))
                                                                             S/O <b
                                                                                 style="color: green;">{{ ucfirst($party['father_name']) }}</b>
                                                                         @endif

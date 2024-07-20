@@ -49,5 +49,8 @@ class MstParty extends Model
     public function partyCity() {
         return $this->hasMany(PartyCity::class);
     }
-  
+    public function partyWhatsapp(){
+        return $this->hasOne(PartyContact::class)->where('type',1);
+    }
+
 }

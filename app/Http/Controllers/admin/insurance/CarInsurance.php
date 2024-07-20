@@ -30,7 +30,7 @@ class CarInsurance extends Controller
         if ($request->has('clear_search')) {
             return redirect()->route('admin.car.insurance.index');
         } else {
-            $insurances = ModelsCarInsurance::with('party:id,party_name')
+            $insurances = ModelsCarInsurance::with('party:id,party_name','party.partyWhatsapp')
                 ->when($request->filled('party_name'), function ($query) use ($request) {
                     $query->whereHas('party', function ($subquery) use ($request) {
                         $subquery->where('party_name', 'like', '%' . $request->party_name . '%');
@@ -53,6 +53,7 @@ class CarInsurance extends Controller
                 ->orderBy('id', 'desc')
                 ->paginate($request->limit ? $request->limit : 10);
         }
+        // dd($insurances);
         $insurance_company = MstInsurance::pluck('name', 'id');
         $executives = MstExecutive::pluck('name', 'id');
         $parties = MstParty::select('id','party_name')->get();

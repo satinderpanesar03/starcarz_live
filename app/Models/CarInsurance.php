@@ -77,4 +77,6 @@ class CarInsurance extends Model
         });
     }
 
+
+
 }
