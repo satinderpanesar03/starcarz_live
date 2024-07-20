@@ -91,7 +91,7 @@
                                                         {{ $insurance->type ? $insurance->type->name : '' }}
                                                     </td>
                                                     <td>{{date('d/m/Y',strtotime($insurance->end_date))}}</td>
-                                                    <td>{{ $insurance->premium }}</td>
+                                                    <td>{{ number_format($insurance->gross_premium, 2) }}</td>
                                                     <td>
                                                     <span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.health.view', $insurance->id)}}" class="btn btn-primary btn-sm" title="View">
