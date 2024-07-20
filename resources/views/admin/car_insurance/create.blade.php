@@ -52,7 +52,7 @@
                                                             <option value="{{ $party['id'] }}" {{ isset($carLoan->mst_party_id) && $carLoan->mst_party_id == $party['id'] ? 'selected' : '' }}>
                                                                 {{ $party['name'] }}
 
-                                                                @if ($party['father_name'])
+                                                                @if (isset($party['father_name']))
                                                                     S/O <span style="color: green;">{{ ucfirst($party['father_name']) }}</span>
                                                                 @endif
 
