@@ -112,7 +112,7 @@
                                                 <th>Car Number</th>
                                                 <th>End Date</th>
                                                 <th>Company</th>
-                                                <th>T. Premium</th>
+                                                <th>T. Prm</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -120,7 +120,11 @@
                                             @foreach ($insurances as $value => $item)
                                             <tr>
                                                 <td>{{$insurances->firstItem() + $value}}</td>
-                                                <td><a style="color: inherit;" href="{{route('admin.master.party.view', $item->party->id)}}">{{$item->party ? ucfirst($item->party->party_name) : ''}}</a></td>
+                                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    <a style="color: inherit; font-size: 12px;" href="{{ route('admin.master.party.view', $item->party->id) }}">
+                                                        {{ $item->party ? ucfirst($item->party->party_name) : '' }}
+                                                    </a>
+                                                </td>
                                                 <td>{{$item->party->partyWhatsapp ? ($item->party->partyWhatsapp->number ? $item->party->partyWhatsapp->number : '--') : '--'}}</td>
                                                 <td>{{ucfirst($item->policy_number)}}</td>
                                                 <td>{{$item->modelName ? $item->modelName->model : ''}}</td>
