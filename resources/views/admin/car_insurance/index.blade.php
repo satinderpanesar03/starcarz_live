@@ -126,7 +126,7 @@
                                                 <td>{{$item->modelName ? $item->modelName->model : ''}}</td>
                                                 <td>{{strtoupper($item->vehicle_number)}}</td>
                                                 <td>
-                                                    {{ date('d-m-Y',strtotime($item->insurance_from_date)) . ' - ' . date('d-m-Y',strtotime($item->insurance_to_date)) }}
+                                                    {{ date('d/m/Y',strtotime($item->insurance_from_date)) . ' - ' . date('d/m/Y',strtotime($item->insurance_to_date)) }}
                                                 </td>
                                                 <td>{{$item->insurance_company}}</td>
                                                 <td>{{$item->total}}</td>
