@@ -30,7 +30,7 @@ class CarInsurance extends Controller
         if ($request->has('clear_search')) {
             return redirect()->route('admin.car.insurance.index');
         } else {
-            $insurances = ModelsCarInsurance::with('party:id,party_name','party.partyWhatsapp')
+            $insurances = ModelsCarInsurance::with('party:id,party_name','party.partyWhatsapp','company:id,name')
                 ->when($request->filled('party_name'), function ($query) use ($request) {
                     $query->whereHas('party', function ($subquery) use ($request) {
                         $subquery->where('party_name', 'like', '%' . $request->party_name . '%');

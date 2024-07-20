@@ -77,6 +77,10 @@ class CarInsurance extends Model
         });
     }
 
+    public function company(){
+        return $this->belongsTo(MstInsurance::class, 'insurance_company','id');
+    }
+
 
 
 }
