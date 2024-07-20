@@ -1,6 +1,22 @@
 @extends('admin.layouts.header')
 @section('title', 'Car Insurance')
 @section('content')
+<style>
+    <style>
+    .table-responsive {
+        overflow-x: auto;
+        min-width: 100%;
+    }
+
+    .nowrap-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 12px; /* Adjust as needed */
+    }
+</style>
+
+</style>
 <div class="main-panel">
     <div class="main-content">
         <div class="content-overlay"></div>
