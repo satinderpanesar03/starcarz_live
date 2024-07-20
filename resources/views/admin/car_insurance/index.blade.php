@@ -125,7 +125,7 @@
                                                 <th>Whatsapp</th>
                                                 <th width="5%">Policy Number</th>
                                                 <th>Model</th>
-                                                <th>Car Number</th>
+                                                <th>Car No.</th>
                                                 <th>End Date</th>
                                                 <th>Company</th>
                                                 <th>T. Prm</th>
