@@ -49,7 +49,7 @@
                                                                 @foreach ($parties as $party)
                                                                     <option value="{{ $party['id'] }}"
                                                                         {{ isset($carLoan->mst_party_id) && $carLoan->mst_party_id == $party['id'] ? 'selected' : '' }}>
-                                                                        {{ $party['name'] }}
+                                                                        {{ isset($party['name']) }}
 
                                                                         @if (isset($party['father_name']))
                                                                             S/O <b
@@ -598,7 +598,7 @@
                     $('#vehicle_number').prop('readonly', true);
                     $('#manufacturing_year').prop('readonly', true);
                     $('#registration_year').prop('readonly', true);
-                    $('#loan_amount').prop('readonly', true);
+                    // $('#loan_amount').prop('readonly', true);
                     $('#tenure_loan').prop('readonly', true);
                     $('#co_applicant').prop('readonly', true);
                     $('#disbursedFields').show();
@@ -609,6 +609,7 @@
                     $('#emi_start_date').prop('required', true);
                     $('#emi_end_date').prop('required', true);
                     $('#loan_number').prop('required', true);
+                    $('#roi').prop('required', true);
                 } else {
                     selectizeLoanTypeControl.enable();
                     selectizeCarTypeControl.enable();

@@ -110,6 +110,8 @@
                                                 <th>Policy Number</th>
                                                 <th>Model</th>
                                                 <th>Car Number</th>
+                                                <th>Insurance Period</th>
+                                                <th>Company Name</th>
                                                 <th>Total Premium</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -123,6 +125,10 @@
                                                 <td>{{ucfirst($item->policy_number)}}</td>
                                                 <td>{{$item->modelName ? $item->modelName->model : ''}}</td>
                                                 <td>{{strtoupper($item->vehicle_number)}}</td>
+                                                <td>
+                                                    {{ date('d-m-Y',strtotime($item->insurance_from_date)) . ' - ' . date('d-m-Y',strtotime($item->insurance_to_date)) }}
+                                                </td>
+                                                <td>{{$item->insurance_company}}</td>
                                                 <td>{{$item->total}}</td>
                                                 <td><span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.car.insurance.view', $item->id)}}" class="btn btn-primary btn-sm" title="View">

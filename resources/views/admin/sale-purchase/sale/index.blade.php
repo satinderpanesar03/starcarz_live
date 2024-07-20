@@ -156,7 +156,8 @@
                 </div>
             </section>
         </div>
-
+    </div>
+</div>
         @endsection
         @push('scripts')
 
