@@ -245,6 +245,10 @@
                                                         <input class="form-control" type="text" name="premium" id="brand" value="{{$insurance->premium ?? ''}}" readonly>
                                                     </div>
                                                     <div class="col-md-3 mt-3">
+                                                        <label for="mst_brand_type_id">Third Party Premium:</label>
+                                                        <input class="form-control" type="number" name="third_party_premium" id="third_party_premium" value="{{$insurance->third_party_premium ?? ''}}" readonly>
+                                                    </div>
+                                                    <div class="col-md-3 mt-3">
                                                         <label for="mst_brand_type_id">Gst:</label>
                                                         <input class="form-control" type="number" name="gst" id="brand" value="{{$insurance->gst ?? ''}}" readonly>
                                                     </div>
