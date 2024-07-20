@@ -123,7 +123,7 @@
                                                 <th width="5%">ID</th>
                                                 <th>Party</th>
                                                 <th>Whatsapp</th>
-                                                <th width="5%">Policy Number</th>
+                                                <th width="5%">Executive</th>
                                                 <th>Model</th>
                                                 <th>Car No.</th>
                                                 <th>End Date</th>
@@ -142,7 +142,9 @@
                                                     </a>
                                                 </td>
                                                 <td>{{$item->party->partyWhatsapp ? ($item->party->partyWhatsapp->number ? $item->party->partyWhatsapp->number : '--') : '--'}}</td>
-                                                <td style="font-size: 13px;">{{ucfirst($item->policy_number)}}</td>
+                                                <td style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    {{ $item->executive ? ucfirst($item->executive->name) : '' }}
+                                                </td>
                                                 <td style="font-size: 12px;">{{ $item->modelName ? $item->modelName->model : '' }}</td>
                                                 <td>{{strtoupper($item->vehicle_number)}}</td>
                                                 <td>{{date('d/m/Y',strtotime($item->insurance_to_date)) }}</td>
