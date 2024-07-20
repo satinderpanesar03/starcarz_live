@@ -75,7 +75,7 @@
                                         <tbody>
                                             @foreach ($insurances as $value => $insurance)
                                                 <tr>
-                                                    <td>{{++$value}}</td>
+                                                    <td>{{$insurances->firstItem() + $value}}</td>
                                                     <td>{{$insurance->party ? strtoupper($insurance->party->party_name) : ''}}</td>
                                                     <td>{{$insurance->policy_number}}</td>
                                                     <td>{{date('d M, Y',strtotime($insurance->start_date))}}</td>
@@ -93,7 +93,7 @@
                                                 </tr>
                                             @endforeach
                                         </tbody>
-                                        
+
                                     </table>
                                     <div class="container d-flex justify-content-end">
                                         {{$insurances->appends($_GET)->links()}}

@@ -114,7 +114,7 @@
                                         <tbody>
                                             @foreach ($insurances as $value => $item)
                                             <tr>
-                                                <td>{{++$value}}</td>
+                                                <td>{{$insurances->firstItem() + $value}}</td>
                                                 <td>{{$item->party ? ucfirst($item->party->party_name) : ''}}</td>
                                                 <td>{{ucfirst($item->policy_number)}}</td>
                                                 <td>{{strtoupper($item->vehicle_number)}}</td>
@@ -132,7 +132,7 @@
 
                                     </table>
                                     <div class="container d-flex justify-content-end">
-
+                                        {{$insurances->appends($_GET)->links()}}
                                     </div>
                                 </div>
                             </div>
