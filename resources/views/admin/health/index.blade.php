@@ -66,9 +66,11 @@
                                             <tr>
                                                 <th width="5%">ID</th>
                                                 <th>Party</th>
-                                                <th>Policy Number</th>
-                                                <th>Start Date</th>
+                                                <th>Whatsapp</th>
+                                                <th>Executive</th>
+                                                <th>Type</th>
                                                 <th>End Date</th>
+                                                <th>T. Prm.</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -76,10 +78,20 @@
                                             @foreach ($insurances as $value => $insurance)
                                                 <tr>
                                                     <td>{{$insurances->firstItem() + $value}}</td>
-                                                    <td>{{$insurance->party ? strtoupper($insurance->party->party_name) : ''}}</td>
-                                                    <td>{{$insurance->policy_number}}</td>
-                                                    <td>{{date('d M, Y',strtotime($insurance->start_date))}}</td>
-                                                    <td>{{date('d M, Y',strtotime($insurance->end_date))}}</td>
+                                                    <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                        <a style="color: inherit; font-size: 12px;" href="{{ route('admin.master.party.view', $insurance->party->id) }}">
+                                                            {{ $insurance->party ? ucfirst($insurance->party->party_name) : '' }}
+                                                        </a>
+                                                    </td>
+                                                    <td>{{$insurance->party->partyWhatsapp ? ($insurance->party->partyWhatsapp->number ? $insurance->party->partyWhatsapp->number : '--') : '--'}}</td>
+                                                    <td style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                        {{ $insurance->executive ? ucfirst($insurance->executive->name) : '' }}
+                                                    </td>
+                                                    <td>
+                                                        {{ $insurance->type ? $insurance->type->name : '' }}
+                                                    </td>
+                                                    <td>{{date('d/m/Y',strtotime($insurance->end_date))}}</td>
+                                                    <td>{{ $insurance->premium }}</td>
                                                     <td>
                                                     <span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.health.view', $insurance->id)}}" class="btn btn-primary btn-sm" title="View">

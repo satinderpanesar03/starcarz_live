@@ -47,4 +47,14 @@ class HealthInsurance extends Model
     public function memberName() {
         return $this->hasMany(FamilyMember::class);
     }
+
+    public function executive(){
+        return $this->belongsTo(MstExecutive::class);
+    }
+
+    public function type(){
+        return $this->belongsTo(MstInsuranceType::class, 'sub_type_id', 'id');
+    }
+
 }
+

@@ -25,7 +25,7 @@ class HealthInsurance extends Controller
         if ($request->has('clear_search')) {
             return redirect()->route('admin.health.index');
         } else {
-            $insurances = ModelsHealthInsurance::with('party:id,party_name')
+            $insurances = ModelsHealthInsurance::with('party:id,party_name','type:id,name')
                 ->when($request->filled('party_name'), function ($query) use ($request) {
                     $query->whereHas('party', function ($subquery) use ($request) {
                         $subquery->where('party_name', 'like', '%' . $request->party_name . '%');
@@ -35,7 +35,7 @@ class HealthInsurance extends Controller
                 ->orderBy('id', 'desc')
                 ->paginate($request->limit ? $request->limit : 10);
                 $parties = MstParty::select('id','party_name')->get();
-
+// dd($insurances);
             return view('admin.health.index', compact('insurances','parties'));
         }
     }
