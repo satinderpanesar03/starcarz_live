@@ -31,7 +31,8 @@ class Sale extends Model
             '6' => 'Telecaller',
             '7' => 'Close',
             '8' => 'Market Place',
-            '9' => 'Google'
+            '9' => 'Google',
+            '10' => 'App'
         ];
     }
 

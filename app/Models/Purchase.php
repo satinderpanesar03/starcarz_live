@@ -45,12 +45,12 @@ class Purchase extends Model
     {
         return [
             '1' => 'Walk In',
-            '2' => 'Internet',
-            '3' => 'SMS',
+            // '2' => 'Internet',
+            // '3' => 'SMS',
             '4' => 'Dealer/Freelancer',
             '5' => 'Existing Customer',
             '6' => 'Telecaller',
-            '7' => 'Others'
+            '7' => 'App'
         ];
     }
 
