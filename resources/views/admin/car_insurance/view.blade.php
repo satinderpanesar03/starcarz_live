@@ -254,7 +254,7 @@
                                                     </div>
                                                     <div class="col-md-3 mt-3">
                                                         <label for="mst_brand_type_id">Total:</label>
-                                                        <input class="form-control" type="number" name="total" id="total" value="{{$insurance->policy_number ?? ''}}" readonly>
+                                                        <input class="form-control" type="number" name="total" id="total" value="{{number_format($insurance->total, 2) ?? ''}}" readonly>
                                                     </div>
                                                     <div class="col-md-3 mt-3">
                                                         <label for="mst_brand_type_id">Policy Number:</label>

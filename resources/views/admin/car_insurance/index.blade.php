@@ -131,7 +131,7 @@
                                                 <td data-toggle="tooltip" data-placement="top" title="{{$item->company ? $item->company->name : ''}}">
                                                     {{ $item->company ? substr($item->company->name, 0, 7) : '' }}
                                                 </td>
-                                                <td>{{$item->total}}</td>
+                                                <td>{{number_format($insurance->total, 2)}}</td>
                                                 <td><span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.car.insurance.view', $item->id)}}" class="btn btn-primary btn-sm" title="View">
                                                             <i class="fa fa-eye"></i>
