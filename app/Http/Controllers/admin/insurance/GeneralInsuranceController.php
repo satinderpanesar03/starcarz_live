@@ -37,6 +37,7 @@ class GeneralInsuranceController extends Controller
                 ->orderBy('id', 'desc')
                 ->paginate($request->limit ? $request->limit : 10);
         }
+        // dd($insurances);
         return view('admin.general-insurance.index', compact('insurances'));
     }
 

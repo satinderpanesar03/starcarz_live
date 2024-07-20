@@ -67,8 +67,12 @@
                                             <tr>
                                                 <th width="5%">ID</th>
                                                 <th>Party</th>
-                                                <th>Policy Number</th>
-                                                <th>Insurance Company</th>
+                                                <th>Whatsapp</th>
+                                                <th>Executive</th>
+                                                <th>Policy Type</th>
+                                                <td>End Date</td>
+                                                <th>Company</th>
+                                                <th>T. Prm</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -76,9 +80,24 @@
                                             @foreach ($insurances as $value => $item)
                                             <tr>
                                                 <td>{{$value + $insurances->firstItem()}}</td>
-                                                <td>{{$item->party ? ucfirst($item->party->party_name) : ''}}</td>
-                                                <td>{{ucfirst($item->policy_number)}}</td>
-                                                <td>{{$item->insurance ? ucfirst($item->insurance->name) : ''}}</td>
+                                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    <a style="color: inherit; font-size: 12px;" href="{{ route('admin.master.party.view', $item->party->id) }}">
+                                                        {{ $item->party ? ucfirst($item->party->party_name) : '' }}
+                                                    </a>
+                                                </td>
+                                                <td>{{$item->party->partyWhatsapp ? ($item->party->partyWhatsapp->number ? $item->party->partyWhatsapp->number : '--') : '--'}}</td>
+                                                <td style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    {{ $item->executive ? ucfirst($item->executive->name) : '' }}
+                                                </td>
+                                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    <a style="color: inherit; font-size: 12px;">
+                                                    {{$item->insuranceType ? ucfirst($item->insuranceType->name) : ''}}
+                                                </td>
+                                                <td>{{date('d/m/Y',strtotime($item->insurance_to_date)) }}</td>
+                                                <td data-toggle="tooltip" data-placement="top" title="{{ $item->insurance ? ucfirst($item->insurance->name) : '' }}">
+                                                    {{ $item->insurance ? substr(ucfirst($item->insurance->name), 0,7) : '' }}
+                                                </td>
+                                                <td>{{number_format($item->total, 2)}}</td>
                                                 <td><span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.general.insurance.view', $item->id)}}" class="btn btn-primary btn-sm" title="View">
                                                             <i class="fa fa-eye"></i>
@@ -93,7 +112,7 @@
 
                                     </table>
                                     <div class="container d-flex justify-content-end">
-
+                                        {{$insurances->appends($_GET)->links()}}
                                     </div>
                                 </div>
                             </div>

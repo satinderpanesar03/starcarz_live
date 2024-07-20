@@ -46,4 +46,8 @@ class GeneralInsuranceClaim extends Model
             });
         }
     }
+
+    public function insuranceType(){
+        return $this->belongsTo(MstInsuranceType::class,'insurance_type','id');
+    }
 }
