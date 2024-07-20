@@ -32,7 +32,7 @@ class HealthInsurance extends Controller
                     });
                 })
                 ->PolicyNumber($request)
-                ->orderBy('id', 'desc')
+                ->orderBy('insurance_done_date', 'desc')
                 ->paginate($request->limit ? $request->limit : 10);
                 $parties = MstParty::select('id','party_name')->get();
 // dd($insurances);

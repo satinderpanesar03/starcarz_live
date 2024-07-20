@@ -108,7 +108,10 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    <div class="col-md-3 mt-3">
+                                                        <label for="start_date">Insurance done date:</label>
+                                                        <input class="form-control" type="date" name="insurance_done_date" id="insurance_done_date" value="{{$insurance->insurance_done_date ?? ''}}" readonly>
+                                                    </div>
                                                     <div class="col-md-3 mt-3">
                                                         <label for="start_date">Start Date:</label>
                                                         <input class="form-control" type="date" name="start_date" id="start_date" value="{{$insurance->start_date ?? ''}}" readonly>
