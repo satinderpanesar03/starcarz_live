@@ -117,7 +117,7 @@
                                         <button class="btn btn-primary" onclick="window.location.href='{{ route('admin.car.insurance.export',['extension' => 'xlsx']) }}'">Export to Excel</button>
                                         <button class="btn btn-secondary" onclick="window.location.href='{{ route('admin.car.insurance.export',['extension' => 'csv']) }}'">Export to CSV</button>
                                     </div> -->
-                                    <table class="table table-striped table-bordered dom-jQuery-events">
+                                    <table class="table table-striped table-bordered table-condensed dom-jQuery-events">
                                         <thead>
                                             <tr>
                                                 <th width="5%">ID</th>
@@ -142,12 +142,10 @@
                                                     </a>
                                                 </td>
                                                 <td>{{$item->party->partyWhatsapp ? ($item->party->partyWhatsapp->number ? $item->party->partyWhatsapp->number : '--') : '--'}}</td>
-                                                <td>{{ucfirst($item->policy_number)}}</td>
-                                                <td>{{$item->modelName ? $item->modelName->model : ''}}</td>
+                                                <td style="font-size: 13px;">{{ucfirst($item->policy_number)}}</td>
+                                                <td style="font-size: 12px;">{{ $item->modelName ? $item->modelName->model : '' }}</td>
                                                 <td>{{strtoupper($item->vehicle_number)}}</td>
-                                                <td>
-                                                    {{date('d/m/Y',strtotime($item->insurance_to_date)) }}
-                                                </td>
+                                                <td>{{date('d/m/Y',strtotime($item->insurance_to_date)) }}</td>
                                                 <td data-toggle="tooltip" data-placement="top" title="{{$item->company ? $item->company->name : ''}}">
                                                     {{ $item->company ? substr($item->company->name, 0, 7) : '' }}
                                                 </td>
@@ -163,8 +161,8 @@
                                             </tr>
                                             @endforeach
                                         </tbody>
-
                                     </table>
+
                                     <div class="container d-flex justify-content-end">
                                         {{$insurances->appends($_GET)->links()}}
                                     </div>
