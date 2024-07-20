@@ -228,7 +228,7 @@
                                                 <h5>Document Type</h5>
                                                 <div class="row">
                                                     <div class="col-md-4 mt-2">
-                                                    
+
                                                         <label for="registration_cerificate">Registration Cerificate:</label>
                                                         <input type="file" id="image" name="image" class="form-control">
                                                         @if(isset($purchase->image))
@@ -238,7 +238,7 @@
                                                         </div>
                                                         @endif
                                                     </div>
-                                                    
+
                                                     <div class="col-md-4 mt-2">
                                                         <label for="seller_id">Seller ID:</label>
                                                         <input type="file" id="seller_id" name="seller_id" class="form-control">
@@ -312,60 +312,68 @@
                 <form method="POST" action="#" id="updateForm" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6">
-                            <!-- <label for="party_name">Party Name</label>  -->
-                            <input type="text" placeholder="Party Name" name="party_name" class="form-control" required>
+                            <label for="party_name">Party Name</label>
+                            <input type="text" id="party_name" placeholder="Party Name" name="party_name" class="form-control" required>
                         </div>
                         <div class="col-md-6">
-                            <!-- <label for="firm_name">Firm Name</label> -->
-                            <input type="text" placeholder="Firm Name" name="firm_name" class="form-control" required>
+                            <label for="father_name">Father Name</label>
+                            <input type="text" id="father_name" placeholder="Father Name" name="father_name" class="form-control" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mt-2">
-                            <input type="text" placeholder="Whatsapp Number" name="whatsapp_number" class="form-control" required>
+                            <label for="whatsapp_number">Whatsapp Number</label>
+                            <input type="number" id="whatsapp_number" placeholder="Whatsapp Number" name="whatsapp_number" class="form-control" required>
                         </div>
                         <div class="col-md-6 mt-2">
-                            <!-- <label for="office_address">Office Address</label> -->
-                            <input type="text" placeholder="Office Address" name="office_address" class="form-control" required>
+                            <label for="office_address">Office Address</label>
+                            <input type="text" id="office_address" placeholder="Office Address" name="office_address" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mt-2">
-                            <!-- <label for="email">Email</label> -->
-                            <input type="text" placeholder="Email" name="email" class="form-control" required>
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Email" name="email" class="form-control" required>
                         </div>
                         <div class="col-md-6 mt-2">
-                            <!-- <label for="residence_city">Residence City</label> -->
-                            <input type="text" placeholder="Residence City" name="residence_city" class="form-control" required>
+                            <label for="residence_city">Residence City</label>
+                            <input type="text" id="residence_city" placeholder="Residence City" name="residence_city" class="form-control" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mt-2">
-                            <!-- <label for="office_number">Office Number</label> -->
-                            <input type="text" placeholder="Office Number" name="office_number" class="form-control" required>
+                            <label for="office_number">Office Number</label>
+                            <input type="text" id="office_number" placeholder="Office Number" name="office_number" class="form-control" required>
                         </div>
                         <div class="col-md-6 mt-2">
-                            <!-- <label for="office_city">Office City</label> -->
-                            <input type="text" placeholder="Office City" name="office_city" class="form-control" required>
+                            <label for="office_city">Office City</label>
+                            <input type="text" id="office_city" placeholder="Office City" name="office_city" class="form-control" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mt-2">
-                            <!-- <label for="residence_address">Residence Address</label> -->
-                            <input type="text" placeholder="Residence Address" name="residence_address" class="form-control" required>
+                            <label for="residence_address">Residence Address</label>
+                            <input type="text" id="residence_address" placeholder="Residence Address" name="residence_address" class="form-control" required>
                         </div>
                         <div class="col-md-6 mt-2">
-                            <!-- <label for="pan_number">Pan Number</label> -->
-                            <input type="text" placeholder="Pan Number" name="pan_number" class="form-control" required>
+                            <label for="pan_number">Pan Number</label>
+                            <input type="text" id="pan_number" placeholder="Pan Number" name="pan_number" class="form-control" required>
                         </div>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <input type="reset" class="btn bg-light-secondary" data-dismiss="modal" value="Close">
-                <button type="button" class="btn btn-primary modal_submit">Save</button>
-            </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="firm_name">Firm Name</label>
+                            <input type="text" id="firm_name" placeholder="Firm Name" name="firm_name" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="reset" class="btn bg-light-secondary" data-dismiss="modal" value="Close">
+                    <button type="button" class="btn btn-primary modal_submit">Save</button>
+                </div>
             </form>
+
         </div>
     </div>
 </div>
@@ -396,6 +404,7 @@
                     $('#address').val(response.office_address);
                     $('#city').val(response.residence_city);
                     $('#contact_number').val(response.contact_number);
+                    $('#pancard_number').val(response.pan_number);
                 },
                 error: function(xhr, status, error) {
                     console.error(error);

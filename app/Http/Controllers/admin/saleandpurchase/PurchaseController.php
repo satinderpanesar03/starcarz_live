@@ -444,6 +444,7 @@ class PurchaseController extends Controller
                 'email' => $party->email,
                 'residence_city' => ($city) ? $city->city : $party->residence_city,
                 'contact_number' => $contactNumber->number ?? null,
+                'pan_number' => $party->pan_number ?? null,
 
             ]);
         } else {
