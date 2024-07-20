@@ -87,7 +87,7 @@
                                                     <td style="font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                         {{ $insurance->executive ? ucfirst($insurance->executive->name) : '' }}
                                                     </td>
-                                                    <td>
+                                                    <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                         {{ $insurance->type ? $insurance->type->name : '' }}
                                                     </td>
                                                     <td>{{date('d/m/Y',strtotime($insurance->end_date))}}</td>
