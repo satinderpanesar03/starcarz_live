@@ -50,7 +50,7 @@ class CarInsurance extends Controller
                 })
                 // ->PolicyNumber($request)
                 // ->CarNumber($request)
-                ->orderBy('id', 'desc')
+                ->orderBy('insurance_done_date', 'desc')
                 ->paginate($request->limit ? $request->limit : 10);
         }
         // dd($insurances);
