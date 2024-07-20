@@ -107,7 +107,7 @@
                                                 <th width="5%">ID</th>
                                                 <th>Party</th>
                                                 <th>Whatsapp</th>
-                                                <th>Policy Number</th>
+                                                <th width="5%">Policy Number</th>
                                                 <th>Model</th>
                                                 <th>Car Number</th>
                                                 <th>End Date</th>
@@ -128,7 +128,9 @@
                                                 <td>
                                                     {{date('d/m/Y',strtotime($item->insurance_to_date)) }}
                                                 </td>
-                                                <td>{{$item->company ? $item->company->name : ''}}</td>
+                                                <td data-toggle="tooltip" data-placement="top" title="{{$item->company ? $item->company->name : ''}}">
+                                                    {{ $item->company ? substr($item->company->name, 0, 7) : '' }}
+                                                </td>
                                                 <td>{{$item->total}}</td>
                                                 <td><span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.car.insurance.view', $item->id)}}" class="btn btn-primary btn-sm" title="View">

@@ -49,14 +49,14 @@
                                                         <select name="party_id" id="mst_party_id" class="form-control" required>
                                                             <option value="">Search By Name/Number</option>
                                                             @foreach($parties as $party)
-                                                            <option value="{{ $party['id'] }}" {{ isset($carLoan->mst_party_id) && $carLoan->mst_party_id == $party['id'] ? 'selected' : '' }}>
+                                                            <option value="{{ $party['id'] }}" {{ isset($insurance->party_id) && $insurance->party_id == $party['id'] ? 'selected' : '' }}>
                                                                 {{ $party['name'] }}
 
                                                                 @if (isset($party['father_name']))
                                                                     S/O <span style="color: green;">{{ ucfirst($party['father_name']) }}</span>
                                                                 @endif
 
-                                                                @if ($party['contacts'])
+                                                                @if (isset($party['contacts']))
                                                                 ({{ $party['contacts'] }})
                                                                 @endif
 

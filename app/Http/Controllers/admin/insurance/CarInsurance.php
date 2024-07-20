@@ -190,7 +190,7 @@ class CarInsurance extends Controller
         $vehicles = Purchase::select('id', 'reg_number')->whereIn('status', [6, 7])->get();
         $insurance_company = MstInsurance::pluck('name', 'id');
         $case = 'edit';
-
+// dd($insurance);
 
         return view('admin.car_insurance.create', compact('insurance', 'executives', 'models', 'suppliers', 'regNumbers', 'headOptions', 'paymentmodes', 'parties', 'vehicles', 'insurance_company', 'case', 'renewal', 'endorsement', 'brands'));
     }
