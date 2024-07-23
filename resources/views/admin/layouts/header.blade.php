@@ -71,7 +71,7 @@
                 break;
         }
         @endif
-        
+
     </script>
     @stack('scripts')
 

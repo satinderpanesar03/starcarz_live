@@ -126,8 +126,8 @@
                                                         <input type="text" id="expectation" name="expectation" class="form-control" readonly>
                                                     </div>-->
                                                     <div class="col-md-3 mt-3">
-                                                        <label for="date_of_purchase">Date Of Purchase:</label>
-                                                        <input type="date" id="date_of_purchase" name="date_of_purchase" class="form-control" readonly>
+                                                        <label for="date_of_purchase">Date Of Sale:</label>
+                                                        <input type="date" id="date_of_purchase" name="date_of_purchase" class="form-control" required>
                                                     </div>
                                                 </div>
 

@@ -95,28 +95,18 @@
                                                     </div>
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">
-                                                <h5>Vehicle Details</h5>
+                                                <h5>Vehicle Asked</h5>
                                                 <div class="row">
-                                                    <!-- <div class="col-md-3">
-                                                        <div>
-                                                            <label for="vehicle_number">Vehicle Number</label>
-                                                            <select name="vehicle_id" id="vehicle_number" class="form-control">
-                                                                <option value="">Choose...</option>
-                                                                @foreach ($vehicles as $vehicle)
-                                                                <option value="{{$vehicle->id}}" {{ isset($sale->id) && $sale->vehicle_id == $vehicle->id ? ' selected' : '' }}>{{strtoupper($vehicle->reg_number)}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            <div data-toggle="modal" data-target="#addDemandVehicle" class="input-group-append">
-                                                                <button class="btn btn-outline-primary btn-field-height" type="button">+</button>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
                                                     <div class="col-md-3">
                                                         <label for="vehicle_id">Vehicle:</label>
-                                                        <select name="vehicle_id" id="vehicle_id" class="form-control">
+                                                        <select name="vehicle_id[]" id="vehicle_id" class="form-control" multiple>
                                                             <option value="" disabled selected>Choose...</option>
                                                             @foreach($models as $value => $label)
-                                                            <option value="{{ $value }}" {{ isset($sale->vehicle_id) && $value == $sale->vehicle_id? 'selected' : '' }}>{{ $label }}</option>
+                                                                <option value="{{ $value }}" @if (isset($sale->vehicle_id))
+                                                                {{ in_array($value, explode(',',$sale->vehicle_id)) ? 'selected' : '' }}
+                                                                @endif>
+                                                                    {{ $label }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -126,10 +116,17 @@
                                                     </div> -->
                                                     <div class="col-md-3">
                                                         <label for="mst_color_id">Color:</label>
-                                                        <input class="form-control" type="text" name="color" id="color" value="@if(isset($sale->id)){{$sale->color}}@else{{old('color')}}@endif">
+                                                        <select name="color[]" id="" multiple>
+                                                            @foreach ($colors as $value => $color)
+                                                                <option value="{{$color}}" @if (isset($sale->color))
+                                                                {{in_array($color, explode(',',$sale->color)) ? 'selected' : '' }}
+                                                                @endif >{{$value}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        {{-- <input class="form-control" type="text" name="color" id="color" value="@if(isset($sale->id)){{$sale->color}}@else{{old('color')}}@endif"> --}}
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <label for="model">Model:</label>
+                                                        <label for="model">Manufacturing Year:</label>
                                                         <input class="form-control" type="text" name="model" id="model" value="@if(isset($sale->id)){{$sale->model}}@else{{old('model')}}@endif">
                                                     </div>
                                                     <div class="col-md-3">
@@ -137,7 +134,7 @@
                                                         <select name="enquiry_type" id="enquiry_type" class="form-control">
                                                             <option value="" disabled selected>Choose...</option>
                                                             @foreach($enquiryType as $value => $label)
-                                                            <option value="{{ $value }}" {{ isset($sale->enquiry_type) && $value == $sale->enquiry_type? 'selected' : '' }}>{{ $label }}</option>
+                                                            <option value="{{ $value }}" {{ isset($sale->enquiry_type) && $value == $sale->enquiry_type? 'selected' : '' }}>{{ $label }}</option >
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -173,9 +170,9 @@
                                                     </div> -->
                                                     <div class="col-md-3 mt-3">
                                                         <label for="fuel_type">Fuel Type</label>
-                                                        <select class="form-control" name="fuel_type">
+                                                        <select class="form-control" name="fuel_type[]" multiple>
                                                             @foreach (\App\Models\Purchase::getFuelType() as $value => $fuel)
-                                                            <option value="{{$value}}"{{ isset($sale->fuel_type) && $value == $sale->fuel_type? 'selected' : '' }}>{{$fuel}}</option>
+                                                            <option value="{{$value}}"{{ isset($sale->fuel_type) && in_array($value, explode(',', $sale->fuel_type)) ? 'selected' : '' }} >{{$fuel}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -220,19 +217,19 @@
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <label for="vehicle_number_s">Vehicle Number</label>
-                                                        <select name="suggestion_vehicle_id" id="vehicle_number_s" class="form-control">
+                                                        <select name="suggestion_vehicle_id[]" id="vehicle_number_s" class="form-control" multiple>
                                                             <option value="">Choose...</option>
-                                                            @foreach ($vehicles as $vehicle)
-                                                            <option value="{{$vehicle->id}}" {{ isset($sale->id) && $sale->suggestion_vehicle_id == $vehicle->id ? ' selected' : '' }}>{{strtoupper($vehicle->reg_number)}}</option>
+                                                            @foreach ($suggestedVehicle as $value => $vehicle)
+                                                                <option value="{{$value}}" {{ isset($sale->suggestion_vehicle_id) && in_array($value, explode(',', $sale->suggestion_vehicle_id)) ? 'selected' : '' }}>{{ $vehicle }}</option>
                                                             @endforeach
                                                         </select>
 
                                                     </div>
 
-                                                    <div class="col-md-3">
+                                                    {{-- <div class="col-md-3">
                                                         <label for="mst_brand_type_id">Model:</label>
                                                         <input class="form-control" type="text" name="model_s" id="model_s" readonly>
-                                                    </div>
+                                                    </div> --}}
                                                     <!-- <div class="col-md-3">
                                                         <label for="mst_color_id">Color:</label>
                                                         <input class="form-control" type="text" name="color" id="color_s" readonly>
@@ -436,18 +433,25 @@
 
 @push('scripts')
 <script>
-    $(document).ready(() => {
-        $('select').selectize();
-        $('#example').DataTable({
-            // data: name,
-            deferRender: true,
-            // scrollY:        200,
-            scrollCollapse: true,
-            scroller: true,
-            info: false,
-            "bPaginate": false
+    // $(document).ready(() => {
+    //     $('select').selectize();
+    //     $('#example').DataTable({
+    //         // data: name,
+    //         deferRender: true,
+    //         // scrollY:        200,
+    //         scrollCollapse: true,
+    //         scroller: true,
+    //         info: false,
+    //         "bPaginate": false,
+    //     });
+    // });
+
+    $(document).ready(()=>{
+        $('select').selectize({
+            plugins: ["remove_button"],
         });
     });
+
 
     $(document).ready(function() {
         $('#mst_party_id').change(function(e) {

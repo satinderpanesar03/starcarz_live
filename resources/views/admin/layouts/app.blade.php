@@ -40,6 +40,7 @@
 <link rel="stylesheet" href="{{asset('app-assets/vendors/css/sweetalert2.min.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/css/selectize.bootstrap4.min.css">
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+
 @stack('head')
 
 {{-- jquery --}}

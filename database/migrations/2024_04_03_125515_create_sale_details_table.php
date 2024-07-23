@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('sale_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mst_party_id')->nullable();
-            $table->foreignId('vehicle_id')->nullable();
-            $table->foreignId('suggestion_vehicle_id')->nullable();
+            $table->string('vehicle_id')->nullable();
+            $table->string('suggestion_vehicle_id')->nullable();
             $table->string('car_number')->nullable();
             $table->string('suggestion_car_number')->nullable();
             $table->string('status')->nullable()->default('1');

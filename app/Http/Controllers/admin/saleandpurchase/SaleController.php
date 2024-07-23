@@ -9,6 +9,7 @@ use App\Models\MstModel;
 use App\Models\MstParty;
 use App\Models\Purchase;
 use App\Models\Sale;
+use App\Models\MstColor;
 use App\Models\SaleDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -82,7 +83,12 @@ class SaleController extends Controller
         $type = true;
         $parties = MstParty::select('id', 'party_name')->get();
         $regNumbers = Purchase::whereIn('status', [6, 7])->pluck('enquiry_id', 'id');
-        $vehicles = Purchase::select('id', 'reg_number')->whereIn('status', [6, 7])->get();
+        // $vehicles = Purchase::select('id', 'reg_number')->whereIn('status', [6, 7])->get();
+        $modelIds = Purchase::select('id', 'mst_model_id')
+                    ->whereIn('status', [6, 7])
+                    ->whereNotNull('mst_model_id')
+                    ->pluck('mst_model_id')
+                    ->toArray();
         $status = SaleDetail::getStatus();
         $carList = DB::table('car_lists')->select('model')->get();
         $executives = MstExecutive::pluck('name', 'id');
@@ -91,12 +97,39 @@ class SaleController extends Controller
         $fuelType = Sale::getFuelType();
         $finance = Sale::getFinanceType();
         $enquiryType = Sale::getEnquiryType();
-
-        return view('admin.sale-purchase.sale.create', compact('parties', 'vehicles', 'regNumbers', 'status', 'type', 'carList', 'executives', 'models', 'budget', 'fuelType', 'finance', 'enquiryType'));
+        $colors = MstColor::pluck('id','color');
+        $suggestedVehicle = MstModel::whereIn('id', $modelIds)->pluck('model', 'id');
+        if ($suggestedVehicle->isEmpty()) {
+            $suggestedVehicle = [];
+        }
+// dd($suggestedVehicle);
+        return view('admin.sale-purchase.sale.create', compact('parties', 'regNumbers', 'status', 'type', 'carList', 'executives', 'models', 'budget', 'fuelType', 'finance', 'enquiryType','colors','suggestedVehicle'));
     }
 
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'firm_name' => 'required',
+            'contact_number' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'mst_executive_id' => 'required',
+            'vehicle_id' => 'required',
+            'color' => 'required',
+            'fuel_type' => 'required',
+            'budget_type' => 'required',
+        ], [
+            'vehicle_id' => 'Please select vehcile',
+            'mst_executive_id' => 'PLease select executive',
+            'budget_type' => 'Please select budget'
+        ]);
+
+        if ($validator->fails()) {
+            \toastr()->error($validator->errors()->first());
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         try {
             DB::beginTransaction();
 
@@ -104,8 +137,8 @@ class SaleController extends Controller
                 $sale = SaleDetail::find($request->id);
                 $sale->update([
                     'mst_party_id' => $request->party_id,
-                    'vehicle_id' => $request->vehicle_id,
-                    'suggestion_vehicle_id' => $request->suggestion_vehicle_id,
+                    'vehicle_id' => implode(',',$request->vehicle_id),
+                    'suggestion_vehicle_id' => implode(',',$request->suggestion_vehicle_id),
                     'status' => $request->status,
                     'followup_date' => ($request->status == 2 || $request->status == 1) ? null : $request->followup_date,
                     'remarks' => $request->remarks,
@@ -122,9 +155,10 @@ class SaleController extends Controller
                     'mst_executive_id' => $request->mst_executive_id,
                     'budget_type' => $request->budget_type ?? '',
                     'brand' => $request->brand,
-                    'color' => $request->color,
+                    'color' => implode(',',$request->color),
                     'model' => $request->model,
                     'date_of_purchase' => $request->date_of_purchase,
+                    'fuel_type' => implode(',',$request->fuel_type),
                 ]);
 
                 if ($sale->status == 5) {
@@ -133,8 +167,8 @@ class SaleController extends Controller
             } else {
                 SaleDetail::create([
                     'mst_party_id' => $request->party_id,
-                    'vehicle_id' => $request->vehicle_id,
-                    'suggestion_vehicle_id' => $request->suggestion_vehicle_id,
+                    'vehicle_id' => implode(',',$request->vehicle_id),
+                    'suggestion_vehicle_id' => implode(',',$request->suggestion_vehicle_id),
                     'status' => $request->status,
                     'followup_date' => $request->status == 'Follow Up' ? $request->followup_date : null,
                     'remarks' => $request->remarks,
@@ -152,9 +186,9 @@ class SaleController extends Controller
                     'budget_type' => $request->budget_type ?? '',
                     'expected_price' => $request->expected_price ,
                     'brand' => $request->brand,
-                    'color' => $request->color,
+                    'color' => implode(',',$request->color),
                     'model' => $request->model,
-
+                    'fuel_type' => implode(',',$request->fuel_type),
                 ]);
             }
 
@@ -233,7 +267,12 @@ class SaleController extends Controller
         $sale = SaleDetail::find($id);
         $parties = MstParty::select('id', 'party_name')->get();
         $regNumbers = Purchase::whereIn('status', [6, 7])->pluck('enquiry_id', 'id');
-        $vehicles = Purchase::select('id', 'reg_number')->whereIn('status', [6, 7])->get();
+        // $vehicles = Purchase::select('id', 'reg_number')->whereIn('status', [6, 7])->get();
+        $modelIds = Purchase::select('id', 'mst_model_id')
+                    ->whereIn('status', [6, 7])
+                    ->whereNotNull('mst_model_id')
+                    ->pluck('mst_model_id')
+                    ->toArray();
         $status = SaleDetail::getStatus($sale->status);
         $carList = DB::table('car_lists')->select('model')->get();
         $budget = Sale::getBudget();
@@ -242,7 +281,13 @@ class SaleController extends Controller
         $enquiryType = Sale::getEnquiryType();
         $executives = MstExecutive::pluck('name', 'id');
         $models = MstModel::pluck('model', 'id');
-        return view('admin.sale-purchase.sale.create', compact('sale', 'parties', 'vehicles', 'regNumbers', 'status', 'type', 'carList', 'budget', 'finance', 'enquiryType', 'executives', 'models'));
+        $colors = MstColor::pluck('id','color');
+        $suggestedVehicle = MstModel::whereIn('id', $modelIds)->pluck('model', 'id');
+        if ($suggestedVehicle->isEmpty()) {
+            $suggestedVehicle = [];
+        }
+
+        return view('admin.sale-purchase.sale.create', compact('sale', 'parties', 'regNumbers', 'status', 'type', 'carList', 'budget', 'finance', 'enquiryType', 'executives', 'models','colors','suggestedVehicle'));
     }
 
     public function delete($id)

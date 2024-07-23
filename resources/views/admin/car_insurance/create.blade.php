@@ -234,10 +234,18 @@
                                                         <label for="mst_brand_type_id">Gst:</label>
                                                         <input class="form-control" type="number" name="gst" id="gst" value="{{$insurance->gst ?? ''}}" required>
                                                     </div>
+                                                    @if (isset($insurance->total))
                                                     <div class="col-md-3 mt-3">
                                                         <label for="mst_brand_type_id">Total:</label>
                                                         <input class="form-control" type="number" name="total" id="total" value="{{number_format($insurance->total, 2)}}" readonly>
                                                     </div>
+                                                    @else
+                                                    <div class="col-md-3 mt-3">
+                                                    <label for="mst_brand_type_id">Total:</label>
+                                                        <input class="form-control" type="number" id="total" value="" readonly>
+                                                    </div>
+                                                    @endif
+
                                                     <div class="col-md-3 mt-3">
                                                         <label for="mst_brand_type_id">Policy Number:</label>
                                                         <input class="form-control" type="text" name="policy_number" id="policy_number" value="{{$insurance->policy_number ?? ''}}" required>
