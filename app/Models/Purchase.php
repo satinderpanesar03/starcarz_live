@@ -12,7 +12,9 @@ class Purchase extends Model
     protected $guarded = ['id'];
 
     protected $appends = [
-        'pending_image_status'
+        'pending_image_status',
+        'fuel_type_name',
+        'status_name'
     ];
 
 
@@ -230,5 +232,20 @@ class Purchase extends Model
         }
         return 0;
     }
+
+    public function scopeSelected($query){
+        return $query->select('id','reg_number','manufacturing_year','registration_year','kilometer','owners','status','image','fuel_type','mst_brand_type_id','mst_model_id','mst_color_id');
+    }
+
+    public function getFuelTypeNameAttribute(){
+        $fuelTypes = static::getFuelType();
+        return $fuelTypes[$this->fuel_type] ?? null;
+    }
+
+    public function getStatusNameAttribute(){
+        $statuses = static::getStatus();
+        return $statuses[$this->status] ?? null;
+    }
+
 
 }
