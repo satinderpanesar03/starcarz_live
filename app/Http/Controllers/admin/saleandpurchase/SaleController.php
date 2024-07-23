@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Crypt;
 
 class SaleController extends Controller
 {
@@ -162,7 +163,7 @@ class SaleController extends Controller
                 ]);
 
                 if ($sale->status == 5) {
-                    return redirect()->route('admin.sale.sale.order-create');
+                    return redirect()->route('admin.sale.sale.order-create', ["s" => Crypt::encrypt($sale->id), "p" => Crypt::encrypt($sale->mst_party_id)]);
                 }
             } else {
                 SaleDetail::create([

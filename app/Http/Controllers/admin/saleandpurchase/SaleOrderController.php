@@ -11,9 +11,11 @@ use App\Models\MstParty;
 use App\Models\Purchase;
 use App\Models\RcTransfer;
 use App\Models\SaleOrder;
+use App\Models\SaleDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 
 class SaleOrderController extends Controller
 {
@@ -45,8 +47,10 @@ class SaleOrderController extends Controller
         return view('admin.sale-purchase.sale-order.index', compact('saleOrders', 'parties', 'vehicles', 'type'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $saleOrderId = Crypt::decrypt($request->query('s'));
+        $mstparty = MstParty::find(Crypt::decrypt($request->query('p')));
         $type = true;
         $rcType = Purchase::getRcType();
         $hypothecationType = Purchase::getHypothecationType();
@@ -71,11 +75,12 @@ class SaleOrderController extends Controller
         $brands = MstBrandType::pluck('type', 'id');
         $policyNumbers = CarInsurance::pluck('policy_number', 'id');
 
-        return view('admin.sale-purchase.sale-order.create', compact('parties', 'vehicles', 'regNumbers', 'company', 'rcType', 'type', 'hypothecationType', 'models', 'brands', 'policyNumbers'));
+        return view('admin.sale-purchase.sale-order.create', compact('parties', 'vehicles', 'regNumbers', 'company', 'rcType', 'type', 'hypothecationType', 'models', 'brands', 'policyNumbers','mstparty','saleOrderId'));
     }
 
     public function store(Request $request)
     {
+
         $input = $request->all();
         if ($request->hasFile('buyer_id_image')) {
             if ($request->id) {
@@ -137,15 +142,21 @@ class SaleOrderController extends Controller
                         ]);
                     }
                 }
+
+                SaleDetail::find($request->sale_order_id)->update(['status' => 5]);
+                Purchase::find($request->purchase_id)->update(['is_sold' => 1]);
             } else {
                 $input['reg_date'] = $request->reg_date;
                 $input['insurance_due_date'] = $request->insurance_due_date;
                 $input['status'] = $request->mode;
-                $input['mst_party_id'] = $request->party_id;
+                $input['mst_party_id'] = $request->mst_party_id;
                 $input['mst_purchase_id'] = $request->purchase_id;
                 $input['pancard_number'] = $request->pancard_number;
                 $input['aadharcard_number'] = $request->aadharcard_number;
                 $saleOrder = SaleOrder::create($input);
+
+                SaleDetail::find($request->sale_order_id)->update(['status' => 5]);
+                Purchase::find($request->purchase_id)->update(['is_sold' => 1]);
             }
 
             DB::commit();

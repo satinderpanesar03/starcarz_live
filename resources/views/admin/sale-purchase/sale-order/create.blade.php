@@ -37,13 +37,13 @@
                                             <form method="post" action="{{route('admin.sale.sale.order-store')}}" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="hidden" name="mst_purchase_id" id="purchase_id">
-
+                                                <input type="hidden" name="sale_order_id" id="sale_order_id" value="{{$saleOrderId ?? ''}}">
                                                 <input type="hidden" name="id" value="{{ $saleOrder->id ?? null }}">
                                                 <div class="row">
                                                     <input type="hidden" name="mst_party_id">
                                                     <div class="col-md-4 mt-2">
                                                         <label for="mst_party_id">Party</label>
-                                                        <select name="mst_party_id" id="mst_party_id" class="form-control">
+                                                        <select name="mst_party_id" id="mst_party_id" class="form-control" required>
                                                             <option value="">Search By Name/Number</option>
                                                             @foreach($parties as $party)
                                                             <option value="{{ $party['id'] }}" {{ isset($saleOrder->mst_party_id) && $saleOrder->mst_party_id == $party['id'] ? 'selected' : '' }}>

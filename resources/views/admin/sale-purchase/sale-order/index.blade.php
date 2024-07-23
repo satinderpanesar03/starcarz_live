@@ -21,8 +21,8 @@
                                             <button class="btn btn-sm btn-danger px-3 py-1 mr-2" id="listing-filter-toggle">
                                                 <i class="fa fa-filter"></i> Filter </button>
                                             @if ($type)
-                                            <a href="{{route('admin.sale.sale.order-create')}}" class="btn btn-sm btn-primary px-3 py-1">
-                                                <i class="fa fa-plus"></i> Add Sale Order </a>
+                                            {{-- <a href="{{route('admin.sale.sale.order-create')}}" class="btn btn-sm btn-primary px-3 py-1">
+                                                <i class="fa fa-plus"></i> Add Sale Order </a> --}}
                                             @endif
                                         </div>
                                     </div>
