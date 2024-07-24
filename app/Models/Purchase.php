@@ -17,7 +17,8 @@ class Purchase extends Model
         'status_name',
         'make',
         'model',
-        'color_name'
+        'color_name',
+        'images'
     ];
 
 
@@ -261,6 +262,44 @@ class Purchase extends Model
     public function getColorNameAttribute(){
         return $this->color->color ?? '';
     }
+
+
+    public function purchased_images(){
+        return $this->hasMany(PurchasedImage::class);
+    }
+
+    public function getImagesAttribute()
+{
+    $imageArray = [];
+
+    foreach ($this->purchased_images as $image) {
+        $types = ['front', 'back', 'side', 'interior', 'tyre'];
+
+        $hasImages = false;
+
+        foreach ($types as $type) {
+            if (!empty($image->$type)) {
+                $urls = explode(',', $image->$type);
+                foreach ($urls as $url) {
+                    $imageArray[] = asset('storage/purchased/' . $url);
+                }
+                $hasImages = true;
+            }
+        }
+
+        if ($hasImages) {
+            break;
+        }
+    }
+
+    if (empty($imageArray)) {
+        return null;
+    }
+
+    return $imageArray;
+}
+
+
 
 
 }

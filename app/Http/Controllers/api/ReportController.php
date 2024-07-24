@@ -14,7 +14,7 @@ class ReportController extends Controller
                 $purchased = Purchase::with([
                     'carModel:id,mst_brand_type_id,model',
                     'color:id,color',
-                    'brand:id,type',
+                    'brand:id,type'
                 ])
                 ->Selected()
                 ->withSum('refurbishment', 'total_amount')
@@ -22,7 +22,7 @@ class ReportController extends Controller
                 ->where('is_sold', '!=', 1)
                 ->orderBy('id', 'desc')
                 ->get()
-                ->makeHidden(['refurbishment_sum_total_amount','pending_image_status','fuel_type','status','mst_brand_type_id','mst_model_id','mst_color_id','brand','carModel','color']);
+                ->makeHidden(['refurbishment_sum_total_amount','pending_image_status','fuel_type','status','mst_brand_type_id','mst_model_id','mst_color_id','brand','carModel','color','image','purchased_images']);
 
                 if ($purchased->isEmpty()) {
                     return response()->json([

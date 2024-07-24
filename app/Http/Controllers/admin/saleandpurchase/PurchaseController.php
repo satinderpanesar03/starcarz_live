@@ -965,40 +965,70 @@ class PurchaseController extends Controller
         return view('admin.sale-purchase.ready-for-sale.images', compact('id','image'));
     }
 
-    public function readySaleImagesStore(Request $request){
-        $request->validate([
-            'front' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'side' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'back' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'interior' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'tyre' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+    public function readySaleImagesStore_old(Request $request){
+        $validator = Validator::make($request->all(), [
+            'front' => 'nullable',
+            'side' => 'nullable',
+            'back' => 'nullable',
+            'interior' => 'nullable',
+            'tyre' => 'nullable',
         ]);
+
+        if ($validator->fails()) {
+            \toastr()->error($validator->errors()->first());
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $updateData = [];
 
-        if ($request->file('front')) {
-            $frontPath = $request->file('front')->store('public/purchased');
-            $updateData['front'] = basename($frontPath);
+        if ($request->hasFile('front')) {
+            $frontImages = [];
+            foreach ($request->file('front') as $key => $front) {
+                $frontPath = $front->store('public/purchased');
+                $frontImages[] = basename($frontPath);
+            }
+            $updateData['front'] = implode(',', $frontImages);
         }
 
+
         if ($request->file('side')) {
-            $sidePath = $request->file('side')->store('public/purchased');
-            $updateData['side'] = basename($sidePath);
+            $sideImages = [];
+            foreach($request->file('side') as $side){
+                $sidePath = $side->store('public/purchased');
+                $sideImages[] = basename($sidePath);
+            }
+            $updateData['side'] = implode(',', $sideImages);
+
         }
 
         if ($request->file('back')) {
-            $backPath = $request->file('back')->store('public/purchased');
-            $updateData['back'] = basename($backPath);
+            $backImages = [];
+            foreach($request->file('back') as $back){
+                $sidePath = $back->store('public/purchased');
+                $backImages[] = basename($sidePath);
+            }
+            $updateData['back'] = implode(',', $backImages);
+
         }
 
         if ($request->file('interior')) {
-            $interiorPath = $request->file('interior')->store('public/purchased');
-            $updateData['interior'] = basename($interiorPath);
+            $interiorImages = [];
+            foreach($request->file('interior') as $interior){
+                $sidePath = $interior->store('public/purchased');
+                $interiorImages[] = basename($sidePath);
+            }
+            $updateData['interior'] = implode(',', $interiorImages);
+
         }
 
         if ($request->file('tyre')) {
-            $tyrePath = $request->file('tyre')->store('public/purchased');
-            $updateData['tyre'] = basename($tyrePath);
+            $tyreImages = [];
+            foreach($request->file('tyre') as $tyre){
+                $sidePath = $tyre->store('public/purchased');
+                $tyreImages[] = basename($sidePath);
+            }
+            $updateData['tyre'] = implode(',', $tyreImages);
+
         }
 
         PurchasedImage::updateOrCreate(
@@ -1009,6 +1039,49 @@ class PurchaseController extends Controller
         \toastr()->success(ucfirst('Image successfully saved'));
         return redirect()->back();
     }
+
+    public function readySaleImagesStore(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'front.*' => 'nullable',
+        'side.*' => 'nullable',
+        'back.*' => 'nullable',
+        'interior.*' => 'nullable',
+        'tyre.*' => 'nullable',
+    ]);
+
+    if ($validator->fails()) {
+        \toastr()->error($validator->errors()->first());
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    $updateData = [];
+
+    $handleFileUpload = function ($fieldName) use ($request, &$updateData) {
+        if ($request->hasFile($fieldName)) {
+            $images = [];
+            foreach ($request->file($fieldName) as $file) {
+                $path = $file->store('public/purchased');
+                $images[] = basename($path);
+            }
+            $updateData[$fieldName] = implode(',', $images);
+        }
+    };
+
+    $imageTypes = ['front', 'side', 'back', 'interior', 'tyre'];
+    foreach ($imageTypes as $type) {
+        $handleFileUpload($type);
+    }
+
+    PurchasedImage::updateOrCreate(
+        ['purchase_id' => $request->purchase_id],
+        $updateData
+    );
+
+    \toastr()->success(ucfirst('Images successfully saved'));
+    return redirect()->back();
+}
+
 
     public function showReadyForSale(Request $request, $id)
     {
