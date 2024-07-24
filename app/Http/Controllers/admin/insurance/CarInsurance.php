@@ -373,7 +373,7 @@ class CarInsurance extends Controller
 
         // Assuming you have a relationship between Purchase and Color models
         $vehicles = Purchase::where('mst_model_id', $modelId)
-            ->where('mst_brand_type_id', $brandId)
+            // ->where('mst_brand_type_id', $brandId)
             ->whereIn('status', [6, 7])
             ->whereNot('is_sold',1)
             ->select('id', 'reg_number')
@@ -388,7 +388,8 @@ class CarInsurance extends Controller
     }
 
     public function getVehicleNumbers($number){
-        $vehicleNumbers =  Purchase::select('id', 'reg_number')->where('mst_model_id',$number)->whereIn('status', [6, 7])->pluck('number', 'id');
+        $vehicleNumbers =  Purchase::select('id', 'reg_number')->where('mst_model_id',$number)->whereIn('status', [6, 7])->where('is_sold', '!=', 1)->pluck('reg_number', 'id');
+        // dd($vehicleNumbers);
         return response()->json(['vehicle_numbers' => $vehicleNumbers]);
     }
 }
