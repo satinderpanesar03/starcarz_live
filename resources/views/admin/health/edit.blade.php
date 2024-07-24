@@ -1,3 +1,6 @@
+<?php
+use Illuminate\Support\Facades\Crypt;
+?>
 @extends('admin.layouts.header')
 @section('title','Edit Health Insurance')
 @section('content')
@@ -37,6 +40,7 @@
                                                 <input type="hidden" name="renewal" value="true">
                                                 @endif
                                                 <input type="hidden" name="id" value="{{ $insurance->id ?? null }}">
+                                                <input type="hidden" name="params" value="{{request()->q ?? ''}}">
                                                 <div class="row">
                                                     <input type="hidden" value="1" name="mst_executive_id">
                                                     <div class="col-md-4 mt-2">

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\MstInsurance;
+use Illuminate\Support\Facades\Crypt;
 
 class HealthInsurance extends Controller
 {
@@ -60,6 +61,7 @@ class HealthInsurance extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'party_id' => 'required',
             // 'member_name' => 'required',
@@ -135,9 +137,9 @@ class HealthInsurance extends Controller
             }
 
             DB::commit();
-
+            $params = $request->params != '' ?  Crypt::decrypt($request->params) : '';
             \toastr()->success(ucfirst('health insurance saved successfully'));
-            return redirect()->route('admin.health.index');
+            return redirect()->route('admin.health.index', $params);
         } catch (\Exception $e) {
             DB::rollBack();
             \toastr()->error('Error occurred while saving health insurance');

@@ -25,7 +25,7 @@ class SaleOrderController extends Controller
         if ($request->has('clear_search')) {
             return redirect()->route('admin.sale.sale.order-index');
         }
-        $saleOrders = SaleOrder::with('purchase', 'party')
+        $saleOrders = SaleOrder::with('purchase', 'party', 'purchase.executive')
             ->when($request->filled('party_id'), function ($query) use ($request) {
                 $query->whereHas('party', function ($subquery) use ($request) {
                     $subquery->where('party_name', 'like', '%' . $request->party_id . '%');
@@ -44,6 +44,7 @@ class SaleOrderController extends Controller
         $parties = MstParty::select('id', 'party_name')->get();
         $vehicles = Purchase::select('id', 'reg_number')->whereIn('status', [6, 7])->get();
         // $status = SaleDetail::getStatus();
+        // dd($saleOrders);
         return view('admin.sale-purchase.sale-order.index', compact('saleOrders', 'parties', 'vehicles', 'type'));
     }
 

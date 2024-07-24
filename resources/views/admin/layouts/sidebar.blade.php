@@ -160,7 +160,7 @@
                             </li>
                             <li class="nav-item {{ request()->routeIs('admin.sale.sale.follow-up') ? 'active' : '' }}""><a href=" {{route('admin.sale.sale.follow-up')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Follow Up</span></a>
                             </li>
-                            <li class="nav-item {{ request()->routeIs('admin.sale.sale.order-index') ? 'active' : '' }}""><a href=" {{route('admin.sale.sale.order-index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item" data-i18n="permissions">Orders</span></a>
+                            <li class="nav-item {{ request()->routeIs('admin.sale.sale.order-index') ? 'active' : '' }}""><a href=" {{route('admin.sale.sale.order-index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item" data-i18n="permissions">Sale Register</span></a>
                             </li>
                         </ul>
                     </li>

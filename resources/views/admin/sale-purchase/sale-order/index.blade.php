@@ -15,7 +15,7 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-12 col-sm-7">
-                                            <h5 class="pt-2 pb-2">Manage Sale Orders List</h5>
+                                            <h5 class="pt-2 pb-2">Manage Sale Register List</h5>
                                         </div>
                                         <div class="col-12 col-sm-5 d-flex justify-content-end align-items-center">
                                             <button class="btn btn-sm btn-danger px-3 py-1 mr-2" id="listing-filter-toggle">
@@ -74,20 +74,21 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Party Name</th>
-                                                <th>Car Name</th>
-                                                <th>Price</th>
-                                                <th>Contact</th>
-                                                <th>Actions</th>
+                                                <th>Party</th>
+                                                <th>Whatsapp</th>
+                                                <th>Model</th>
+                                                <th>Vehicle</th>
+                                                <th>Executive</th>
+                                                <th>Sale Price</th>
+                                                <th>Delivery date</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @forelse($saleOrders as $value => $sale)
                                             <tr>
-                                                <td>{{++$value}}</td>
+                                                <td>{{$saleOrders->firstItem() + $value}}</td>
                                                 <td>{{ ($sale->party) ? $sale->party->party_name : '' }}</td>
-                                                <td>{{ ($sale->purchase) ? $sale->purchase->reg_number : ''}}</td>
-                                                <td>{{ ($sale->price_p1) ? $sale->price_p1 : '' }}</td>
                                                 <td>
                                                     @if($sale->party)
                                                     @foreach ($sale->party->partyContact as $contact)
@@ -98,19 +99,20 @@
                                                     @endforeach
                                                     @endif
                                                 </td>
+                                                <td>{{ ($sale->party) ? $sale->party->party_name : '' }}</td>
+                                                <td>{{ ($sale->purchase) ? $sale->purchase->reg_number : ''}}</td>
+                                                <td></td>
+                                                <td>{{ ($sale->price_p1) ? $sale->price_p1 : '' }}</td>
+                                                <td></td>
+
                                                 <td class="text-truncate">
                                                     <span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.sale.sale.order-view', $sale->id)}}" class="btn btn-primary btn-sm" title="View">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <a href="{{route('admin.sale.sale.order-show', $sale->id)}}" class="btn btn-success btn-sm" title="Edit">
+                                                        {{-- <a href="{{route('admin.sale.sale.order-show', $sale->id)}}" class="btn btn-success btn-sm" title="Edit">
                                                             <i class="fa fa-edit"></i>
-                                                        </a>
-                                                        <form id="partyForm" action="{{ route('admin.sale.sale.order-status', ['id' => $sale->id, 'state_id' => $sale->state_id]) }}" method="GET" style="display: inline;">
-                                                            <a onclick="document.getElementById('partyForm').submit(); return false;">
-                                                                <input type="checkbox" @if($sale->state_id == 1) checked @endif data-toggle="toggle" data-size="xs" onchange="this.closest('form').submit()">
-                                                            </a>
-                                                        </form>
+                                                        </a> --}}
                                                     </span>
                                                 </td>
                                             </tr>

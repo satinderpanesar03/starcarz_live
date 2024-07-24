@@ -2,6 +2,10 @@
 
 @section('title', 'Health Insurance')
 @section('content')
+<?php
+use Illuminate\Support\Facades\Crypt;
+$encryptedQuery = Crypt::encrypt(request()->query());
+?>
 <div class="main-panel">
     <div class="main-content">
         <div class="content-overlay"></div>
@@ -97,9 +101,10 @@
                                                         <a href="{{route('admin.health.view', $insurance->id)}}" class="btn btn-primary btn-sm" title="View">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        <a href="{{route('admin.health.show', $insurance->id)}}" class="btn btn-success btn-sm" title="Edit">
+                                                        <a href="{{ route('admin.health.show', [$insurance->id, 'q' => $encryptedQuery  ]) }}" class="btn btn-success btn-sm" title="Edit">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
+
                                                     </span>
                                                     </td>
                                                 </tr>
