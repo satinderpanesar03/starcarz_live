@@ -34,6 +34,8 @@
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
 
+
+
     <script>
         @if (Session::has('message'))
         var type = "{{ Session::get('alert-type', 'info') }}"

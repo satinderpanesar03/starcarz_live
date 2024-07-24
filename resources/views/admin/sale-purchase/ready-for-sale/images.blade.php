@@ -15,7 +15,7 @@
                                     <div class="card-header" style="background-color: #d6d6d6; color: #000000;  z-index: 1;">
                                         <div class="row">
                                             <div class="col-12 col-sm-7">
-                                                <h5 class="pt-2 pb-2 font-weight-bold">Add Images</h5>
+                                                <h5 class="pt-2 pb-2 font-weight-bold">Add Images </h5>
                                             </div>
                                             <div class="col-12 col-sm-5 d-flex justify-content-end align-items-center">
                                                 <a href="{{ route('admin.purchase.purchase.orders') }}"
@@ -56,6 +56,15 @@
                                                                                 <img src="{{ asset('storage/purchased/' . $img) }}" class="img-fluid" alt="Front Image">
                                                                             </a>
                                                                         </div>
+                                                                        <div class="mt-1">
+                                                                            <a href="#" class="delete_button"
+                                                                               data-img-name="{{ $img }}"
+                                                                               data-type="front"
+                                                                               data-purchase-id={{$id}}
+                                                                               data-confirm="Delete confirmation ?">
+                                                                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                            </a>
+                                                                        </div>
                                                                     </div>
                                                                 @endforeach
                                                             </div>
@@ -85,6 +94,15 @@
                                                                         <div class="image-item position-relative">
                                                                             <a href="#" class="image-link">
                                                                                 <img src="{{ asset('storage/purchased/' . $img) }}" class="img-fluid" alt="Side Image">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="mt-1">
+                                                                            <a href="#" class="delete_button"
+                                                                               data-img-name="{{ $img }}"
+                                                                               data-type="side"
+                                                                               data-purchase-id={{$id}}
+                                                                               data-confirm="Delete confirmation ?">
+                                                                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                                             </a>
                                                                         </div>
                                                                     </div>
@@ -117,6 +135,15 @@
                                                                                 <img src="{{ asset('storage/purchased/' . $img) }}" class="img-fluid" alt="Back Image">
                                                                             </a>
                                                                         </div>
+                                                                        <div class="mt-1">
+                                                                            <a href="#" class="delete_button"
+                                                                               data-img-name="{{ $img }}"
+                                                                               data-type="back"
+                                                                               data-purchase-id={{$id}}
+                                                                               data-confirm="Delete confirmation ?">
+                                                                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                            </a>
+                                                                        </div>
                                                                     </div>
                                                                 @endforeach
                                                             </div>
@@ -145,6 +172,15 @@
                                                                         <div class="image-item position-relative">
                                                                             <a href="#" class="image-link">
                                                                                 <img src="{{ asset('storage/purchased/' . $img) }}" class="img-fluid" alt="Interior Image">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="mt-1">
+                                                                            <a href="#" class="delete_button"
+                                                                               data-img-name="{{ $img }}"
+                                                                               data-type="interior"
+                                                                               data-purchase-id={{$id}}
+                                                                               data-confirm="Delete confirmation ?">
+                                                                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                                             </a>
                                                                         </div>
                                                                     </div>
@@ -177,6 +213,15 @@
                                                                                 <img src="{{ asset('storage/purchased/' . $img) }}" class="img-fluid" alt="tyre Image">
                                                                             </a>
                                                                         </div>
+                                                                        <div class="mt-1">
+                                                                            <a href="#" class="delete_button"
+                                                                               data-img-name="{{ $img }}"
+                                                                               data-type="tyre"
+                                                                               data-purchase-id={{$id}}
+                                                                               data-confirm="Delete confirmation ?">
+                                                                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                            </a>
+                                                                        </div>
                                                                     </div>
                                                                 @endforeach
                                                             </div>
@@ -201,3 +246,37 @@
     </div>
 
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.delete_button').on('click', function(e) {
+            e.preventDefault();
+
+            var imgName = $(this).data('img-name');
+            var type = $(this).data('type');
+            var purchase_id = $(this).data('purchase-id');
+            var confirmMessage = $(this).data('confirm');
+
+            if (confirm(confirmMessage)) {
+                $.ajax({
+                    url: '{{ route('admin.purchase.remove.images') }}',
+                    type: 'POST',
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'img_name': imgName,
+                        'type': type,
+                        'purchase_id': purchase_id,
+                    },
+                    success: function(response) {
+                        console.log('Image deleted successfully');
+                        $(e.target).closest('.col-sm-3').remove();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error deleting image:', error);
+                    }
+                });
+            }
+        });
+    });
+</script>

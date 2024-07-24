@@ -60,10 +60,11 @@
 
                                         <tbody>
                                             @foreach ($purchased as $value => $item)
+                                            <?php $model = $item->carModel ? ucfirst($item->carModel->model) : '' ?>
                                             <tr>
                                                 <td>{{++$value}}</td>
                                                 <td>{{$item->brand ? ucfirst($item->brand->type) : '---'}}</td>
-                                                <td>{{$item->carModel ? ucfirst($item->carModel->model) : '---'}}</td>
+                                                <td>{{$model}}</td>
                                                 <td>
                                                     @foreach (\App\Models\Purchase::getFuelType() as $key => $value)
                                                     @if($key == $item->fuel_type)
@@ -124,7 +125,7 @@
                                                     @if($item->pending_image_status == 0)
                                                     <a class="btn btn-sm btn-danger" href="{{route('admin.purchase.purchase.ready-sale-add-image', $item->id)}}">Pending Pics</a>
                                                     @else
-                                                    <button class="btn btn-sm btn-success">IN STOCK</button>
+                                                    <a class="btn btn-sm btn-success" href="{{route('admin.purchase.purchase.ready-sale-add-image', $item->id)}}">IN STOCK</a>
                                                     @endif
                                                 </td>
 

@@ -961,7 +961,8 @@ class PurchaseController extends Controller
     }
 
     public function readySaleImages($id){
-        $image = PurchasedImage::where('purchase_id', $id)->first();
+    $image = PurchasedImage::where('purchase_id', $id)->first();
+
         return view('admin.sale-purchase.ready-for-sale.images', compact('id','image'));
     }
 
@@ -1041,46 +1042,46 @@ class PurchaseController extends Controller
     }
 
     public function readySaleImagesStore(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'front.*' => 'nullable',
-        'side.*' => 'nullable',
-        'back.*' => 'nullable',
-        'interior.*' => 'nullable',
-        'tyre.*' => 'nullable',
-    ]);
+    {
+        $validator = Validator::make($request->all(), [
+            'front.*' => 'nullable',
+            'side.*' => 'nullable',
+            'back.*' => 'nullable',
+            'interior.*' => 'nullable',
+            'tyre.*' => 'nullable',
+        ]);
 
-    if ($validator->fails()) {
-        \toastr()->error($validator->errors()->first());
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
-
-    $updateData = [];
-
-    $handleFileUpload = function ($fieldName) use ($request, &$updateData) {
-        if ($request->hasFile($fieldName)) {
-            $images = [];
-            foreach ($request->file($fieldName) as $file) {
-                $path = $file->store('public/purchased');
-                $images[] = basename($path);
-            }
-            $updateData[$fieldName] = implode(',', $images);
+        if ($validator->fails()) {
+            \toastr()->error($validator->errors()->first());
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-    };
 
-    $imageTypes = ['front', 'side', 'back', 'interior', 'tyre'];
-    foreach ($imageTypes as $type) {
-        $handleFileUpload($type);
+        $updateData = [];
+
+        $handleFileUpload = function ($fieldName) use ($request, &$updateData) {
+            if ($request->hasFile($fieldName)) {
+                $images = [];
+                foreach ($request->file($fieldName) as $file) {
+                    $path = $file->store('public/purchased');
+                    $images[] = basename($path);
+                }
+                $updateData[$fieldName] = implode(',', $images);
+            }
+        };
+
+        $imageTypes = ['front', 'side', 'back', 'interior', 'tyre'];
+        foreach ($imageTypes as $type) {
+            $handleFileUpload($type);
+        }
+
+        PurchasedImage::updateOrCreate(
+            ['purchase_id' => $request->purchase_id],
+            $updateData
+        );
+
+        \toastr()->success(ucfirst('Images successfully saved'));
+        return redirect()->back();
     }
-
-    PurchasedImage::updateOrCreate(
-        ['purchase_id' => $request->purchase_id],
-        $updateData
-    );
-
-    \toastr()->success(ucfirst('Images successfully saved'));
-    return redirect()->back();
-}
 
 
     public function showReadyForSale(Request $request, $id)
@@ -1114,4 +1115,40 @@ class PurchaseController extends Controller
 
         return view('admin.sale-purchase.ready-for-sale.view', compact('purchase', 'executives', 'parties', 'colors', 'brandTypes', 'model', 'fuelType', 'shapeType', 'serviceBooklet', 'enquiryType', 'willingType', 'rcType', 'hypothecationType', 'status', 'type', 'adminCheck', 'company'));
     }
+
+    public function removeImage(Request $request)
+    {
+        $updatedArray = array();
+        $type = $request->type;
+        $images = PurchasedImage::where('purchase_id', $request->purchase_id)->first();
+
+        if (!$images) {
+            return response()->json(['error' => 'Images not found'], 404);
+        }
+
+        $imageArray = explode(',', $images->$type);
+
+        foreach ($imageArray as $item) {
+            if ($item != $request->img_name) {
+                $updatedArray[] = $item;
+            }
+        }
+
+
+        $imagePath = 'public/purchased/' . $request->img_name;
+        if (Storage::exists($imagePath)) {
+            Storage::delete($imagePath);
+        }
+
+        $images->update([$type => implode(',',$updatedArray)]);
+
+        return response()->json(['message' => 'Image removed successfully'], 200);
+    }
+
+
+
+
+
+
+
 }
