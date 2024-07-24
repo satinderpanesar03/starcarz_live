@@ -269,35 +269,35 @@ class Purchase extends Model
     }
 
     public function getImagesAttribute()
-{
-    $imageArray = [];
+    {
+        $imageArray = [];
 
-    foreach ($this->purchased_images as $image) {
-        $types = ['front', 'back', 'side', 'interior', 'tyre'];
+        foreach ($this->purchased_images as $image) {
+            $types = ['front', 'back', 'side', 'interior', 'tyre'];
 
-        $hasImages = false;
+            $hasImages = false;
 
-        foreach ($types as $type) {
-            if (!empty($image->$type)) {
-                $urls = explode(',', $image->$type);
-                foreach ($urls as $url) {
-                    $imageArray[] = asset('storage/purchased/' . $url);
+            foreach ($types as $type) {
+                if (!empty($image->$type)) {
+                    $urls = explode(',', $image->$type);
+                    foreach ($urls as $url) {
+                        $imageArray[] = asset('storage/purchased/' . $url);
+                    }
+                    $hasImages = true;
                 }
-                $hasImages = true;
+            }
+
+            if ($hasImages) {
+                break;
             }
         }
 
-        if ($hasImages) {
-            break;
+        if (empty($imageArray)) {
+            return null;
         }
-    }
 
-    if (empty($imageArray)) {
-        return null;
+        return $imageArray;
     }
-
-    return $imageArray;
-}
 
 
 

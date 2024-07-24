@@ -121,7 +121,7 @@ class CarInsurance extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $fileName = pathinfo($originalFileName, PATHINFO_FILENAME);
                 $uniqueFileName = $fileName . '_' . time() . '.' . $extension;
-                $file->storeAs('documents', $uniqueFileName);
+                $file->storeAs('public/documents', $uniqueFileName);
                 $input['insurance_documents'] = $uniqueFileName;
             }
 

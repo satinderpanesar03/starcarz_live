@@ -255,7 +255,7 @@
                                                         <input class="form-control" type="file" name="insurance_documents" id="insurance_documents">
                                                         @if(isset($insurance->insurance_documents))
                                                         <div class="mt-1">
-                                                            <span><a href="{{ asset('storage/' . $insurance->insurance_documents) }}" target="_blank" class="btn btn-sm">View</a></span>
+                                                            <span><a href="{{ asset('storage/documents/' . $insurance->insurance_documents) }}" target="_blank" class="btn btn-sm">View</a></span>
                                                             <span><a href="{{route('admin.remove.uploaded.image',['car_insurances',$insurance->id,'insurance_documents'])}}" class="btn btn-sm danger">Remove</a></span>
                                                         </div>
                                                         @endif
