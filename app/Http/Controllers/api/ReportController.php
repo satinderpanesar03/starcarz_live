@@ -12,7 +12,7 @@ class ReportController extends Controller
         {
             try {
                 $purchased = Purchase::with([
-                    'carModel:id,mst_brand_type_id,model',
+                    'carModel:id,mst_brand_type_id,model,luxury',
                     'color:id,color',
                     'brand:id,type'
                 ])

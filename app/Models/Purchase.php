@@ -18,7 +18,8 @@ class Purchase extends Model
         'make',
         'model',
         'color_name',
-        'images'
+        'images',
+        'is_luxury'
     ];
 
 
@@ -303,6 +304,10 @@ class Purchase extends Model
         return $this->belongsTo(MstInsurance::class, 'icompany_id', 'id');
     }
 
+
+    public function getIsLuxuryAttribute(){
+        return (isset($this->carModel) && $this->carModel->luxury != null) ? 1 : null;
+    }
 
 
 }

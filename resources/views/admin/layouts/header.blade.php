@@ -266,3 +266,19 @@ $company = DB::table('companies')->first();
 
 
 </html>
+
+<script>
+$(document).ready(function() {
+    $('#sidebarToggle').click(function(e) {
+        e.preventDefault();
+        console.log('clicked');
+        $('.app-sidebar').toggleClass('expanded');
+    });
+
+    $('#sidebarClose').click(function(e) {
+        e.preventDefault();
+        console.log('un-clicked');
+        $('.app-sidebar').removeClass('expanded');
+    });
+});
+</script>
