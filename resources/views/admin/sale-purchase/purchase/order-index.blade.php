@@ -15,14 +15,11 @@
                                     <div class="card-header">
                                         <div class="row">
                                             <div class="col-12 col-sm-7">
-                                                <h5 class="pt-2 pb-2">Manage Orders List</h5>
+                                                <h5 class="pt-2 pb-2">Manage Purchase Register List</h5>
                                             </div>
                                             <div class="col-12 col-sm-5 d-flex justify-content-end align-items-center">
                                                 <button class="btn btn-sm btn-danger px-3 py-1 mr-2" id="listing-filter-toggle">
                                                     <i class="fa fa-filter"></i> Filter </button>
-                                                <a href="{{route('admin.purchase.purchase.create-order')}}" class="btn btn-sm btn-primary px-3 py-1">
-                                                    <i class="fa fa-plus"></i> Add Order </a>
-
                                             </div>
                                         </div>
                                     </div>
@@ -81,8 +78,8 @@
                                             <thead>
                                                 <tr>
                                                     <th width="5%">ID</th>
-                                                    <th>Party name</th>
-                                                    <th>Vehicle Number</th>
+                                                    <th>Party</th>
+                                                    <th>Vehicle No.</th>
                                                     <th>Price</th>
                                                     <th>Contact</th>
                                                     <th>Status</th>
@@ -146,14 +143,6 @@
                                                             <a href="{{ route('admin.purchase.purchase.showOrder', $purchase->id) }}" class="btn btn-success btn-sm" title="Edit">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
-                                                            <a href="{{ route('admin.purchase.purchase.show-document', $purchase->id) }}" class="btn btn-secondary btn-sm" title="Pending Documents">
-                                                                <i class="fa fa-file"></i>
-                                                            </a>
-                                                            <form id="partyForm" action="{{ route('admin.purchase.purchase.status-order', ['id' => $purchase->id, 'state_id' => $purchase->state_id]) }}" method="GET" style="display: inline;">
-                                                                <a onclick="document.getElementById('partyForm').submit(); return false;">
-                                                                    <input type="checkbox" @if($purchase->state_id == 1) checked @endif data-toggle="toggle" data-size="xs" onchange="this.closest('form').submit()">
-                                                                </a>
-                                                            </form>
                                                         </span>
                                                     </td>
                                                 </tr>
