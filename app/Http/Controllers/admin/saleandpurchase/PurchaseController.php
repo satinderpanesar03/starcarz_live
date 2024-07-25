@@ -961,7 +961,7 @@ class PurchaseController extends Controller
     }
 
     public function readySaleImages($id){
-    $image = PurchasedImage::where('purchase_id', $id)->first();
+        $image = PurchasedImage::where('purchase_id', $id)->first();
 
         return view('admin.sale-purchase.ready-for-sale.images', compact('id','image'));
     }

@@ -47,7 +47,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            @if (isset($image['front']))
+                                                            @if (isset($image['front']) && $image['front'] != "")
                                                             <div class="row">
                                                                 @foreach (explode(',', $image['front']) as $img)
                                                                     <div class="col-sm-3 mb-3">
@@ -87,7 +87,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            @if (isset($image['side']))
+                                                            @if (isset($image['side']) && $image['side'] != "")
                                                             <div class="row">
                                                                 @foreach (explode(',', $image['side']) as $img)
                                                                     <div class="col-sm-3 mb-3">
@@ -126,7 +126,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            @if (isset($image['back']))
+                                                            @if (isset($image['back']) && $image['back'] != "")
                                                             <div class="row">
                                                                 @foreach (explode(',', $image['back']) as $img)
                                                                     <div class="col-sm-3 mb-3">
@@ -165,7 +165,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            @if (isset($image['interior']))
+                                                            @if (isset($image['interior']) && $image['interior'] != "")
                                                             <div class="row">
                                                                 @foreach (explode(',', $image['interior']) as $img)
                                                                     <div class="col-sm-3 mb-3">
@@ -204,7 +204,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            @if (isset($image['tyre']))
+                                                            @if (isset($image['tyre']) && $image['tyre'] != "")
                                                             <div class="row">
                                                                 @foreach (explode(',', $image['tyre']) as $img)
                                                                     <div class="col-sm-3 mb-3">
