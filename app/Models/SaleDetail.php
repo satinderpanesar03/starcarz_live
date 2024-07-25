@@ -4,12 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 
 class SaleDetail extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected $appends = [
+        'vehicle_asked_name'
+    ];
 
     public static function getStatus($selectedStatusId = null)
     {
@@ -58,4 +64,24 @@ class SaleDetail extends Model
     {
         return $this->belongsTo(MstModel::class, 'vehicle_id');
     }
+
+    public function executive(){
+        return $this->belongsTo(MstExecutive::class, 'mst_executive_id', 'id')->select('id','name');
+    }
+
+    public function getVehicleAskedNameAttribute(){
+        $models = array();
+
+        foreach(explode(',',$this->vehicle_id) as $vehicle){
+            $model = DB::table('mst_models')->select('id','model')->find($vehicle);
+            if($model != null):
+                array_push($models, $model->model);
+            endif;
+        }
+
+        return $models;
+
+    }
+
+
 }

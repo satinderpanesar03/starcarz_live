@@ -86,14 +86,12 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Party Name</th>
-                                                <th>Car Name</th>
+                                                <th>Party</th>
+                                                <th>Whatsapp</th>
+                                                <th>Executive</th>
+                                                <th>Vehicle asked</th>
                                                 <th>Enquiry Date</th>
                                                 <th>Status</th>
-                                                <!-- <th>Executive</th>
-                                                <th>Model</th>
-                                                <th>Budget</th>
-                                                <th>Remarks</th> -->
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -102,7 +100,24 @@
                                             <tr>
                                                 <td>{{$value + $sales->firstItem()}}</td>
                                                 <td>{{ ($sale->firm_name) ? $sale->firm_name : '' }}</td>
-                                                <td>{{ ($sale->modelName) ? $sale->modelName->model : ''}}</td>
+                                                <td>
+                                                    @if($sale->party)
+                                                    @foreach ($sale->party->partyContact as $contact)
+                                                    @if ($contact->type == 1)
+                                                    {{ $contact->number }}
+                                                    @break
+                                                    @endif
+                                                    @endforeach
+                                                    @endif
+                                                </td>
+                                                <td>{{ $sale->executive ? $sale->executive->name : '' }}</td>
+                                                <td>
+                                                    @if (isset($sale->vehicle_asked_name))
+                                                        @foreach ($sale->vehicle_asked_name as $model)
+                                                            <span class="btn btn-sm btn-light">{{ $model }}</span>
+                                                        @endforeach
+                                                    @endif
+                                                </td>
                                                 <td>{{date('d M,Y', strtotime($sale->created_at))}}</td>
                                                 <td>
                                                     @php
@@ -134,11 +149,6 @@
                                                         <a href="{{route('admin.sale.sale.show', $sale->id)}}" class="btn btn-success btn-sm" title="Edit">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <form id="partyForm" action="{{ route('admin.sale.sale.status', ['id' => $sale->id, 'state_id' => $sale->state_id]) }}" method="GET" style="display: inline;">
-                                                            <a onclick="document.getElementById('partyForm').submit(); return false;">
-                                                                <input type="checkbox" @if($sale->state_id == 1) checked @endif data-toggle="toggle" data-size="xs" onchange="this.closest('form').submit()">
-                                                            </a>
-                                                        </form>
                                                     </span>
                                                 </td>
                                             </tr>
