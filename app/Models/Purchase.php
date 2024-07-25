@@ -19,7 +19,8 @@ class Purchase extends Model
         'model',
         'color_name',
         'images',
-        'is_luxury'
+        'is_luxury',
+        'video_link'
     ];
 
 
@@ -309,5 +310,9 @@ class Purchase extends Model
         return (isset($this->carModel) && $this->carModel->luxury != null) ? 1 : null;
     }
 
+
+    public function getVideoLinkAttribute(){
+        return $this->purchased_images[0]->video_url ?? '';
+    }
 
 }

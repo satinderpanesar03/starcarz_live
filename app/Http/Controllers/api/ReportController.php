@@ -14,7 +14,8 @@ class ReportController extends Controller
                 $purchased = Purchase::with([
                     'carModel:id,mst_brand_type_id,model,luxury',
                     'color:id,color',
-                    'brand:id,type'
+                    'brand:id,type',
+                    'purchased_images'
                 ])
                 ->Selected()
                 ->withSum('refurbishment', 'total_amount')

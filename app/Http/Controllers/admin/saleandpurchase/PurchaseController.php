@@ -1052,6 +1052,7 @@ class PurchaseController extends Controller
             'back.*' => 'nullable',
             'interior.*' => 'nullable',
             'tyre.*' => 'nullable',
+            'video_url' => 'nullable'
         ]);
 
         if ($validator->fails()) {
@@ -1060,6 +1061,7 @@ class PurchaseController extends Controller
         }
 
         $updateData = [];
+        $updateData['video_url'] = $request->video_url;
 
         $handleFileUpload = function ($fieldName) use ($request, &$updateData) {
             if ($request->hasFile($fieldName)) {

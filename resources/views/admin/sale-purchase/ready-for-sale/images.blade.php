@@ -47,28 +47,31 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            @if (isset($image['front']) && $image['front'] != "")
-                                                            <div class="row">
-                                                                @foreach (explode(',', $image['front']) as $img)
-                                                                    <div class="col-sm-3 mb-3">
-                                                                        <div class="image-item position-relative">
-                                                                            <a href="#" class="image-link">
-                                                                                <img src="{{ asset('storage/purchased/' . $img) }}" class="img-fluid" alt="Front Image">
-                                                                            </a>
+                                                            @if (isset($image['front']) && $image['front'] != '')
+                                                                <div class="row">
+                                                                    @foreach (explode(',', $image['front']) as $img)
+                                                                        <div class="col-sm-3 mb-3">
+                                                                            <div class="image-item position-relative">
+                                                                                <a href="#" class="image-link">
+                                                                                    <img src="{{ asset('storage/purchased/' . $img) }}"
+                                                                                        class="img-fluid" alt="Front Image">
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="mt-1">
+                                                                                <a href="#" class="delete_button"
+                                                                                    data-img-name="{{ $img }}"
+                                                                                    data-type="front"
+                                                                                    data-purchase-id={{ $id }}
+                                                                                    data-confirm="Delete confirmation ?">
+                                                                                    <button class="btn btn-sm btn-danger"><i
+                                                                                            class="fa fa-trash"
+                                                                                            aria-hidden="true"></i></button>
+                                                                                </a>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="mt-1">
-                                                                            <a href="#" class="delete_button"
-                                                                               data-img-name="{{ $img }}"
-                                                                               data-type="front"
-                                                                               data-purchase-id={{$id}}
-                                                                               data-confirm="Delete confirmation ?">
-                                                                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                        @endif
+                                                                    @endforeach
+                                                                </div>
+                                                            @endif
                                                         </div>
 
                                                     </div>
@@ -87,28 +90,31 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            @if (isset($image['side']) && $image['side'] != "")
-                                                            <div class="row">
-                                                                @foreach (explode(',', $image['side']) as $img)
-                                                                    <div class="col-sm-3 mb-3">
-                                                                        <div class="image-item position-relative">
-                                                                            <a href="#" class="image-link">
-                                                                                <img src="{{ asset('storage/purchased/' . $img) }}" class="img-fluid" alt="Side Image">
-                                                                            </a>
+                                                            @if (isset($image['side']) && $image['side'] != '')
+                                                                <div class="row">
+                                                                    @foreach (explode(',', $image['side']) as $img)
+                                                                        <div class="col-sm-3 mb-3">
+                                                                            <div class="image-item position-relative">
+                                                                                <a href="#" class="image-link">
+                                                                                    <img src="{{ asset('storage/purchased/' . $img) }}"
+                                                                                        class="img-fluid" alt="Side Image">
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="mt-1">
+                                                                                <a href="#" class="delete_button"
+                                                                                    data-img-name="{{ $img }}"
+                                                                                    data-type="side"
+                                                                                    data-purchase-id={{ $id }}
+                                                                                    data-confirm="Delete confirmation ?">
+                                                                                    <button class="btn btn-sm btn-danger"><i
+                                                                                            class="fa fa-trash"
+                                                                                            aria-hidden="true"></i></button>
+                                                                                </a>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="mt-1">
-                                                                            <a href="#" class="delete_button"
-                                                                               data-img-name="{{ $img }}"
-                                                                               data-type="side"
-                                                                               data-purchase-id={{$id}}
-                                                                               data-confirm="Delete confirmation ?">
-                                                                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                        @endif
+                                                                    @endforeach
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <hr>
@@ -126,28 +132,33 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            @if (isset($image['back']) && $image['back'] != "")
-                                                            <div class="row">
-                                                                @foreach (explode(',', $image['back']) as $img)
-                                                                    <div class="col-sm-3 mb-3">
-                                                                        <div class="image-item position-relative">
-                                                                            <a href="#" class="image-link">
-                                                                                <img src="{{ asset('storage/purchased/' . $img) }}" class="img-fluid" alt="Back Image">
-                                                                            </a>
+                                                            @if (isset($image['back']) && $image['back'] != '')
+                                                                <div class="row">
+                                                                    @foreach (explode(',', $image['back']) as $img)
+                                                                        <div class="col-sm-3 mb-3">
+                                                                            <div class="image-item position-relative">
+                                                                                <a href="#" class="image-link">
+                                                                                    <img src="{{ asset('storage/purchased/' . $img) }}"
+                                                                                        class="img-fluid"
+                                                                                        alt="Back Image">
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="mt-1">
+                                                                                <a href="#" class="delete_button"
+                                                                                    data-img-name="{{ $img }}"
+                                                                                    data-type="back"
+                                                                                    data-purchase-id={{ $id }}
+                                                                                    data-confirm="Delete confirmation ?">
+                                                                                    <button
+                                                                                        class="btn btn-sm btn-danger"><i
+                                                                                            class="fa fa-trash"
+                                                                                            aria-hidden="true"></i></button>
+                                                                                </a>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="mt-1">
-                                                                            <a href="#" class="delete_button"
-                                                                               data-img-name="{{ $img }}"
-                                                                               data-type="back"
-                                                                               data-purchase-id={{$id}}
-                                                                               data-confirm="Delete confirmation ?">
-                                                                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                        @endif
+                                                                    @endforeach
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <hr>
@@ -165,28 +176,33 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            @if (isset($image['interior']) && $image['interior'] != "")
-                                                            <div class="row">
-                                                                @foreach (explode(',', $image['interior']) as $img)
-                                                                    <div class="col-sm-3 mb-3">
-                                                                        <div class="image-item position-relative">
-                                                                            <a href="#" class="image-link">
-                                                                                <img src="{{ asset('storage/purchased/' . $img) }}" class="img-fluid" alt="Interior Image">
-                                                                            </a>
+                                                            @if (isset($image['interior']) && $image['interior'] != '')
+                                                                <div class="row">
+                                                                    @foreach (explode(',', $image['interior']) as $img)
+                                                                        <div class="col-sm-3 mb-3">
+                                                                            <div class="image-item position-relative">
+                                                                                <a href="#" class="image-link">
+                                                                                    <img src="{{ asset('storage/purchased/' . $img) }}"
+                                                                                        class="img-fluid"
+                                                                                        alt="Interior Image">
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="mt-1">
+                                                                                <a href="#" class="delete_button"
+                                                                                    data-img-name="{{ $img }}"
+                                                                                    data-type="interior"
+                                                                                    data-purchase-id={{ $id }}
+                                                                                    data-confirm="Delete confirmation ?">
+                                                                                    <button
+                                                                                        class="btn btn-sm btn-danger"><i
+                                                                                            class="fa fa-trash"
+                                                                                            aria-hidden="true"></i></button>
+                                                                                </a>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="mt-1">
-                                                                            <a href="#" class="delete_button"
-                                                                               data-img-name="{{ $img }}"
-                                                                               data-type="interior"
-                                                                               data-purchase-id={{$id}}
-                                                                               data-confirm="Delete confirmation ?">
-                                                                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            </div>
-                                                        @endif
+                                                                    @endforeach
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                     <hr>
@@ -204,28 +220,49 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-8">
-                                                            @if (isset($image['tyre']) && $image['tyre'] != "")
-                                                            <div class="row">
-                                                                @foreach (explode(',', $image['tyre']) as $img)
-                                                                    <div class="col-sm-3 mb-3">
-                                                                        <div class="image-item position-relative">
-                                                                            <a href="#" class="image-link">
-                                                                                <img src="{{ asset('storage/purchased/' . $img) }}" class="img-fluid" alt="tyre Image">
-                                                                            </a>
+                                                            @if (isset($image['tyre']) && $image['tyre'] != '')
+                                                                <div class="row">
+                                                                    @foreach (explode(',', $image['tyre']) as $img)
+                                                                        <div class="col-sm-3 mb-3">
+                                                                            <div class="image-item position-relative">
+                                                                                <a href="#" class="image-link">
+                                                                                    <img src="{{ asset('storage/purchased/' . $img) }}"
+                                                                                        class="img-fluid"
+                                                                                        alt="tyre Image">
+                                                                                </a>
+                                                                            </div>
+                                                                            <div class="mt-1">
+                                                                                <a href="#" class="delete_button"
+                                                                                    data-img-name="{{ $img }}"
+                                                                                    data-type="tyre"
+                                                                                    data-purchase-id={{ $id }}
+                                                                                    data-confirm="Delete confirmation ?">
+                                                                                    <button
+                                                                                        class="btn btn-sm btn-danger"><i
+                                                                                            class="fa fa-trash"
+                                                                                            aria-hidden="true"></i></button>
+                                                                                </a>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="mt-1">
-                                                                            <a href="#" class="delete_button"
-                                                                               data-img-name="{{ $img }}"
-                                                                               data-type="tyre"
-                                                                               data-purchase-id={{$id}}
-                                                                               data-confirm="Delete confirmation ?">
-                                                                                <button class="btn btn-sm btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
+                                                                    @endforeach
+                                                                </div>
+                                                            @endif
+
+                                                        </div>
+
+                                                    </div>
+<hr>
+                                                    <div class="form-group row mb-3">
+                                                        <div class="col-sm-2">
+                                                            <label for="video url"
+                                                                class="col-sm-5 col-form-label font-weight-bold">Video
+                                                                Url:</label>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-check">
+                                                                <input class="form-control" type="text" id="video_url"
+                                                                    name="video_url" value="{{ $image->video_url ?? '' }}">
                                                             </div>
-                                                        @endif
                                                         </div>
                                                     </div>
 
