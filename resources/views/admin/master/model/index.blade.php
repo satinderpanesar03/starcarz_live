@@ -94,9 +94,6 @@
                                                         <a href="{{ route('admin.master.model.show', $model->id) }}" class="btn btn-success btn-sm" title="Edit">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <a href="#">
-                                                            <input type="checkbox" checked data-toggle="toggle" data-size="xs">
-                                                        </a>
                                                     </span>
                                                 </td>
                                             </tr>
