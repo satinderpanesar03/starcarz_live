@@ -100,10 +100,10 @@
                                                     @endif
                                                 </td>
                                                 <td>{{ ($sale->party) ? $sale->party->party_name : '' }}</td>
-                                                <td>{{ ($sale->purchase) ? $sale->purchase->reg_number : ''}}</td>
-                                                <td></td>
+                                                <td>{{ ($sale->purchase) ? strtoupper($sale->purchase->reg_number) : ''}}</td>
+                                                <td>{{ ($sale->executive) ? $sale->executive->name : '' }}</td>
                                                 <td>{{ ($sale->price_p1) ? $sale->price_p1 : '' }}</td>
-                                                <td></td>
+                                                <td>{{ date('d M Y',strtotime($sale->date_of_sale)) }}</td>
 
                                                 <td class="text-truncate">
                                                     <span style="white-space:nowrap;" class="">

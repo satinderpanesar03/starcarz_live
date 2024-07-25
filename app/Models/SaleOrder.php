@@ -22,4 +22,10 @@ class SaleOrder extends Model
             ->select('id', 'party_name')
             ->with('partyContact:id,mst_party_id,number,type');
     }
+
+    public function executive(){
+        return $this->belongsTo(MstExecutive::class, 'mst_executive_id', 'id')->select('id','name');
+    }
+
+
 }

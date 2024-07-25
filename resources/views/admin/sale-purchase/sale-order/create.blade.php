@@ -72,6 +72,12 @@
                                                         <label for="city">City:</label>
                                                         <input type="text" id="city" name="city" class="form-control" readonly>
                                                     </div>
+                                                    <div class="col-md-4 mt-2">
+                                                        <label for="residence_city">Executive Name</label>
+                                                        <select name="executive_id" id="mst_executive_id">
+                                                            <option value="{{$executive->id ?? ''}}" selected>{{$executive->name ?? ''}}</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">
                                                 <h5>Vehicle Details</h5>
@@ -126,8 +132,8 @@
                                                         <input type="text" id="expectation" name="expectation" class="form-control" readonly>
                                                     </div>-->
                                                     <div class="col-md-3 mt-3">
-                                                        <label for="date_of_purchase">Date Of Sale:</label>
-                                                        <input type="date" id="date_of_purchase" name="date_of_purchase" class="form-control" required>
+                                                        <label for="date_of_sale">Date Of Sale:</label>
+                                                        <input type="date" id="date_of_sale" name="date_of_sale" class="form-control" required>
                                                     </div>
                                                 </div>
 
@@ -158,7 +164,7 @@
                                                     </div>
                                                     <div class="col-md-3 mt-3">
                                                         <label for="kilometer">Kilometer:</label>
-                                                        <input type="text" id="kilometer" name="kilometer" class="form-control" value="@if(isset($saleOrder->id)){{$saleOrder->kilometer}}@else{{old('kilometer')}}@endif">
+                                                        <input type="text" id="kilometer" name="kilometer" class="form-control" value="@if(isset($saleOrder->id)){{$saleOrder->kilometer}}@else{{old('kilometer')}}@endif" required>
                                                     </div>
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">
@@ -312,6 +318,7 @@
                             <!-- <label for="residence_city">Residence City</label> -->
                             <input type="text" placeholder="Residence City" name="residence_city" class="form-control" required>
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-6 mt-2">
@@ -369,6 +376,7 @@
                     $('#address').val(response.office_address);
                     $('#city').val(response.residence_city);
                     $('#contact_number').val(response.contact_number);
+                    $('#pancard_number').val(response.pan_number);
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
@@ -424,7 +432,7 @@
                     $('#engine_number').val(response.engine_number);
                     $('#chasis_number').val(response.chasis_number);
                     $('#service_booklet').val(response.service_booklet);
-                    $('#date_of_purchase').val(response.date_of_purchase);
+                    // $('#date_of_purchase').val(response.date_of_purchase);
                     $('#purchase_id').val(response.purchase_id);
                     var regDate = new Date(response.reg_date);
                     var insuranceDueDate = new Date(response.insurance_due_date);

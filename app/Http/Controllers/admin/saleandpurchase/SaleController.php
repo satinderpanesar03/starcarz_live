@@ -163,7 +163,7 @@ class SaleController extends Controller
                 ]);
 
                 if ($sale->status == 5) {
-                    return redirect()->route('admin.sale.sale.order-create', ["s" => Crypt::encrypt($sale->id), "p" => Crypt::encrypt($sale->mst_party_id)]);
+                    return redirect()->route('admin.sale.sale.order-create', ["s" => Crypt::encrypt($sale->id), "p" => Crypt::encrypt($sale->mst_party_id), 'e' => Crypt::encrypt($sale->mst_executive_id)]);
                 }
             } else {
                 SaleDetail::create([

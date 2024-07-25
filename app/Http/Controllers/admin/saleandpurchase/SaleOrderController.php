@@ -25,7 +25,7 @@ class SaleOrderController extends Controller
         if ($request->has('clear_search')) {
             return redirect()->route('admin.sale.sale.order-index');
         }
-        $saleOrders = SaleOrder::with('purchase', 'party', 'purchase.executive')
+        $saleOrders = SaleOrder::with('purchase', 'party','executive')
             ->when($request->filled('party_id'), function ($query) use ($request) {
                 $query->whereHas('party', function ($subquery) use ($request) {
                     $subquery->where('party_name', 'like', '%' . $request->party_id . '%');
@@ -51,6 +51,8 @@ class SaleOrderController extends Controller
     public function create(Request $request)
     {
         $saleOrderId = Crypt::decrypt($request->query('s'));
+        $executiveId = Crypt::decrypt($request->query('e'));
+        $executive = DB::table('mst_executives')->select('id','name')->where('id', $executiveId)->first();
         $mstparty = MstParty::find(Crypt::decrypt($request->query('p')));
         $type = true;
         $rcType = Purchase::getRcType();
@@ -76,12 +78,11 @@ class SaleOrderController extends Controller
         $brands = MstBrandType::pluck('type', 'id');
         $policyNumbers = CarInsurance::pluck('policy_number', 'id');
 
-        return view('admin.sale-purchase.sale-order.create', compact('parties', 'vehicles', 'regNumbers', 'company', 'rcType', 'type', 'hypothecationType', 'models', 'brands', 'policyNumbers','mstparty','saleOrderId'));
+        return view('admin.sale-purchase.sale-order.create', compact('parties', 'vehicles', 'regNumbers', 'company', 'rcType', 'type', 'hypothecationType', 'models', 'brands', 'policyNumbers','mstparty','saleOrderId','executive'));
     }
 
     public function store(Request $request)
     {
-
         $input = $request->all();
         if ($request->hasFile('buyer_id_image')) {
             if ($request->id) {
@@ -118,6 +119,8 @@ class SaleOrderController extends Controller
                 $input['mst_purchase_id'] = empty($request->purchase_id) ? $saleOrder->purchase_id : $request->purchase_id;
                 $input['pancard_number'] = $request->pancard_number;
                 $input['aadharcard_number'] = $request->aadharcard_number;
+                $input['mst_executive_id'] = $request->executive_id;
+                $input['date_of_sale'] = $request->date_of_sale;
                 $saleOrder->update($input);
                 if ($rc_transfer === 'true') {
                     if ($request->rc_id) {
@@ -154,6 +157,8 @@ class SaleOrderController extends Controller
                 $input['mst_purchase_id'] = $request->purchase_id;
                 $input['pancard_number'] = $request->pancard_number;
                 $input['aadharcard_number'] = $request->aadharcard_number;
+                $input['mst_executive_id'] = $request->executive_id;
+                $input['date_of_sale'] = $request->date_of_sale;
                 $saleOrder = SaleOrder::create($input);
 
                 SaleDetail::find($request->sale_order_id)->update(['status' => 5]);
