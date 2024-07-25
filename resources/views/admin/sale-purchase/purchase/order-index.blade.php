@@ -139,9 +139,11 @@
                                                             <a href="{{ route('admin.purchase.purchase.view-order', $purchase->id) }}" class="btn btn-primary btn-sm" title="View">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
+                                                            @if(in_array(1, $roleNames))
                                                             <a href="{{ route('admin.purchase.purchase.showOrder', $purchase->id) }}" class="btn btn-success btn-sm" title="Edit">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
+                                                            @endif
                                                         </span>
                                                     </td>
                                                 </tr>

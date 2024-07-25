@@ -647,9 +647,10 @@ class PurchaseController extends Controller
             $party = MstParty::pluck('party_name', 'id');
             $status = Purchase::getStatus();
             $parties = MstParty::select('id','party_name')->get();
+            $roleNames = explode(',',Auth::guard('admin')->user()->roles);
         }
 
-        return view('admin.sale-purchase.purchase.order-index', compact('purchases', 'executives', 'models', 'party', 'status','parties'));
+        return view('admin.sale-purchase.purchase.order-index', compact('purchases', 'executives', 'models', 'party', 'status','parties','roleNames'));
     }
 
     function generateNextValue()
