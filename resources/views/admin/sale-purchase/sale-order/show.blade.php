@@ -98,12 +98,7 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <label for="vehicle_number">Vehicle Number</label>
-                                                        <select name="purchase_id" id="vehicle_number" class="form-control" disabled>
-                                                            <option value="">Choose...</option>
-                                                            @foreach ($vehicles as $vehicle)
-                                                            <option value="{{$vehicle->id}}" {{ isset($saleOrder->id) && $saleOrder->purchase_id == $vehicle->id ? ' selected' : '' }}>{{strtoupper($vehicle->reg_number)}}</option>
-                                                            @endforeach
-                                                        </select>
+                                                        <input type="text" name="purchase_id" id="vehicle_number" class="form-control" value="{{ isset($saleOrder->purchase)  ? $saleOrder->purchase->reg_number : '' }}" disabled>
                                                     </div>
 
                                                     <div class="col-md-3">
