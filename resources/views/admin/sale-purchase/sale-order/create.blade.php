@@ -133,7 +133,7 @@
                                                     </div>-->
                                                     <div class="col-md-3 mt-3">
                                                         <label for="date_of_sale">Date Of Sale:</label>
-                                                        <input type="date" id="date_of_sale" name="date_of_sale" class="form-control" required>
+                                                        <input type="date" id="date_of_sale" name="date_of_sale" class="form-control" value="{{$saleOrder->date_of_sale ?? ''}}" required>
                                                     </div>
                                                 </div>
 
