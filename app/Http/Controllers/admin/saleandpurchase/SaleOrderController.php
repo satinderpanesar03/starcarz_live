@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
 
 class SaleOrderController extends Controller
 {
@@ -43,9 +44,10 @@ class SaleOrderController extends Controller
             ->paginate($request->limit ? $request->limit : 10);
         $parties = MstParty::select('id', 'party_name')->get();
         $vehicles = Purchase::select('id', 'reg_number')->whereIn('status', [6, 7])->get();
+        $roleNames = explode(',',Auth::guard('admin')->user()->roles);
         // $status = SaleDetail::getStatus();
         // dd($saleOrders);
-        return view('admin.sale-purchase.sale-order.index', compact('saleOrders', 'parties', 'vehicles', 'type'));
+        return view('admin.sale-purchase.sale-order.index', compact('saleOrders', 'parties', 'vehicles', 'type','roleNames'));
     }
 
     public function create(Request $request)
@@ -147,8 +149,6 @@ class SaleOrderController extends Controller
                     }
                 }
 
-                SaleDetail::find($request->sale_order_id)->update(['status' => 5]);
-                Purchase::find($request->purchase_id)->update(['is_sold' => 1]);
             } else {
                 $input['reg_date'] = $request->reg_date;
                 $input['insurance_due_date'] = $request->insurance_due_date;

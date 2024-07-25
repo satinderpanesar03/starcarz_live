@@ -110,9 +110,11 @@
                                                         <a href="{{route('admin.sale.sale.order-view', $sale->id)}}" class="btn btn-primary btn-sm" title="View">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
-                                                        {{-- <a href="{{route('admin.sale.sale.order-show', $sale->id)}}" class="btn btn-success btn-sm" title="Edit">
+                                                        @if(in_array(1, $roleNames))
+                                                        <a href="{{route('admin.sale.sale.order-show', $sale->id)}}" class="btn btn-success btn-sm" title="Edit">
                                                             <i class="fa fa-edit"></i>
-                                                        </a> --}}
+                                                        </a>
+                                                        @endif
                                                     </span>
                                                 </td>
                                             </tr>

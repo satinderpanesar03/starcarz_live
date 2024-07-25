@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('mst_party_id')->nullable();
             $table->foreignId('purchase_id')->nullable();
-            $table->foreignId('icompany_id')->nullable();
+            $table->string('icompany_id')->nullable();
             $table->string('ncb_insurance')->nullable();
             $table->string('policy_number')->nullable();
-            $table->dateTime('reg_date')->nullable();
-            $table->dateTime('insurance_due_date')->nullable();
+            $table->string('reg_date')->nullable();
+            $table->string('insurance_due_date')->nullable();
             $table->string('status')->nullable()->default(1);
             $table->timestamps();
         });
