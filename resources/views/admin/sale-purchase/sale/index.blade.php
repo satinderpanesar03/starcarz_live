@@ -90,7 +90,9 @@
                                                 <th>Whatsapp</th>
                                                 <th>Executive</th>
                                                 <th>Vehicle asked</th>
-                                                <th>Enquiry Date</th>
+                                                <th>Budget</th>
+                                                <th>Enquiry</th>
+                                                <th>Type</th>
                                                 <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -99,8 +101,9 @@
                                             @forelse($sales as $value => $sale)
                                             <tr>
                                                 <td>{{$value + $sales->firstItem()}}</td>
-                                                <td>{{ ($sale->firm_name) ? $sale->firm_name : '' }}</td>
-                                                <td>
+                                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    {{ ($sale->firm_name) ? $sale->firm_name : '' }}</td>
+                                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">
                                                     @if($sale->party)
                                                     @foreach ($sale->party->partyContact as $contact)
                                                     @if ($contact->type == 1)
@@ -110,15 +113,17 @@
                                                     @endforeach
                                                     @endif
                                                 </td>
-                                                <td>{{ $sale->executive ? $sale->executive->name : '' }}</td>
-                                                <td>
+                                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">{{ $sale->executive ? $sale->executive->name : '' }}</td>
+                                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">
                                                     @if (isset($sale->vehicle_asked_name))
                                                         @foreach ($sale->vehicle_asked_name as $model)
                                                             <span class="btn btn-sm btn-light">{{ $model }}</span>
                                                         @endforeach
                                                     @endif
                                                 </td>
-                                                <td>{{date('d M,Y', strtotime($sale->created_at))}}</td>
+                                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">{{ $sale->budget_type_name }}</td>
+                                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">{{date('d M,Y', strtotime($sale->created_at))}}</td>
+                                                <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">{{ $sale->enquery_type_name }}</td>
                                                 <td>
                                                     @php
                                                     $statusClass = '';

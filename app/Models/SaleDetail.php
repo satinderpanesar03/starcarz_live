@@ -14,7 +14,9 @@ class SaleDetail extends Model
     protected $guarded = ['id'];
 
     protected $appends = [
-        'vehicle_asked_name'
+        'vehicle_asked_name',
+        'budget_type_name',
+        'enquery_type_name'
     ];
 
     public static function getStatus($selectedStatusId = null)
@@ -81,6 +83,16 @@ class SaleDetail extends Model
 
         return $models;
 
+    }
+
+    public function getBudgetTypeNameAttribute(){
+        $budgets =  \App\Models\Purchase::getBudget();
+        return $budgets[$this->budget_type] ?? '';
+    }
+
+    public function getEnqueryTypeNameAttribute(){
+        $enquiry = \App\Models\Sale::getEnquiryType();
+        return $enquiry[$this->enquiry_type] ?? '';
     }
 
 
