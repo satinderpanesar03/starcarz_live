@@ -71,8 +71,9 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">ID</th>
-                                                <th>Vehicle Brand</th>
-                                                <th>Vehicle Model</th>
+                                                <th>Brand</th>
+                                                <th>Model</th>
+                                                <th>Category</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -82,6 +83,9 @@
                                                 <td>{{++$value}}</td>
                                                 <td>{{ucfirst($model->brand->type)}}</td>
                                                 <td>{{ucfirst($model->model)}}</td>
+                                                <td>
+                                                    <span class="btn-sm btn-light">{{($model->luxury == 1) ? 'Luxury' : 'Non Luxury'}}</span>
+                                                </td>
                                                 <td class="text-truncate">
                                                     <span style="white-space:nowrap;" class="">
                                                         <a href="{{ route('admin.master.model.view', $model->id) }}" class="btn btn-primary btn-sm" title="View">
@@ -110,7 +114,8 @@
                 </div>
             </section>
         </div>
-
+    </div>
+</div>
         @endsection
         @push('scripts')
 
