@@ -299,6 +299,9 @@ class Purchase extends Model
         return $imageArray;
     }
 
+    public function insurance_company(){
+        return $this->belongsTo(MstInsurance::class, 'icompany_id', 'id');
+    }
 
 
 

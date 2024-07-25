@@ -693,7 +693,8 @@ class PurchaseController extends Controller
     {
         $vehicle = $request->input('vehicle');
 
-        $vehicles = Purchase::with('brand:id,type', 'color:id,color')->where('id', $vehicle)->first();
+        $vehicles = Purchase::with('brand:id,type', 'color:id,color','insurance_company:id,name')->where('id', $vehicle)->first();
+        // dd($vehicles);
         if ($vehicles) {
             return [
                 'purchase_id' => $vehicles->id,
@@ -712,11 +713,12 @@ class PurchaseController extends Controller
                 'chasis_number' => $vehicles->chasis_number,
                 'service_booklet' => $vehicles->service_booklet,
                 'date_of_purchase' => $vehicles->date_of_purchase,
-                'reg_date' => $vehicles->reg_date,
-                'insurance_due_date' => $vehicles->insurance_due_date,
+                'reg_date' => $vehicles->reg_date ? date('d-m-Y',strtotime($vehicles->reg_date)) : '',
+                'insurance_due_date' => $vehicles->insurance_due_date ? date('d-m-Y',strtotime($vehicles->insurance_due_date)) : '',
                 'icompany_id' => $vehicles->icompany_id,
                 'policy_number' => $vehicles->policy_number,
-                'vehicle_number' => $vehicles->reg_number
+                'vehicle_number' => $vehicles->reg_number,
+                'insurance_company' => (isset($vehicles->insurance_company) && $vehicles->insurance_company) ? $vehicles->insurance_company->name : ''
             ];
         } else {
             return response()->json([

@@ -186,33 +186,22 @@
                                                 <div class="row">
                                                     <div class="col-md-4 mt-2">
                                                         <label for="policy_number_id">Policy Number</label>
-                                                        <select name="policy_number" id="policy_number_id" class="form-control">
+                                                        {{-- <select name="policy_number" id="policy_number_id" class="form-control">
                                                             <option value="" selected disabled>Choose...</option>
-                                                            @foreach ($policyNumbers as $id => $policy)
-                                                            <option value="{{$id}}" {{ isset($saleOrder->id) && $saleOrder->policy_number == $id ? ' selected' : '' }}>{{$policy}}</option>
-                                                            @endforeach
-                                                        </select>
+                                                        </select> --}}
+                                                        <input type="text" value="" name="policy_number" id="policy_number_id" class="form-control" readonly>
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="insurance_company">Insurance Company:</label>
-                                                        <select name="icompany_id" id="insurance_company" class="form-control">
-                                                            <option value="">Choose...</option>
-                                                            @foreach($company as $value => $label)
-                                                            <option value="{{ $value }}" {{ isset($saleOrder->icompany_id) && $saleOrder->icompany_id == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                                            @endforeach
-                                                        </select>
+                                                        <input type="text" name="icompany_id" id="insurance_company" class="form-control" readonly>
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="insurance_done_date">Insurance Done Date:</label>
-                                                        <input type="date" id="insurance_done_date" name="insurance_done_date" class="form-control" value="{{ isset($saleOrder) ? \Carbon\Carbon::parse($saleOrder->insurance_done_date)->format('Y-m-d') : old('insurance_done_date') }}">
-                                                    </div>
-                                                    <div class="col-md-4 mt-2">
-                                                        <label for="insurance_from_date">Insurance From Date:</label>
-                                                        <input type="date" id="insurance_from_date" name="insurance_from_date" class="form-control" value="{{ isset($saleOrder) ? \Carbon\Carbon::parse($saleOrder->insurance_from_date)->format('Y-m-d') : old('insurance_from_date') }}">
+                                                        <input type="text" id="insurance_done_date" name="insurance_done_date" class="form-control" value="{{ isset($saleOrder) ? \Carbon\Carbon::parse($saleOrder->insurance_done_date)->format('Y-m-d') : old('insurance_done_date') }}" readonly>
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="insurance_to_date">Insurance To Date:</label>
-                                                        <input type="date" id="insurance_to_date" name="insurance_to_date" class="form-control" value="{{ isset($saleOrder) ? \Carbon\Carbon::parse($saleOrder->insurance_to_date)->format('Y-m-d') : old('insurance_to_date') }}">
+                                                        <input type="text" id="insurance_to_date" name="insurance_to_date" class="form-control" value="{{ isset($saleOrder) ? \Carbon\Carbon::parse($saleOrder->insurance_to_date)->format('Y-m-d') : old('insurance_to_date') }}" readonly>
                                                     </div>
                                                 </div>
                                                 <!-- <div class="row">
@@ -420,6 +409,7 @@
                     vehicle: vehicle
                 },
                 success: function(response) {
+                    console.log(response);
                     $('#brand').val(response.brand);
                     $('#color').val(response.color);
                     $('#manufacturing_year').val(response.manufacturing_year);
@@ -438,7 +428,10 @@
                     var insuranceDueDate = new Date(response.insurance_due_date);
                     $('#reg_date').val(regDate.toISOString().split('T')[0]);
                     $('#insurance_due_date').val(insuranceDueDate.toISOString().split('T')[0]);
-                    $('#policy_number').val(response.policy_number);
+                    $('#policy_number_id').val(response.policy_number);
+                    $('#insurance_done_date').val(response.reg_date);
+                    $('#insurance_to_date').val(response.insurance_due_date);
+                    $('#insurance_company').val(response.insurance_company);
                     var selectize = $('#icompany_id')[0].selectize;
                     selectize.addOption({
                         value: response.icompany_id,
@@ -511,38 +504,38 @@
         getCars();
     });
 
-    $(document).ready(function() {
-        $('#policy_number_id').change(function(e) {
-            $('#policy_number_id').val($(this).val());
-            var policy = this.value;
+    // $(document).ready(function() {
+    //     $('#policy_number_id').click(function(e) {
+    //         $('#policy_number_id').val($(this).val());
+    //         var policy = this.value;
 
-            $.ajax({
-                url: '{{ route("fetch-insurance-data")}}',
-                type: 'GET',
-                data: {
-                    policy: policy
-                },
-                success: function(response) {
-                    // $('#insurance_company').val(response.insurance_company);
-                    $('#insurance_done_date').val(response.insurance_done_date);
-                    $('#insurance_from_date').val(response.insurance_from_date);
-                    $('#insurance_to_date').val(response.insurance_to_date);
-                    var selectize = $('#insurance_company')[0].selectize;
-                    selectize.addOption({
-                        value: response.icompany_id,
-                        text: response.icompany_id
-                    });
-                    selectize.refreshOptions(false);
-                    selectize.setValue(response.insurance_company);
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
+    //         $.ajax({
+    //             url: '{{ route("fetch-insurance-data")}}',
+    //             type: 'GET',
+    //             data: {
+    //                 policy: policy
+    //             },
+    //             success: function(response) {
+    //                 // $('#insurance_company').val(response.insurance_company);
+    //                 $('#insurance_done_date').val(response.insurance_done_date);
+    //                 $('#insurance_from_date').val(response.insurance_from_date);
+    //                 $('#insurance_to_date').val(response.insurance_to_date);
+    //                 var selectize = $('#insurance_company')[0].selectize;
+    //                 selectize.addOption({
+    //                     value: response.icompany_id,
+    //                     text: response.icompany_id
+    //                 });
+    //                 selectize.refreshOptions(false);
+    //                 selectize.setValue(response.insurance_company);
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.error(error);
+    //             }
+    //         });
 
-        });
-        $('#policy_number_id').trigger('change');
-    });
+    //     });
+    //     $('#policy_number_id').trigger('change');
+    // });
     $(document).ready(function() {
         $('.modal_submit').click(function(e) {
             e.preventDefault();
