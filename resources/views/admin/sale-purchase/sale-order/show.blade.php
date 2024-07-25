@@ -1,7 +1,6 @@
 @extends('admin.layouts.header')
 @section('title', 'View Sale Order')
 @section('content')
-
 <head>
     <!-- Other head elements -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -69,6 +68,12 @@
                                                         <label for="city">City:</label>
                                                         <input type="text" id="city" name="city" class="form-control" readonly>
                                                     </div>
+                                                    <div class="col-md-4 mt-2">
+                                                        <label for="residence_city">Executive Name</label>
+                                                        <select name="executive_id" id="mst_executive_id" disabled>
+                                                            <option value="{{($saleOrder->executive) ? $saleOrder->executive->id : ''}}" selected>{{($saleOrder->executive) ? $saleOrder->executive->name : ''}}</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">
                                                 <h5>Vehicle Details</h5>
@@ -123,8 +128,8 @@
                                                         <input type="text" id="expectation" name="expectation" class="form-control" readonly>
                                                     </div>-->
                                                     <div class="col-md-3 mt-3">
-                                                        <label for="date_of_purchase">Date Of Purchase:</label>
-                                                        <input type="date" id="date_of_purchase" name="date_of_purchase" class="form-control" readonly>
+                                                        <label for="date_of_sale">Date Of Purchase:</label>
+                                                        <input type="text" id="date_of_sale" name="date_of_sale"  class="form-control" value="{{ date('d-m-Y',strtotime($saleOrder->date_of_sale)) }}" readonly>
                                                     </div>
                                                 </div>
 
@@ -247,11 +252,11 @@
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="pancard_number">Pancard Number:</label>
-                                                        <input type="text" id="pancard_number" name="pancard_number" class="form-control" value="@if(isset($saleOrder->id)){{$saleOrder->pancard_number}}@else{{old('pancard_number')}}@endif" required>
+                                                        <input type="text" id="pancard_number" name="pancard_number" class="form-control" value="@if(isset($saleOrder->id)){{$saleOrder->pancard_number}}@else{{old('pancard_number')}}@endif" readonly>
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="aadharcard_number">Aadharcard Number:</label>
-                                                        <input type="text" id="aadharcard_number" name="aadharcard_number" class="form-control" value="@if(isset($saleOrder->id)){{$saleOrder->aadharcard_number}}@else{{old('aadharcard_number')}}@endif" required>
+                                                        <input type="text" id="aadharcard_number" name="aadharcard_number" class="form-control" value="@if(isset($saleOrder->id)){{$saleOrder->aadharcard_number}}@else{{old('aadharcard_number')}}@endif" readonly>
                                                     </div>
                                                 </div>
                                                 <!-- <button type="submit" id="save_button" class="btn btn-primary mt-3">Save</button> -->

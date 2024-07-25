@@ -218,7 +218,7 @@ class SaleOrderController extends Controller
 
     public function view($id)
     {
-        $saleOrder = SaleOrder::with('purchase', 'party')->find($id);
+        $saleOrder = SaleOrder::with('purchase', 'party', 'executive')->find($id);
         $parties = MstParty::with('partyContact')->get()->map(function ($party) {
             $contactNumbers = $party->partyContact->pluck('number')->implode(', ');
             return [
