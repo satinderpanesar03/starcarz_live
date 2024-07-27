@@ -359,8 +359,16 @@ use Illuminate\Support\Facades\Crypt;
             const premium = parseFloat($('#premium').val()) || 0;
             const gst = parseFloat($('#gst').val()) || 0;
 
-            const total = premium + gst;
-            $('#gross_premium').val(total);
+            // const total = premium + gst;
+            // $('#gross_premium').val(total);
+
+            // const total = premium + gst;
+
+
+            const gstAmount = (premium * gst) / 100;
+            const totalAmount = premium + gstAmount;
+
+            $('#gross_premium').val(totalAmount);
         }
         $('#premium, #gst').on('input', function() {
             calculateTotal();
