@@ -84,9 +84,9 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">ID</th>
-                                                <th>Party Name</th>
+                                                <th>Party</th>
                                                 <th>Loan Amount</th>
-                                                <th>Executive Name</th>
+                                                <th>Executive</th>
                                                 <th>Policy Number</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -107,11 +107,6 @@
                                                         <a href="{{ route('admin.loan.aggregrator-loan.show', $carLoan->id) }}" class="btn btn-success btn-sm" title="Edit">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <form id="partyForm" action="{{ route('admin.loan.aggregrator-loan.status', ['id' => $carLoan->id, 'state_id' => $carLoan->state_id]) }}" method="GET" style="display: inline;">
-                                                            <a onclick="document.getElementById('partyForm').submit(); return false;">
-                                                                <input type="checkbox" @if($carLoan->state_id == 1) checked @endif data-toggle="toggle" data-size="xs" onchange="this.closest('form').submit()">
-                                                            </a>
-                                                        </form>
                                                     </span>
                                                 </td>
                                             </tr>

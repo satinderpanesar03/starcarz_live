@@ -126,6 +126,10 @@
                                                         <label for="idv">IDV:</label>
                                                         <input type="text" id="idv" name="idv" class="form-control" value="@if(isset($aggregratorLoan->id)){{$aggregratorLoan->idv}}@else{{old('idv')}}@endif">
                                                     </div>
+                                                    <div class="col-md-4 mt-2">
+                                                        <label for="idv">Disburhment date:</label>
+                                                        <input type="date" id="disburshment_date" name="disburshment_date" class="form-control" value="@if(isset($aggregratorLoan->disburshment_date)){{$aggregratorLoan->disburshment_date}}@else{{old('disburshment_date')}}@endif">
+                                                    </div>
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">
                                                 <button type="submit" class="btn btn-primary mt-3">Save</button>

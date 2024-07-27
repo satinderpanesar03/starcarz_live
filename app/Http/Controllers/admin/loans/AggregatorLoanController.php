@@ -54,6 +54,7 @@ class AggregatorLoanController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'policy_number' => [
                 'required',
@@ -80,7 +81,7 @@ class AggregatorLoanController extends Controller
                         $rcTransfer->update([
                             'agent_id' => $request->agent_id,
                             'transfer_date' => $request->transfer_date,
-                            'date' => $request->date,
+                            'date' => $request->disburshment_date,
                             'amount_paid' => $request->amount_paid,
                             'status' => $request->status,
                             'aggregator_loan_id' => $aggregratorLoan->id,
@@ -89,7 +90,7 @@ class AggregatorLoanController extends Controller
                         RcTransfer::create([
                             'agent_id' => $request->agent_id,
                             'transfer_date' => $request->transfer_date,
-                            'date' => $request->date,
+                            'date' => $request->disburshment_date,
                             'amount_paid' => $request->amount_paid,
                             'status' => $request->status,
                             'aggregator_loan_id' => $aggregratorLoan->id,
