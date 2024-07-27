@@ -533,7 +533,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         });
 
         Route::middleware(['Ensure:view_rc_transfer'])->group(function () {
-            Route::get('RcTransfer/index', [RcTransferController::class, 'index'])->name('rc-transfer.index');
+            Route::get('rc-transfer/index', [RcTransferController::class, 'index'])->name('rc-transfer.index');
         });
 
         Route::middleware(['Ensure:add_rc_transfer'])->group(function () {

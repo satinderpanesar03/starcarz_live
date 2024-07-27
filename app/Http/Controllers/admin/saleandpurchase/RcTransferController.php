@@ -46,15 +46,14 @@ class RcTransferController extends Controller
                         break;
                 }
             } else {
-                $carLoans = CarLoan::where('car_type', '1')->get();
+                $carLoans = CarLoan::with('party:id,party_name','carModel:id,mst_brand_type_id,model')->where('car_type', '1')->get();
                 $aggregateLoans = AggregatorLoan::get();
-                $saleOrders = SaleOrder::get();
+                $saleOrders = SaleOrder::with('party:id,party_name','carModel:id,mst_brand_type_id,model','purchase')->get();
             }
 
 
-            // Combine all data into a single collection
             $combinedData = collect();
-            // $combinedData = $combinedData->concat($rcTransfers);
+
             $combinedData = $combinedData->concat($carLoans);
             $combinedData = $combinedData->concat($aggregateLoans);
             $combinedData = $combinedData->concat($saleOrders);
@@ -72,7 +71,7 @@ class RcTransferController extends Controller
             if ($request->filled('fromDate') && $request->filled('toDate')) {
                 $fromDate = $request->input('fromDate');
                 $toDate = $request->input('toDate');
-                // Assuming created_at is the date field to filter by
+
                 $combinedData = $combinedData->filter(function ($item) use ($fromDate, $toDate) {
                     return $item->created_at >= $fromDate && $item->created_at <= $toDate;
                 });
@@ -104,7 +103,7 @@ class RcTransferController extends Controller
             $statusType = RcTransfer::getStatusType();
             $vehicles = Purchase::select('id', 'reg_number')->whereIn('status', [6, 7])->get();
         }
-
+// dd($combinedData);
         return view('admin.sale-purchase.rc-transfer.index', compact('combinedData', 'parties', 'vehicles', 'type', 'agents', 'statusType'));
     }
 

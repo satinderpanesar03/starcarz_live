@@ -27,5 +27,9 @@ class SaleOrder extends Model
         return $this->belongsTo(MstExecutive::class, 'mst_executive_id', 'id')->select('id','name');
     }
 
+    public function carModel()
+    {
+        return $this->belongsTo(MstModel::class, 'model_id');
+    }
 
 }
