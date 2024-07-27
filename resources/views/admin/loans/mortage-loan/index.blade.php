@@ -163,11 +163,6 @@
                                                         <a href="{{ route('admin.loan.mortage-loan.show', $mortageLoan->id) }}" class="btn btn-success btn-sm" title="Edit">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
-                                                        <form id="partyForm" action="{{ route('admin.loan.mortage-loan.status', ['id' => $mortageLoan->id, 'state_id' => $mortageLoan->state_id]) }}" method="GET" style="display: inline;">
-                                                            <a onclick="document.getElementById('partyForm').submit(); return false;">
-                                                                <input type="checkbox" @if($mortageLoan->state_id == 1) checked @endif data-toggle="toggle" data-size="xs" onchange="this.closest('form').submit()">
-                                                            </a>
-                                                        </form>
                                                     </span>
                                                 </td>
                                             </tr>
