@@ -242,7 +242,7 @@
                                                     {{-- @else  --}}
                                                     <div class="col-md-3 mt-3">
                                                     <label for="mst_brand_type_id">Total:</label>
-                                                        <input class="form-control" type="number" id="total" name="total" value="" readonly>
+                                                        <input class="form-control" type="number" id="total" name="total" value="{{$insurance->total ?? ''}}" readonly>
                                                     </div>
                                                     {{-- @endif --}}
 
