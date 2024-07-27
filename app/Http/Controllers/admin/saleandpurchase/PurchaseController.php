@@ -650,7 +650,7 @@ class PurchaseController extends Controller
             $parties = MstParty::select('id','party_name')->get();
             $roleNames = explode(',',Auth::guard('admin')->user()->roles);
         }
-dd($purchases);
+// dd($purchases);
         return view('admin.sale-purchase.purchase.order-index', compact('purchases', 'executives', 'models', 'party', 'status','parties','roleNames'));
     }
 
