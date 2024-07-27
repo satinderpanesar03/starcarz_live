@@ -79,23 +79,23 @@
                                         </div>
                                         <table class="table table-striped table-bordered dom-jQuery-events">
                                             <thead>
-                                                <tr>
+                                                <tr style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                     <th width="5%">ID</th>
                                                     <th>Party</th>
+                                                    <th>Whatsapp</th>
+                                                    <th>Executive</th>
+                                                    <th>Model</th>
                                                     <th>Vehicle No.</th>
                                                     <th>Price</th>
-                                                    <th>Contact</th>
                                                     <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @forelse($purchases as $key => $purchase)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $purchase->party ? $purchase->party->party_name : '' }}</td>
-                                                    <td>{{ $purchase->purchase ? $purchase->purchase->reg_number : '' }}</td>
-                                                    <td>{{ $purchase->price_p1 ? $purchase->price_p1 : '' }}</td>
+                                                <tr style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    <td>{{ $purchases->firstItem() + $key }}</td>
+                                                    <td style="color: inherit; font-size: 12px;">{{ $purchase->party ? $purchase->party->party_name : '' }}</td>
                                                     <td>
                                                         @if ($purchase->party)
                                                         @foreach ($purchase->party->partyContact ?? [] as $contact)
@@ -106,6 +106,11 @@
                                                         @endforeach
                                                         @endif
                                                     </td>
+                                                    <td style="color: inherit; font-size: 12px;">{{ $purchase->purchase ? ($purchase->purchase->executive) ? $purchase->purchase->executive->name : '---' : '---' }}</td>
+                                                    <td>{{$purchase->purchase ? ($purchase->purchase->carModel) ? $purchase->purchase->carModel->model : '---' : '---'}}</td>
+                                                    <td>{{ $purchase->purchase ? $purchase->purchase->reg_number : '' }}</td>
+                                                    <td>{{ $purchase->price_p1 ? $purchase->price_p1 : '' }}</td>
+
                                                     <td>
                                                         @php
                                                         $statusClass = '';

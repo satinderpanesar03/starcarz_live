@@ -13,7 +13,7 @@ class PurchaseOrder extends Model
 
     public function purchase()
     {
-        return $this->belongsTo(Purchase::class, 'purchase_id', 'id')->select('id', 'reg_number');
+        return $this->belongsTo(Purchase::class, 'purchase_id', 'id')->select('id', 'reg_number','mst_executive_id');
     }
 
     public function party()
