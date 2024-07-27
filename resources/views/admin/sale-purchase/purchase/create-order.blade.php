@@ -62,7 +62,7 @@
                                                         <div class="form-group mb-2">
                                                             <label class="mr-2">Party:</label>
                                                             <div class="input-group">
-                                                                <select name="mst_party_id" id="mst_party_id" class="form-control">
+                                                                <select name="mst_party_id" id="mst_party_id" class="form-control" required>
                                                                     <option value="">Search Party</option>
                                                                     @foreach($parties as $party)
                                                                     <option value="{{ $party['id'] }}" {{ isset($purchase->mst_party_id) && $purchase->mst_party_id == $party['id'] ? 'selected' : '' }}>
