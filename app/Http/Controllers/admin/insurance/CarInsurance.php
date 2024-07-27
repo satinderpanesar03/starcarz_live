@@ -89,6 +89,7 @@ class CarInsurance extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'party_id' => 'required',
             'insurance_done_date' => 'required',
