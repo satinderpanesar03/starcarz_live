@@ -35,4 +35,5 @@ class RcTransfer extends Model
             '2' => 'Transferred',
         ];
     }
+
 }

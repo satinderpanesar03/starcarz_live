@@ -131,11 +131,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
+                                                    <th>Doc Given Date</th>
                                                     <th>Party</th>
                                                     <th>Model</th>
-                                                    <th>Reg. No.</th>
-                                                    <th>Date</th>
+                                                    <th>Amount Paid</th>
                                                     <th>Source</th>
+                                                    <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -144,6 +145,9 @@
                                                     @foreach ($combinedData as $value => $sale)
                                                         <tr>
                                                             <td>{{ ++$value }}</td>
+                                                            <td>
+                                                                {{ $sale->rc_transfer ? date('d-M-Y',strtotime($sale->rc_transfer->date)) : '---' }}
+                                                            </td>
                                                             <td>
                                                                 @if ($sale instanceof App\Models\AggregatorLoan)
                                                                     {{ $sale->firm_name }}
@@ -158,26 +162,20 @@
                                                                     {{ ($sale->carModel) ? $sale->carModel->model : '---' }}
                                                                 @endif
                                                             </td>
-                                                            <td>
-                                                                @if ($sale instanceof App\Models\SaleOrder)
-                                                                    {{ $sale->purchase ? $sale->purchase->reg_number : '' }}
-                                                                @else
-                                                                    {{ $sale->vehicle_number }}
-                                                                @endif
-                                                            </td>
-                                                            <td>
-                                                                @if ($sale instanceof App\Models\AggregatorLoan)
-                                                                    {{ $sale->disburshment_date ?? '' }}
-                                                                @elseif ($sale instanceof App\Models\SaleOrder)
-                                                                    {{ $sale->reg_date ?? '' }}
-                                                                @elseif ($sale instanceof App\Models\CarLoan)
-                                                                    {{ $sale->registration_year ?? '' }}
-                                                                @else
-                                                                    ---
-                                                                @endif
-                                                            </td>
+                                                            <td>{{ $sale->rc_transfer ? $sale->rc_transfer->amount_paid : '---' }}</td>
                                                             </td>
                                                             <td>{{ preg_replace('/(?<!\s)([A-Z])/', ' $1', class_basename(get_class($sale))) }}
+                                                            </td>
+                                                            <td>
+                                                                @if (isset($sale->rc_transfer))
+                                                                    @if($sale->rc_transfer->status == 2)
+                                                                        <span class="btn-sm btn-success">Transferred</span>
+                                                                    @else
+                                                                        <span class="btn-sm btn-secondary">Pending</span>
+                                                                    @endif
+                                                                @else
+                                                                    <span class="btn-sm btn-secondary">Pending</span>
+                                                                @endif
                                                             </td>
                                                             <td class="text-truncate">
                                                                 <span style="white-space:nowrap;" class="">
@@ -224,6 +222,7 @@
                                             @endif
                                         </table>
                                         <div class="container d-flex justify-content-end">
+
                                         </div>
                                     </div>
                                 </div>

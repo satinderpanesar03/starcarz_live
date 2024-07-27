@@ -20,4 +20,8 @@ class AggregatorLoan extends Model
     {
         return $this->belongsTo(MstExecutive::class, 'executive');
     }
+
+    public function rc_transfer(){
+        return $this->hasOne(RcTransfer::class,'aggregator_loan_id');
+    }
 }

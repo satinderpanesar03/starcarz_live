@@ -116,4 +116,9 @@ class CarLoan extends Model
     {
         return $this->belongsTo(MstBank::class, 'bank_id');
     }
+
+    public function rc_transfer(){
+        return $this->hasOne(RcTransfer::class,'car_loan_id');
+    }
+
 }

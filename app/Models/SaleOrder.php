@@ -32,4 +32,9 @@ class SaleOrder extends Model
         return $this->belongsTo(MstModel::class, 'model_id');
     }
 
+    public function rc_transfer(){
+        return $this->hasOne(RcTransfer::class,'sale_order_id');
+    }
+
+
 }
