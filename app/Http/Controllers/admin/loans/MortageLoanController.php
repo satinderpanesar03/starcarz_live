@@ -24,7 +24,7 @@ class MortageLoanController extends Controller
             return redirect()->route('admin.loan.mortage-loan.index');
         }
 
-        $query = MortageLoan::with('party:id,party_name');
+        $query = MortageLoan::with('party:id,party_name','mst_executive:id,name','bank:id,name','disbursed:id,mortage_loan_id,emi_start_date,emi_end_date');
         $query->when($request->filled('party_name'), function ($query) use ($request) {
             $query->whereHas('party', function ($subquery) use ($request) {
                 $subquery->where('party_name', 'like', '%' . $request->party_name . '%');
@@ -55,6 +55,7 @@ class MortageLoanController extends Controller
         $loanType = MortageLoan::getLoanType();
         $banks = MstBank::pluck('name', 'id');
         $executives = MstExecutive::pluck('name', 'id');
+// dd($mortageLoans);
         return view('admin.loans.mortage-loan.index', compact('mortageLoans', 'status', 'loanType', 'banks', 'executives'));
     }
 

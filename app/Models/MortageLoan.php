@@ -63,9 +63,9 @@ class MortageLoan extends Model
         return $this->belongsTo(MstParty::class, 'mst_party_id');
     }
 
-    public function executive()
+    public function mst_executive()
     {
-        return $this->belongsTo(MstExecutive::class, 'mst_executive_id');
+        return $this->belongsTo(MstExecutive::class, 'executive');
     }
 
     public function insuranceType()
@@ -75,6 +75,10 @@ class MortageLoan extends Model
 
     public function disbursed()
     {
-        return $this->hasMany(MortageDisbursedDetails::class);
+        return $this->hasOne(MortageDisbursedDetails::class);
+    }
+
+    public function bank(){
+        return $this->belongsTo(MstBank::class, 'bank_id');
     }
 }

@@ -115,24 +115,32 @@
                                     </div>
                                     <table class="table table-striped table-bordered dom-jQuery-events">
                                         <thead>
-                                            <tr>
+                                            <tr style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                 <th width="5%">ID</th>
                                                 <th>Party</th>
-                                                <th>Loan Type</th>
-                                                <th>Loan Amount</th>
-                                                <th>Disburshed Amount</th>
+                                                <th>Executive</th>
+                                                <th>Type</th>
+                                                <th>Bank</th>
+                                                <th>Login Date</th>
+                                                <th>Ln. Amt</th>
+                                                <th>Disb. Amt</th>
+                                                <th>Emi Period</th>
                                                 <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @forelse($mortageLoans as $key => $mortageLoan)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ ($mortageLoan->party) ? $mortageLoan->party->party_name : '' }}</td>
-                                                <td>{{ ($mortageLoan->getLoanTypeName($mortageLoan->loan_type)) ? $mortageLoan->getLoanTypeName($mortageLoan->loan_type) : '' }}</td>
+                                            <tr style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                <td>{{ $mortageLoans->firstItem() + $key }}</td>
+                                                <td style="color: inherit; font-size: 12px;">{{ ($mortageLoan->party) ? $mortageLoan->party->party_name : '' }}</td>
+                                                <td style="color: inherit; font-size: 13px;">{{ ($mortageLoan->executive) ? $mortageLoan->mst_executive->name : '' }}</td>
+                                                <td style="color: inherit; font-size: 12px;">{{ ($mortageLoan->getLoanTypeName($mortageLoan->loan_type)) ? $mortageLoan->getLoanTypeName($mortageLoan->loan_type) : '' }}</td>
+                                                <td style="color: inherit; font-size: 12px;">{{ ($mortageLoan->bank) ? $mortageLoan->bank->name : '' }}</td>
+                                                <td>{{ date('d-m-Y',strtotime($mortageLoan->login_date)) ?? '' }}</td>
                                                 <td>{{ ($mortageLoan->loan_amount) ? $mortageLoan->loan_amount : '' }}</td>
                                                 <td>{{ $mortageLoan->disbursed_sum_disbursed_amount ?? 'Not Added' }}</td>
+                                                <td style="color: inherit; font-size: 12px;">{{ isset($mortageLoan->disbursed) ? date('d-m-Y',strtotime($mortageLoan->disbursed->emi_start_date)) . ' - ' . date('d-m-Y',strtotime($mortageLoan->disbursed->emi_end_date)) : '---' }}</td>
                                                 <td>
                                                     @php
                                                     $statusClass = '';
