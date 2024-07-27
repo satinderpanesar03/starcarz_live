@@ -206,17 +206,6 @@
                                                                         class="btn btn-success btn-sm" title="Edit">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
-                                                                    <form id="partyForm"
-                                                                        action="{{ route('admin.purchase.purchase.status', ['id' => $purchase->id, 'state_id' => $purchase->state_id]) }}"
-                                                                        method="GET" style="display: inline;">
-                                                                        <a
-                                                                            onclick="document.getElementById('partyForm').submit(); return false;">
-                                                                            <input type="checkbox"
-                                                                                @if ($purchase->state_id == 1) checked @endif
-                                                                                data-toggle="toggle" data-size="xs"
-                                                                                onchange="this.closest('form').submit()">
-                                                                        </a>
-                                                                    </form>
                                                                 </span>
                                                             </td>
                                                         </tr>
