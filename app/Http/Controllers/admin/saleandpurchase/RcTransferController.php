@@ -46,9 +46,9 @@ class RcTransferController extends Controller
                         break;
                 }
             } else {
-                $carLoans = CarLoan::with('party:id,party_name','carModel:id,mst_brand_type_id,model','rc_transfer')->where('car_type', '1')->get();
-                $aggregateLoans = AggregatorLoan::with('rc_transfer')->get();
-                $saleOrders = SaleOrder::with('party:id,party_name','carModel:id,mst_brand_type_id,model','purchase','rc_transfer')->get();
+                $carLoans = CarLoan::with('party:id,party_name','carModel:id,mst_brand_type_id,model','rc_transfer','rc_transfer.agent')->where('car_type', '1')->get();
+                $aggregateLoans = AggregatorLoan::with('rc_transfer','rc_transfer.agent')->get();
+                $saleOrders = SaleOrder::with('party:id,party_name','carModel:id,mst_brand_type_id,model','purchase','rc_transfer','rc_transfer.agent')->get();
             }
 
 

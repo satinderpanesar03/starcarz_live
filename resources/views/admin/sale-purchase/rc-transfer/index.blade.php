@@ -129,12 +129,14 @@
                                         </div>
                                         <table class="table table-striped table-bordered dom-jQuery-events">
                                             <thead>
-                                                <tr>
+                                                <tr style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                     <th>ID</th>
                                                     <th>Doc Given Date</th>
                                                     <th>Party</th>
+                                                    <th>Agent</th>
                                                     <th>Model</th>
                                                     <th>Amount Paid</th>
+                                                    <th>Reg. No.</th>
                                                     <th>Source</th>
                                                     <th>Status</th>
                                                     <th>Actions</th>
@@ -143,19 +145,22 @@
                                             @if ($combinedData->isNotEmpty())
                                                 <tbody>
                                                     @foreach ($combinedData as $value => $sale)
-                                                        <tr>
+                                                        <tr style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                             <td>{{ ++$value }}</td>
                                                             <td>
                                                                 {{ $sale->rc_transfer ? date('d-M-Y',strtotime($sale->rc_transfer->date)) : '---' }}
                                                             </td>
-                                                            <td>
+                                                            <td style="color: inherit; font-size: 13px;">
                                                                 @if ($sale instanceof App\Models\AggregatorLoan)
                                                                     {{ $sale->firm_name }}
                                                                 @else
                                                                     {{ ($sale->party) ? $sale->party->party_name : '' }}
                                                                 @endif
                                                             </td>
-                                                            <td>
+                                                            <td style="color: inherit; font-size: 13px;">
+                                                                {{ $sale->rc_transfer ?  ($sale->rc_transfer->agent) ? $sale->rc_transfer->agent->agent : '---' : '---' }}
+                                                            </td>
+                                                            <td style="color: inherit; font-size: 13px;">
                                                                 @if ($sale instanceof App\Models\AggregatorLoan)
                                                                     {{ strtoupper($sale->model) }}
                                                                 @else
@@ -164,7 +169,14 @@
                                                             </td>
                                                             <td>{{ $sale->rc_transfer ? $sale->rc_transfer->amount_paid : '---' }}</td>
                                                             </td>
-                                                            <td>{{ preg_replace('/(?<!\s)([A-Z])/', ' $1', class_basename(get_class($sale))) }}
+                                                            <td style="color: inherit; font-size: 13px;">
+                                                                @if ($sale instanceof App\Models\SaleOrder)
+                                                                    {{ $sale->purchase ? $sale->purchase->reg_number : '---' }}
+                                                                @else
+                                                                    {{ $sale->vehicle_number ??  '---' }}
+                                                                @endif
+                                                            </td>
+                                                            <td style="color: inherit; font-size: 13px;">{{ preg_replace('/(?<!\s)([A-Z])/', ' $1', class_basename(get_class($sale))) }}
                                                             </td>
                                                             <td>
                                                                 @if (isset($sale->rc_transfer))
