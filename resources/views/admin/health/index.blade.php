@@ -74,7 +74,7 @@ $encryptedQuery = Crypt::encrypt(request()->query());
                                                 <th>Executive</th>
                                                 <th>Type</th>
                                                 <th>End Date</th>
-                                                <th>T. Prm.</th>
+                                                <th>OD Prm.</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -95,7 +95,7 @@ $encryptedQuery = Crypt::encrypt(request()->query());
                                                         {{ $insurance->type ? $insurance->type->name : '' }}
                                                     </td>
                                                     <td>{{date('d/m/Y',strtotime($insurance->end_date))}}</td>
-                                                    <td>{{ number_format($insurance->gross_premium, 2) }}</td>
+                                                    <td>{{ number_format($insurance->premium, 2) }}</td>
                                                     <td>
                                                     <span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.health.view', $insurance->id)}}" class="btn btn-primary btn-sm" title="View">
