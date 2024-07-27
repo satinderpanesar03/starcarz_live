@@ -612,7 +612,7 @@ class PurchaseController extends Controller
             return redirect()->route('admin.purchase.purchase.orders');
         } else {
             // Start with the base query
-            $query = PurchaseOrder::with('purchase', 'party','purchase.executive:id,name','party.partyContact','purchase.carModel:id,carModel')
+            $query = PurchaseOrder::with('purchase', 'party','purchase.executive:id,name','party.partyContact','purchase.carModel:id,model')
                 ->with('party', 'purchase')
                 ->when($request->filled('party_id'), function ($query) use ($request) {
                     $query->whereHas('party', function ($subquery) use ($request) {
