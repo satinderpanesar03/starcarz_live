@@ -1,7 +1,9 @@
 @extends('admin.layouts.header')
 @section('title', isset($purchase->id) ? 'Edit Order' : 'Add Order')
 @section('content')
-
+<?php
+    use Illuminate\Support\Facades\Crypt;
+?>
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -198,6 +200,7 @@
                                                     @endif
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">
+                                                @if(Crypt::decrypt(request()->query('q')) == 1)
                                                 <h5>Insurance</h5>
                                                 <div class="row">
                                                     <div class="col-md-4 mt-2">
@@ -212,7 +215,7 @@
                                                 <div class="row">
                                                     <div class="col-md-4 mt-2">
                                                         <label for="icompany_id">Insurance Company:</label>
-                                                        <select name="icompany_id" id="icompany_id" class="form-control" required>
+                                                        <select name="icompany_id" id="icompany_id" class="form-control" @if(Crypt::decrypt(request()->query('q')) == 1) required @endif>
                                                             <option value="" disabled selected>Choose...</option>
                                                             @foreach($company as $value => $label)
                                                             <option value="{{ $value }}" {{ isset($purchase->icompany_id) && $value == $purchase->icompany_id? 'selected' : '' }}>{{ $label }}</option>
@@ -225,6 +228,7 @@
                                                     </div>
                                                 </div>
                                                 <hr style="border: #2A3F54 1px solid;">
+                                                @endif
                                                 <h5>Document Type</h5>
                                                 <div class="row">
                                                     <div class="col-md-4 mt-2">

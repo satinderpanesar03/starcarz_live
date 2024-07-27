@@ -32,6 +32,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Helpers\WhatsappHelper;
 use App\Models\PurchasedImage;
 use Exception;
+use Illuminate\Support\Facades\Crypt;
 
 class PurchaseController extends Controller
 {
@@ -301,7 +302,7 @@ class PurchaseController extends Controller
                 $purchase = Purchase::find($request->id);
                 $success = $purchase->update($input);
                 if ($success && in_array($purchase->status, [6, 7])) {
-                    return redirect()->route('admin.purchase.purchase.create-order')->with(['status' => $purchase->status]);
+                    return redirect()->route('admin.purchase.purchase.create-order', ['q' => Crypt::encrypt($purchase->willing_insurance)])->with(['status' => $purchase->status]);
                 }
             } else {
                 $nextValue = $this->generateNextValue();
