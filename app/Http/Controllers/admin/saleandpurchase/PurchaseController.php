@@ -202,14 +202,14 @@ class PurchaseController extends Controller
                 $input['reg_date'] = $request->reg_date;
                 $input['insurance_due_date'] = $request->insurance_due_date;
                 $input['status'] = $request->mode;
-                $input['mst_party_id'] = $request->party_id;
+                $input['mst_party_id'] = $request->mst_party_id;
                 $input['mst_purchase_id'] = empty($request->purchase_id) ? $purchase->purchase_id : $request->purchase_id;
                 $purchase->update($input);
             } else {
                 $input['reg_date'] = $request->reg_date;
                 $input['insurance_due_date'] = $request->insurance_due_date;
                 $input['status'] = $request->mode;
-                $input['mst_party_id'] = $request->party_id;
+                $input['mst_party_id'] = $request->mst_party_id;
                 $input['mst_purchase_id'] = $request->purchase_id;
                 $purchase = PurchaseOrder::create($input);
             }

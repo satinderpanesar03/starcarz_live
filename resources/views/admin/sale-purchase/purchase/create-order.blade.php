@@ -57,7 +57,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <input type="hidden" value="1" name="mst_party_id">
+                                                    {{-- <input type="hidden" value="1" name="mst_party_id"> --}}
                                                     <div class="col-md-6">
                                                         <div class="form-group mb-2">
                                                             <label class="mr-2">Party:</label>
