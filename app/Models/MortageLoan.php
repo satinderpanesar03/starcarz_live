@@ -15,7 +15,7 @@ class MortageLoan extends Model
     {
         return [
             '4' => 'Home Loan',
-            '5' => 'Loan Against Property',
+            '5' => 'LAP',
             '6' => 'OverDraft'
         ];
     }
