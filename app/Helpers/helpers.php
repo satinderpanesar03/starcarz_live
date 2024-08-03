@@ -47,7 +47,7 @@ function allAccess(){
         ];
     }
     $executive = DB::table('mst_executives')->where('admin_login_id', Auth::guard('admin')->id())->first();
-    \Log::info($executive);
+
     return [
         'status' => false,
         'id' => $executive->id
