@@ -283,7 +283,7 @@ class Purchase extends Model
                 if (!empty($image->$type)) {
                     $urls = explode(',', $image->$type);
                     foreach ($urls as $url) {
-                        $imageArray[] = asset('storage/purchased/' . $url);
+                        $imageArray[] = url('public/storage/purchased/' . $url);
                     }
                     $hasImages = true;
                 }
