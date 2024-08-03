@@ -53,7 +53,7 @@
                                                                         <div class="col-sm-3 mb-3">
                                                                             <div class="image-item position-relative">
                                                                                 <a href="#" class="image-link">
-                                                                                    <img src="{{ url('storage/purchased/' . $img) }}"
+                                                                                    <img src="{{ url('public/storage/purchased/' . $img) }}"
                                                                                         class="img-fluid" alt="Front Image">
                                                                                 </a>
                                                                             </div>
@@ -96,7 +96,7 @@
                                                                         <div class="col-sm-3 mb-3">
                                                                             <div class="image-item position-relative">
                                                                                 <a href="#" class="image-link">
-                                                                                    <img src="{{ url('storage/purchased/' . $img) }}"
+                                                                                    <img src="{{ url('public/storage/purchased/' . $img) }}"
                                                                                         class="img-fluid" alt="Side Image">
                                                                                 </a>
                                                                             </div>
@@ -138,7 +138,7 @@
                                                                         <div class="col-sm-3 mb-3">
                                                                             <div class="image-item position-relative">
                                                                                 <a href="#" class="image-link">
-                                                                                    <img src="{{ url('storage/purchased/' . $img) }}"
+                                                                                    <img src="{{ url('public/storage/purchased/' . $img) }}"
                                                                                         class="img-fluid"
                                                                                         alt="Back Image">
                                                                                 </a>
@@ -182,7 +182,7 @@
                                                                         <div class="col-sm-3 mb-3">
                                                                             <div class="image-item position-relative">
                                                                                 <a href="#" class="image-link">
-                                                                                    <img src="{{ url('storage/purchased/' . $img) }}"
+                                                                                    <img src="{{ url('public/storage/purchased/' . $img) }}"
                                                                                         class="img-fluid"
                                                                                         alt="Interior Image">
                                                                                 </a>
