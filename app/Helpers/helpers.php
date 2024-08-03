@@ -50,6 +50,6 @@ function allAccess(){
     \Log::info($executive);
     return [
         'status' => false,
-        'id' => $executive->id ?? 0
+        'id' => $executive->id
     ];
 }
