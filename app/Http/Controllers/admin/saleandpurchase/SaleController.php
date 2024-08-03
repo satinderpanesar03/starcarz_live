@@ -69,6 +69,11 @@ class SaleController extends Controller
                     $subquery->where('reg_number', 'like', '%' . $request->car_number . '%');
                 });
             })
+            ->where(function($q){
+                if(!allAccess()['status']){
+                    $q->where('mst_executive_id', allAccess()['id']);
+                }
+            })
             ->orderByDesc('id')
             ->paginate($request->limit ? $request->limit : 10);
         $parties = MstParty::select('id', 'party_name')->get();
