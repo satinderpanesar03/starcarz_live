@@ -97,7 +97,12 @@ class SaleDetail extends Model
     }
 
     public function getWhatappNumberAttribute(){
-        return 'test';
+        foreach($this->party->partyContact as $contact){
+            if($contact->type == 1){
+                return $contact->number;
+            }
+        }
+        return null;
     }
 
 
