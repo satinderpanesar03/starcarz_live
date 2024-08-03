@@ -307,7 +307,7 @@ class Purchase extends Model
 
 
     public function getIsLuxuryAttribute(){
-        return (isset($this->carModel) && $this->carModel->luxury != null) ? 1 : null;
+        return (isset($this->carModel) && ($this->carModel->luxury != 1)) ? null : 1;
     }
 
 

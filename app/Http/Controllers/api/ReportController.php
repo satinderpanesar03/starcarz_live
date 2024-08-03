@@ -20,7 +20,10 @@ class ReportController extends Controller
                 ->Selected()
                 ->withSum('refurbishment', 'total_amount')
                 ->whereIn('status', [6, 7])
-                ->where('is_sold', '!=', 1)
+                ->where(function($q){
+                    $q->whereNull('is_sold')
+                    ->orWhere('is_sold', 0);
+                })
                 ->orderBy('id', 'desc')
                 ->get()
                 ->makeHidden(['refurbishment_sum_total_amount','pending_image_status','fuel_type','status','mst_brand_type_id','mst_model_id','mst_color_id','brand','carModel','color','image','purchased_images']);
