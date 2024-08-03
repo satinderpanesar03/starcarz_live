@@ -376,7 +376,10 @@ class CarInsurance extends Controller
         $vehicles = Purchase::where('mst_model_id', $modelId)
             // ->where('mst_brand_type_id', $brandId)
             ->whereIn('status', [6, 7])
-            ->whereNot('is_sold',1)
+            ->where(function($q) {
+                $q->whereNull('is_sold')
+                ->orWhere('is_sold', 0);
+            })
             ->select('id', 'reg_number')
             ->get();
 
