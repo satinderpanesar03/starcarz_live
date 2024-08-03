@@ -105,7 +105,7 @@
                                                 <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                     {{ ($sale->firm_name) ? $sale->firm_name : '' }}</td>
                                                 <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">
-                                                    {{$sale->whatapp_number}}
+                                                    {{$sale->contact_number}}
                                                 </td>
                                                 <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">{{ $sale->executive ? $sale->executive->name : '' }}</td>
                                                 <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">
