@@ -997,7 +997,7 @@ class ReportController extends Controller
         $purchased = Purchase::with('carModel:id,mst_brand_type_id,model','color:id,color','brand:id,type','purchaseOrder:id,purchase_id,price_p1')
         ->withSum('refurbishment','total_amount')
         ->whereIn('status', [6,7])
-        ->where('is_sold','!=',1)
+        // ->where('is_sold','!=',1)
         ->orderBy('id','desc')->paginate($request->limit ? $request->limit : 10);
         // return $purchased;
 
