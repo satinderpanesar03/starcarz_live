@@ -70,7 +70,7 @@ class PurchaseController extends Controller
                 $query->whereDate('evaluation_date', '<=', $toDate);
             }
             if(!allAccess()['status']){
-                $query->where('mst_executive_id', allAccess()['id']);
+                $query->where('mst_executive_id', Auth::guard('admin')->id());
             }
 
             $purchases = $query->with('executiveName:id,name,email')->orderBy('id', 'desc')->paginate($request->limit ?: 10);
