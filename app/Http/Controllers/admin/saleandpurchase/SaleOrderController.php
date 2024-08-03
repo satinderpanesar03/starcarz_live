@@ -70,10 +70,14 @@ class SaleOrderController extends Controller
         $company = MstInsurance::pluck('name', 'id');
         $vehicles = Purchase::select('id', 'reg_number')
             ->whereIn('status', [6, 7])
-            ->whereNotIn('id', function ($query) {
-                $query->select('purchase_id')
-                    ->from('sale_orders');
+            ->where(function($q) {
+                $q->whereNull('is_sold')
+                  ->orWhere('is_sold', 0);
             })
+            // ->whereNotIn('id', function ($query) {
+            //     $query->select('purchase_id')
+            //         ->from('sale_orders');
+            // })
             ->get();
         $regNumbers = Purchase::whereIn('status', [6, 7])->pluck('enquiry_id', 'id');
         $models = MstModel::pluck('model', 'id');

@@ -16,7 +16,8 @@ class SaleDetail extends Model
     protected $appends = [
         'vehicle_asked_name',
         'budget_type_name',
-        'enquery_type_name'
+        'enquery_type_name',
+        'whatapp_number'
     ];
 
     public static function getStatus($selectedStatusId = null)
@@ -93,6 +94,10 @@ class SaleDetail extends Model
     public function getEnqueryTypeNameAttribute(){
         $enquiry = \App\Models\Sale::getEnquiryType();
         return $enquiry[$this->enquiry_type] ?? '';
+    }
+
+    public function getWhatappNumberAttribute(){
+        return 'test';
     }
 
 

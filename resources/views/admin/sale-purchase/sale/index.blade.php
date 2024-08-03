@@ -99,19 +99,18 @@
                                         </thead>
                                         <tbody>
                                             @forelse($sales as $value => $sale)
+
                                             <tr>
                                                 <td>{{$value + $sales->firstItem()}}</td>
                                                 <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                                     {{ ($sale->firm_name) ? $sale->firm_name : '' }}</td>
                                                 <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">
-                                                    @if($sale->party)
                                                     @foreach ($sale->party->partyContact as $contact)
                                                     @if ($contact->type == 1)
                                                     {{ $contact->number }}
                                                     @break
                                                     @endif
                                                     @endforeach
-                                                    @endif
                                                 </td>
                                                 <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">{{ $sale->executive ? $sale->executive->name : '' }}</td>
                                                 <td style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px">
