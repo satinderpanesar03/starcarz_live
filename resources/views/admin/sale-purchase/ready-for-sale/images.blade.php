@@ -226,7 +226,7 @@
                                                                         <div class="col-sm-3 mb-3">
                                                                             <div class="image-item position-relative">
                                                                                 <a href="#" class="image-link">
-                                                                                    <img src="{{ url('storage/purchased/' . $img) }}"
+                                                                                    <img src="{{ url('public/storage/purchased/' . $img) }}"
                                                                                         class="img-fluid"
                                                                                         alt="tyre Image">
                                                                                 </a>
