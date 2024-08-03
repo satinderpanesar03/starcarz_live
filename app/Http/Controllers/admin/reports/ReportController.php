@@ -993,12 +993,12 @@ class ReportController extends Controller
         }
     }
 
-    public function stockIndex(){
+    public function stockIndex(Request $request){
         $purchased = Purchase::with('carModel:id,mst_brand_type_id,model','color:id,color','brand:id,type','purchaseOrder:id,purchase_id,price_p1')
         ->withSum('refurbishment','total_amount')
         ->whereIn('status', [6,7])
-        // ->whereNot('is_sold', 1)
-        ->orderBy('id','desc')->get();
+        ->where('is_sold','!=',1)
+        ->orderBy('id','desc')->paginate($request->limit ? $request->limit : 10);
         // return $purchased;
 
 

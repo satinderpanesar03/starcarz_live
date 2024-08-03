@@ -62,7 +62,7 @@
                                             @foreach ($purchased as $value => $item)
                                             <?php $model = $item->carModel ? ucfirst($item->carModel->model) : '' ?>
                                             <tr>
-                                                <td>{{++$value}}</td>
+                                                <td>{{$purchased->firstItem() + $value}}</td>
                                                 <td>{{$item->brand ? ucfirst($item->brand->type) : '---'}}</td>
                                                 <td>{{$model}}</td>
                                                 <td>
@@ -134,7 +134,7 @@
                                         </tbody>
                                     </table>
                                     <div class="container d-flex justify-content-end">
-
+                                            {{ $purchased->appends($_GET)->links() }}
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
         </div>
     </div>
 </div>
-
+`
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
