@@ -47,12 +47,6 @@ function allAccess(){
         ];
     }
     $executive = DB::table('mst_executives')->where('admin_login_id', Auth::guard('admin')->id())->first();
-    if(!$executive){
-        return [
-            'status' => true,
-            'id' => null
-        ];
-    }
 
     return [
         'status' => false,
