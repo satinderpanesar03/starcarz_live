@@ -26,7 +26,7 @@ class SaleOrderController extends Controller
         if ($request->has('clear_search')) {
             return redirect()->route('admin.sale.sale.order-index');
         }
-        $saleOrders = SaleOrder::with('purchase', 'party','executive')
+        $saleOrders = SaleOrder::with('purchase', 'party','executive','carModel:id,mst_brand_type_id,model')
             ->when($request->filled('party_id'), function ($query) use ($request) {
                 $query->whereHas('party', function ($subquery) use ($request) {
                     $subquery->where('party_name', 'like', '%' . $request->party_id . '%');

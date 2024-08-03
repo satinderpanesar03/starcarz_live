@@ -99,7 +99,7 @@
                                                     @endforeach
                                                     @endif
                                                 </td>
-                                                <td>{{ ($sale->party) ? $sale->party->party_name : '' }}</td>
+                                                <td>{{ ($sale->carModel) ? $sale->carModel->model : '' }}</td>
                                                 <td>{{ ($sale->purchase) ? strtoupper($sale->purchase->reg_number) : ''}}</td>
                                                 <td>{{ ($sale->executive) ? $sale->executive->name : '' }}</td>
                                                 <td>{{ ($sale->price_p1) ? $sale->price_p1 : '' }}</td>
