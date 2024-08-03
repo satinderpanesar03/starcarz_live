@@ -40,8 +40,7 @@ function calculateGst($amount, $percentage){
 }
 
 function allAccess(){
-    dd(Auth::guard('admin')->user()->all_access);
-    if(Auth::guard('admin')->user()->all_access === 1 || in_array(\App\Models\AdminLogin::ADMIN,explode(',',Auth::guard('admin')->user()->roles))){
+    if(Auth::guard('admin')->user()->all_access == 1 || in_array(\App\Models\AdminLogin::ADMIN,explode(',',Auth::guard('admin')->user()->roles))){
         return [
             'status' => true,
             'id' => null
