@@ -40,6 +40,11 @@ class SaleController extends Controller
             ->when($request->filled('status'), function ($query) use ($request) {
                 $query->where('status', $request->status);
             })
+            ->where(function($q){
+                if(!allAccess()['status']){
+                    $q->where('mst_executive_id', allAccess()['id']);
+                }
+            })
             ->orderByDesc('id')
             ->paginate($request->limit ? $request->limit : 10);
         $parties = MstParty::select('id', 'party_name')->get();

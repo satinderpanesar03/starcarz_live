@@ -69,24 +69,12 @@ class PurchaseController extends Controller
             if ($toDate) {
                 $query->whereDate('evaluation_date', '<=', $toDate);
             }
-
-
-            // Fetch filtered results
-            if (Auth::guard('admin')->user()->role_id == AdminLogin::ADMIN) {
-                $purchases = $query->with('executiveName:id,name,email')->orderBy('id', 'desc')->paginate($request->limit ?: 10);
-            } else {
-                // Add user_executive_id condition for non-admin users
-                $purchases = $query->with('executiveName:id,name,email')->where('user_executive_id', Auth::guard('admin')->id())
-                    ->orderBy('id', 'desc')
-                    ->paginate($request->limit ?: 10);
+            if(!allAccess()['status']){
+                $query->where('mst_executive_id', allAccess()['id']);
             }
 
-            // $role = Role::where('title', ucfirst('executive'))->first();
-            // if ($role) {
-            //     $executives = AdminLogin::where('role_id', $role->id)->pluck('name', 'id');
-            // } else {
-            //     $executives = collect();
-            // }
+            $purchases = $query->with('executiveName:id,name,email')->orderBy('id', 'desc')->paginate($request->limit ?: 10);
+
             $executives = MstExecutive::pluck('name', 'id');
             $models = MstModel::pluck('model', 'id');
             $party = MstParty::pluck('party_name', 'id');
@@ -626,23 +614,8 @@ class PurchaseController extends Controller
                 })
                 ->ModeSearch($request);
 
-            // Fetch filtered results
-            if (Auth::guard('admin')->user()->role_id == AdminLogin::ADMIN) {
                 $purchases = $query->orderBy('id', 'desc')->paginate($request->limit ?: 10);
-            } else {
-                // Add user_executive_id condition for non-admin users
-                $purchases = $query->where('user_executive_id', Auth::guard('admin')->id())
-                    // ->whereIn('status', [6, 7])
-                    ->orderBy('id', 'desc')
-                    ->paginate($request->limit ?: 10);
-            }
 
-            // $role = Role::where('title', ucfirst('executive'))->first();
-            // if ($role) {
-            //     $executives = AdminLogin::where('role_id', $role->id)->pluck('name', 'id');
-            // } else {
-            //     $executives = collect();
-            // }
             $executives = MstExecutive::pluck('name', 'id');
             $models = MstModel::pluck('model', 'id');
             $party = MstParty::pluck('party_name', 'id');

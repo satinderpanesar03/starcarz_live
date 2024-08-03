@@ -1,6 +1,6 @@
 @extends('admin.layouts.header')
 
-@section('title', 'Sale Order')
+@section('title', 'Sale Register')
 @section('content')
 
 <div class="main-panel">

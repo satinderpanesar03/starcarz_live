@@ -48,6 +48,11 @@ class CarInsurance extends Controller
                 ->when($request->filled('toDate'), function ($query) use ($request) {
                     $query->whereDate('created_at', '<=', $request->toDate);
                 })
+                ->where(function($q){
+                    if(!allAccess()['status']){
+                        $q->where('mst_executive_id', allAccess()['id']);
+                    }
+                })
                 // ->PolicyNumber($request)
                 // ->CarNumber($request)
                 ->orderBy('insurance_done_date', 'desc')

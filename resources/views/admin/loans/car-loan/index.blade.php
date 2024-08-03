@@ -187,11 +187,6 @@
                                                         <a href="{{ route('admin.loan.chart.index', $carLoan->id) }}" class="btn btn-success btn-sm" title="Chart">
                                                             <i class="fa fa-file"></i>
                                                         </a>
-                                                        <form id="partyForm" action="{{ route('admin.loan.car-loan.status', ['id' => $carLoan->id, 'state_id' => $carLoan->state_id]) }}" method="GET" style="display: inline;">
-                                                            <a onclick="document.getElementById('partyForm').submit(); return false;">
-                                                                <input type="checkbox" @if($carLoan->state_id == 1) checked @endif data-toggle="toggle" data-size="xs" onchange="this.closest('form').submit()">
-                                                            </a>
-                                                        </form>
                                                     </span>
                                                 </td>
                                             </tr>

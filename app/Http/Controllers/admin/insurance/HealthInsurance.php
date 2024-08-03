@@ -32,6 +32,11 @@ class HealthInsurance extends Controller
                         $subquery->where('party_name', 'like', '%' . $request->party_name . '%');
                     });
                 })
+                ->where(function($q){
+                    if(!allAccess()['status']){
+                        $q->where('executive_id', allAccess()['id']);
+                    }
+                })
                 ->PolicyNumber($request)
                 ->orderBy('insurance_done_date', 'desc')
                 ->paginate($request->limit ? $request->limit : 10);
@@ -159,7 +164,7 @@ class HealthInsurance extends Controller
         $insurance_company = MstInsurance::pluck('name', 'id');
         $subTypes = MstInsuranceType::where('insurance_id',1)->pluck('name', 'id');
 
-        return view('admin.health.edit', compact('parties', 'insurance', 'renewal', 'endorsement','executives','insurance_company','subTypes'));
+        return view('admin.health.`edit', compact('parties', 'insurance', 'renewal', 'endorsement','executives','insurance_company','subTypes'));
     }
 
     public function view($id)

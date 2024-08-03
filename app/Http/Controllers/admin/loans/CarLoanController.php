@@ -55,9 +55,15 @@ class CarLoanController extends Controller
         $query->when($request->filled('toDate'), function ($query) use ($request) {
             $query->whereDate('created_at', '<=', $request->toDate);
         });
+
+        if(!allAccess()['status']){
+            $query->where('executive', allAccess()['id']);
+        }
+
         $carLoans = $query->orderBy('id', 'desc')
             ->paginate($request->limit ? $request->limit : 10);
-// dd($carLoans);
+
+
         $models = MstModel::pluck('model', 'id');
         $dealers = MstDealer::pluck('name', 'id');
         $status = CarLoan::getStatus();

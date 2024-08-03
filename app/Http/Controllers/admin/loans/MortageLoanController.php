@@ -49,6 +49,10 @@ class MortageLoanController extends Controller
             $query->where('executive', $request->executive);
         });
 
+        if(!allAccess()['status']){
+            $query->where('executive', allAccess()['id']);
+        }
+
         $mortageLoans = $query->withSum('disbursed', 'disbursed_amount')->orderBy('id', 'desc')
             ->paginate($request->limit ? $request->limit : 10);
         $status = MortageLoan::getStatus();

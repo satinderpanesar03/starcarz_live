@@ -120,7 +120,7 @@ class GeneralInsuranceClaimController extends Controller
         $policy = $request->input('policy');
 
         $policyData = GeneralInsurance::with('party', 'executive', 'insurance', 'insuranceType', 'partyContact', 'partyCity')->where('id', $policy)->first();
-       
+
         $firstPartyCity = $policyData->partyCity->first();
         $partyContacts = $policyData->partyContact;
         $partyContact = $partyContacts->first(function ($partyContact) {

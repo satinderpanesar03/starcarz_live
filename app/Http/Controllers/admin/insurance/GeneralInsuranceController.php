@@ -33,6 +33,11 @@ class GeneralInsuranceController extends Controller
                         $subquery->where('party_name', 'like', '%' . $request->party_name . '%');
                     });
                 })
+                ->where(function($q){
+                    if(!allAccess()['status']){
+                        $q->where('mst_executive_id', allAccess()['id']);
+                    }
+                })
                 ->PolicyNumber($request)
                 ->orderBy('insurance_done_date', 'desc')
                 ->paginate($request->limit ? $request->limit : 10);
