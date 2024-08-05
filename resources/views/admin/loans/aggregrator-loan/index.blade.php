@@ -97,7 +97,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ ($carLoan->firm_name) ? $carLoan->firm_name : '' }}</td>
                                                 <td>{{ ($carLoan->loan_amount) ? $carLoan->loan_amount : '' }}</td>
-                                                <td>{{ $carLoan->executiveName ? $carLoan->executiveName->name : '' }}</td>
+                                                <td>{{ ucfirst($carLoan->executive) ?? '' }}</td>
                                                 <td>{{ ($carLoan->policy_number) ? $carLoan->policy_number : '' }}</td>
                                                 <td class="text-truncatle">
                                                     <span style="white-space:nowrap;" class="">

@@ -216,7 +216,7 @@ class Purchase extends Model
         return $this->belongsTo(AdminLogin::class, 'user_executive_id', 'id');
     }
 
-    public function refurbishment()
+    public function refurbishmentOrder()
     {
         return $this->hasOne(RefurbnishmentOrder::class, 'purchase_id', 'id');
     }

@@ -101,13 +101,9 @@
                                                         <input type="text" id="policy_number" name="policy_number" class="form-control" value="@if(isset($aggregratorLoan->id)){{$aggregratorLoan->policy_number}}@else{{old('policy_number')}}@endif" required>
                                                     </div>
                                                     <div class="col-md-4 mt-2">
-                                                        <label for="executive">Executive Name & Number:</label>
-                                                        <select name="executive" id="executive" class="form-control">
-                                                            <option value="" selected disabled>Choose...</option>
-                                                            @foreach ($executives as $value => $party)
-                                                            <option value="{{$value}}" {{ isset($aggregratorLoan->id) && $aggregratorLoan->executive == $value ? ' selected' : '' }}>{{$party}}</option>
-                                                            @endforeach
-                                                        </select>
+                                                        <label for="executive">Executive Name:</label>
+
+                                                        <input type="text" name="executive" class="form-control" value="@if(isset($aggregratorLoan->id)){{$aggregratorLoan->executive}}@else{{old('executive')}}@endif" required>
                                                     </div>
                                                     <div class="col-md-4 mt-2">
                                                         <label for="insurance_company">Ins Company Name & Address:</label>
