@@ -228,14 +228,10 @@ class Purchase extends Model
     public function getPendingImageStatusAttribute(){
         $purchases = PurchasedImage::where('purchase_id', $this->id)->first();
 
-        if($purchases){
-            foreach ($purchases->toArray() as $column => $value) {
-                if (empty($value)) {
-                    return 0;
-                }
-            }
+        if(isset($purchases) && $purchases->status == 1){
             return 1;
         }
+
         return 0;
     }
 
@@ -300,6 +296,7 @@ class Purchase extends Model
 
         return $imageArray;
     }
+
 
     public function insurance_company(){
         return $this->belongsTo(MstInsurance::class, 'icompany_id', 'id');

@@ -478,7 +478,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
                     Route::get('purchase/ready-to-sale/add-images/{id}', 'readySaleImages')->name('purchase.ready-sale-add-image');
                     Route::post('purchase/ready-to-sale/add-images', 'readySaleImagesStore')->name('purchase.ready-sale-add-image-store');
                     Route::post('remove-images', 'removeImage')->name('remove.images');
-                    Route::post('ready-for-sale/{id}', 'changeStatus')->name('ready_for_sale.status');
+                    Route::post('ready-for-sale-status', 'changeStatus')->name('ready_for_sale.status');
                 });
                 Route::middleware(['Ensure:add_purchase'])->group(function () {
                     Route::get('purchase/create', 'create')->name('purchase.create');

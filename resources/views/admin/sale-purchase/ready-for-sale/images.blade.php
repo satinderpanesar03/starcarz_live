@@ -270,11 +270,12 @@
                                                         <div class="col-sm-4">
                                                             <label for="video url"
                                                                 class="col-sm-5 col-form-label font-weight-bold">Mark as finished</label>
-                                                                <form id="partyForm" action="{{ route('admin.purchase.ready_for_sale.status', ['id' => $image->id, 'status' => ($image->status ?? 0)]) }}" method="GET" style="display: inline;">
-                                                                    <a onclick="document.getElementById('partyForm').submit(); return false;">
-                                                                        <input type="checkbox" data-toggle="toggle" data-size="xs" onchange="this.closest('form').submit()">
-                                                                    </a>
-                                                                </form>
+                                                                <a href="#" class="change_status"
+                                                                                    data-status="{{ $image->status ?? 0 }}"
+                                                                                    data-purchase-id={{ $image->id ?? 0 }}
+                                                                                    data-confirm="Move to stock?">
+                                                                                    <input type="checkbox" data-toggle="toggle" data-size="xs" @if(isset($image) && $image->status == 1) checked @endif>
+                                                                                </a>
                                                         </div>
                                                     </div>
 
@@ -327,5 +328,32 @@
                 });
             }
         });
+
+        $('.change_status').on('click', function(e) {
+            e.preventDefault();
+
+            var status = $(this).data('status');
+            var purchase_id = $(this).data('purchase-id');
+            var confirmMessage = $(this).data('confirm');
+
+            if (confirm(confirmMessage)) {
+                $.ajax({
+                    url: '{{ route('admin.purchase.ready_for_sale.status') }}',
+                    type: 'POST',
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'status': status,
+                        'id': purchase_id,
+                    },
+                    success: function(response) {
+
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error deleting image:', error);
+                    }
+                });
+            }
+        });
+
     });
 </script>
