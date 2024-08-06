@@ -164,7 +164,7 @@ class HealthInsurance extends Controller
         $insurance_company = MstInsurance::pluck('name', 'id');
         $subTypes = MstInsuranceType::where('insurance_id',1)->pluck('name', 'id');
 
-        return view('admin.health.`edit', compact('parties', 'insurance', 'renewal', 'endorsement','executives','insurance_company','subTypes'));
+        return view('admin.health.edit', compact('parties', 'insurance', 'renewal', 'endorsement','executives','insurance_company','subTypes'));
     }
 
     public function view($id)
