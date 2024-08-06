@@ -56,7 +56,7 @@ class RefurbishmentController extends Controller
             ->sum(function ($order) {
                 return $order->refurbished->sum('amount');
             });
-
+// return $refurbishments;
         $parties = MstParty::select('id','party_name')->get();
 
         return view('admin.refurbishment.index', compact('refurbishments', 'parties', 'vehicles', 'totalAmount','parties'));

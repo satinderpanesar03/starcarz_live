@@ -81,6 +81,7 @@
                                                 <th>Vehicle number</th>
                                                 <th>Ref Total Amount</th>
                                                 <th>Ref EST Amount</th>
+                                                <th>Deviation</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -91,8 +92,9 @@
                                                 <td>{{$refurbishment->date ? strtoupper($refurbishment->date) : ''}}</td>
                                                 <!-- <td>{{$refurbishment->party ? ucfirst($refurbishment->party->party_name) : ''}}</td> -->
                                                 <td>{{$refurbishment->purchase ? strtoupper($refurbishment->purchase->reg_number) : ''}}</td>
-                                                <td>{{$refurbishment->total_amount ? ($refurbishment->total_amount +$totalAmount) : ''}}</td>
-                                                <td>{{$refurbishment->total_amount}}</td>
+                                                <td>{{$actual = $refurbishment->total_amount ?  ($refurbishment->total_amount +$totalAmount) : 0}}</td>
+                                                <td>{{$exp = $refurbishment->purchase ? $refurbishment->purchase->total : 0}}</td>
+                                                <td>{{ $actual - $exp }}</td>
                                                 <td class="text-truncatle">
                                                     <span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.refurbishment.view', $refurbishment->id)}}" class="btn btn-primary btn-sm" title="View">

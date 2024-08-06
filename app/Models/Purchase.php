@@ -315,4 +315,8 @@ class Purchase extends Model
         return $this->purchased_images[0]->video_url ?? '';
     }
 
+    public function scopeCarNumberSearch($query, $request){
+        return $query->where('reg_number', 'LIKE', '%'.$request->vn.'%');
+    }
+
 }

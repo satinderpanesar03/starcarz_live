@@ -263,7 +263,7 @@
                     <li class="has-sub nav-item"><a href="javascript:;"><i class="fa fa-list"></i><span class="menu-title" data-i18n="settings">Reports</span></a>
                         <ul class="menu-content">
 
-                            <li class="nav-item {{ request()->routeIs('admin.sale-report.index') ? 'active' : '' }}""><a href=" {{route('admin.sale-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Sale</span></a>
+                            {{-- <li class="nav-item {{ request()->routeIs('admin.sale-report.index') ? 'active' : '' }}""><a href=" {{route('admin.sale-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Sale</span></a>
                             </li>
                             <li class="nav-item {{ request()->routeIs('admin.purchase-report.index') ? 'active' : '' }}""><a href=" {{route('admin.purchase-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Purchase</span></a>
                             </li>
@@ -284,17 +284,17 @@
                             <li class="nav-item {{ request()->routeIs('admin.mortage-loan-report.index') ? 'active' : '' }}""><a href=" {{route('admin.mortage-loan-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Pending Mortage Loan</span></a>
                             </li>
                             <li class="nav-item {{ request()->routeIs('admin.businessmortage-loan-report.index') ? 'active' : '' }}""><a href=" {{route('admin.businessmortage-loan-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Business Mortage Loan</span></a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item {{ request()->routeIs('admin.document-report.index') ? 'active' : '' }}""><a href=" {{route('admin.document-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Pending Documents</span></a>
                             </li>
-                            <li class="nav-item {{ request()->routeIs('admin.gross-margin-report.index') ? 'active' : '' }}""><a href=" {{route('admin.gross-margin-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Gross Margin</span></a>
-                            </li>
+                            {{-- <li class="nav-item {{ request()->routeIs('admin.gross-margin-report.index') ? 'active' : '' }}""><a href=" {{route('admin.gross-margin-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Gross Margin</span></a>
+                            </li> --}}
                             <li class="nav-item {{ request()->routeIs('admin.match-making-report.index') ? 'active' : '' }}""><a href=" {{route('admin.match-making-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Match Making</span></a>
                             </li>
-                            <li class="nav-item {{ request()->routeIs('admin.party-report.index') ? 'active' : '' }}""><a href=" {{route('admin.party-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Party Report</span></a>
-                            </li>
-                            <li class="nav-item {{ request()->routeIs('admin.vehicle-report.index') ? 'active' : '' }}""><a href=" {{route('admin.vehicle-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Vehicle Report</span></a>
-                            </li>
+                            {{-- <li class="nav-item {{ request()->routeIs('admin.party-report.index') ? 'active' : '' }}""><a href=" {{route('admin.party-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Party Report</span></a>
+                            </li> --}}
+                            {{-- <li class="nav-item {{ request()->routeIs('admin.vehicle-report.index') ? 'active' : '' }}""><a href=" {{route('admin.vehicle-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Vehicle Report</span></a>
+                            </li> --}}
 
                             <li class="nav-item {{ request()->routeIs('admin.stock-report.index') ? 'active' : '' }}"><a href="{{route('admin.stock-report.index')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item " data-i18n="roles">Stock</span></a>
                             </li>

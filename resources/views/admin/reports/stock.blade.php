@@ -16,8 +16,28 @@
                                             <div class="col-12 col-sm-7">
                                                 <h5 class="pt-2 pb-2">Stock Report</h5>
                                             </div>
+                                            <div class="col-12 col-sm-5 d-flex justify-content-end align-items-center">
+                                                <button class="btn btn-sm btn-danger px-3 py-1 mr-2" id="listing-filter-toggle">
+                                                    <i class="fa fa-filter"></i> Filter </button>
+                                            </div>
                                         </div>
                                     </div>
+                                    <form action="{{route('admin.stock-report.index')}}" method="get">
+                                        <div class="row mb-2" id="listing-filter-data" data-select2-id="listing-filter-data" style="display:none;">
+                                            <div class="row col-sm-12 ml-2">
+                                                <div class="col-sm-3">
+                                                    <span class="text">Enter Vehcile Number</span>
+                                                    <input class="form-control" placeholder="Vehicle Number" type="text" id="search" value="{{ request()->query('vn') ?? '' }}" name="vn">
+                                                </div>
+                                            </div>
+                                            <div class="row col-sm-12 m-2">
+                                                <div class="col-sm-3">
+                                                    <button type="submit" class="btn btn-success">Search</button>
+                                                    <button value="clear_search" name="clear_search" class="btn btn-danger">Clear search</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                     <div class="card-body table-responsive">
                                         <div class="card-body table-responsive">
                                             <form action="{{ route('admin.stock-report.index') }}" method="get">
@@ -192,6 +212,10 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+
+            $('#listing-filter-toggle').click(function() {
+                    $('#listing-filter-data').toggle();
+                });
 
             $(document).on('click', '.fa-edit', function() {
                 var itemId = $(this).data('id');
