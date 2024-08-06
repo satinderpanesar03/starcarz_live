@@ -18,7 +18,6 @@ class ReportController extends Controller
                     'purchased_images'
                 ])
                 ->Selected()
-                ->withSum('refurbishment', 'total_amount')
                 ->whereIn('status', [6, 7])
                 ->where(function($q){
                     $q->whereNull('is_sold')
