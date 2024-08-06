@@ -79,11 +79,8 @@
                                                 <th>Date</th>
                                                 <!-- <th>Party Name</th> -->
                                                 <th>Vehicle number</th>
-                                                <th>Refurbished total amount</th>
-                                                @if (Auth::guard('admin')->user()->role_id = 1 || Auth::guard()->user()->role_id = 2)
-                                                <th>Purchased Price</th>
-                                                @endif
-
+                                                <th>Ref Total Amount</th>
+                                                <th>Ref EST Amount</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -95,9 +92,7 @@
                                                 <!-- <td>{{$refurbishment->party ? ucfirst($refurbishment->party->party_name) : ''}}</td> -->
                                                 <td>{{$refurbishment->purchase ? strtoupper($refurbishment->purchase->reg_number) : ''}}</td>
                                                 <td>{{$refurbishment->total_amount ? ($refurbishment->total_amount +$totalAmount) : ''}}</td>
-                                                @if (Auth::guard('admin')->user()->role_id = 1 || Auth::guard()->user()->role_id = 2)
-                                                <th>{{$refurbishment->purchase ? ($refurbishment->purchase->total) : ''}}</th>
-                                                @endif
+                                                <td>{{$refurbishment->total_amount}}</td>
                                                 <td class="text-truncatle">
                                                     <span style="white-space:nowrap;" class="">
                                                         <a href="{{route('admin.refurbishment.view', $refurbishment->id)}}" class="btn btn-primary btn-sm" title="View">
