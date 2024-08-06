@@ -1124,7 +1124,17 @@ class PurchaseController extends Controller
         return response()->json(['message' => 'Image removed successfully'], 200);
     }
 
+    public function changeStatus($id){
+        dd($request->all());
+        $image = PurchasedImage::find($id);
+        $updateStatus = ($status == 1) ? 0 : 1;
+        $message = ($status == 0) ? 'Stock activated successfully' : 'Stock deactivated successfully';
 
+        $image->update(['status' => $updateStatus]);
+
+        \toastr()->success(ucfirst($message));
+        return redirect()->back();
+    }
 
 
 

@@ -265,6 +265,18 @@
                                                             </div>
                                                         </div>
                                                     </div>
+<hr>
+                                                    <div class="form-group row mb-3">
+                                                        <div class="col-sm-4">
+                                                            <label for="video url"
+                                                                class="col-sm-5 col-form-label font-weight-bold">Mark as finished</label>
+                                                                <form id="partyForm" action="{{ route('admin.purchase.ready_for_sale.status', ['id' => $image->id, 'status' => ($image->status ?? 0)]) }}" method="GET" style="display: inline;">
+                                                                    <a onclick="document.getElementById('partyForm').submit(); return false;">
+                                                                        <input type="checkbox" data-toggle="toggle" data-size="xs" onchange="this.closest('form').submit()">
+                                                                    </a>
+                                                                </form>
+                                                        </div>
+                                                    </div>
 
                                                     <button type="submit" id="save_button"
                                                         class="btn btn-primary mt-3">Save</button>
